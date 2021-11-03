@@ -1,0 +1,62 @@
+package view;
+
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class Application_panel {
+
+	public void start(Stage primaryStage) {
+		try {
+			BorderPane border = new BorderPane();
+			HBox hbox = new HBox();
+			border.setTop(hbox);
+			hbox.setPadding(new Insets(15, 12, 15, 12));
+			hbox.setSpacing(10);
+			hbox.setStyle("-fx-background-color: #96c5ef;");
+
+			VBox vbox = new VBox();
+			border.setLeft(vbox);
+
+			Scene scene = new Scene(border, 1000, 800);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+
+			Button buttonPlan = new Button("Plan przyjazdów");
+			buttonPlan.setPrefSize(100, 20);
+			
+			Button buttonIn = new Button("Wpuszczanie");
+			buttonIn.setPrefSize(100, 20);
+			
+			Button buttonOut = new Button("Wypuszczanie");
+			buttonOut.setPrefSize(100, 20);
+
+			Button buttonRaport = new Button("Raport");
+			buttonRaport.setPrefSize(100, 20);
+
+			Button buttonChange = new Button("Zmieñ dane");
+			buttonChange.setPrefSize(100, 20);
+			
+			Button buttonAdd = new Button("Dodaj u¿ytkowników");
+			buttonAdd.setPrefSize(100, 20);
+			
+			hbox.getChildren().addAll(buttonPlan, buttonIn, buttonOut, buttonRaport, buttonChange, buttonAdd);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}
