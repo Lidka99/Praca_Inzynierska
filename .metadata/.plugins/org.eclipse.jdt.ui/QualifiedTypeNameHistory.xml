@@ -3,11 +3,7 @@
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="view.Login_panel"/>
     <fullyQualifiedTypeName name="javafx.scene.text.Text"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.PasswordField"/>
-    <fullyQualifiedTypeName name="javafx.scene.layout.GridPane"/>
     <fullyQualifiedTypeName name="javafx.geometry.Pos"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
     <fullyQualifiedTypeName name="java.beans.EventHandler"/>
     <fullyQualifiedTypeName name="javafx.scene.input.MouseEvent"/>
     <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
@@ -16,4 +12,25 @@
     <fullyQualifiedTypeName name="javafx.scene.layout.VBox"/>
     <fullyQualifiedTypeName name="view.Application_panel"/>
     <fullyQualifiedTypeName name="javafx.geometry.Insets"/>
+    <fullyQualifiedTypeName name="javafx.fxml.FXMLLoader"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.GridPane"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
+    <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.PasswordField"/>
+    <fullyQualifiedTypeName name="application.view.Login_view_controller"/>
+    <fullyQualifiedTypeName name="application.view.Application_view_controller"/>
+    <fullyQualifiedTypeName name="com.j256.ormlite.table.DatabaseTable"/>
+    <fullyQualifiedTypeName name="com.j256.ormlite.field.DatabaseField"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.DataSourceConnectionSource"/>
+    <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcPooledConnectionSource"/>
+    <fullyQualifiedTypeName name="javax.activation.DataSource"/>
+    <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcConnectionSource"/>
+    <fullyQualifiedTypeName name="application.controller.DriversController"/>
+    <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
 </qualifiedTypeNameHistroy>

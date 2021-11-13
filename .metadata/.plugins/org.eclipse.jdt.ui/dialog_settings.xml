@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<item key="org.eclipse.jdt.ui.last.selected.jre.kind2" value="1"/>
 	<item key="org.eclipse.jdt.ui.last.selected.execution.enviroment" value="JavaSE-15"/>
+	<item key="org.eclipse.jdt.ui.lastextjar" value="C:\Program Files\eclipse\sqljdbc_9.4\enu"/>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item key="group_libraries" value="true"/>
 		<item key="layout" value="2"/>
@@ -22,8 +23,12 @@
 		<item key="create_unimplemented" value="false"/>
 	</section>
 	<section name="completion_proposal_size">
+		<item key="contextSelector.size.x" value="337"/>
+		<item key="contextSelector.size.y" value="277"/>
 	</section>
 	<section name="quick_assist_proposal_size">
+		<item key="size.x" value="538"/>
+		<item key="size.y" value="266"/>
 	</section>
 	<section name="RefactoringWizard.preview">
 		<item key="width" value="600"/>
@@ -35,9 +40,12 @@
 		<item key="updateTextualMatches" value="false"/>
 		<item key="updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>
-		<item key="renameSubpackages" value="false"/>
+		<item key="renameSubpackages" value="true"/>
 	</section>
 	<section name="BuildPathsPropertyPage">
 		<item key="pageIndex" value="2"/>
+	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item key="index" value="0"/>
 	</section>
 </section>

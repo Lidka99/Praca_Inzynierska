@@ -1,0 +1,21 @@
+package application.controller;
+
+import application.model.*;
+
+import java.sql.Connection;
+
+import com.j256.ormlite.dao.*;
+
+public class DriversController {
+
+	private Dao<Drivers, Integer> driversDao;
+	
+	 private Connection dataBaseConnection;
+	
+	public DriversController(Connection dataBaseConnection) {
+		
+		this.dataBaseConnection = dataBaseConnection;
+		
+		driversDao = DaoManager.createDao(dataBaseConnection, Drivers.class);
+}
+}

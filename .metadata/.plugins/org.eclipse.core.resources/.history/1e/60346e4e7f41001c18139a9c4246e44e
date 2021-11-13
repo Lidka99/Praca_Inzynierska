@@ -1,0 +1,11 @@
+package application.controller;
+
+import application.model.*;
+
+import com.j256.ormlite.dao.*;
+
+public class DriversController {
+
+	private Dao<Drivers, Integer> DriversDao;
+
+}

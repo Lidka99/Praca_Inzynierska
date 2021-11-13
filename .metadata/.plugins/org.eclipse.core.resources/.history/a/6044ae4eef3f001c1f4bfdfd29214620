@@ -1,0 +1,16 @@
+package application.model;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "drivers")
+
+public class Drivers {
+
+	@DatabaseField(generatedId = true)
+	int id;
+	String name;
+	String surname;
+	String driving_licence;
+	
+}

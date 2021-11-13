@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;application.controller.DriversControllers&apos; to &apos;DriversController&apos;&#x0D;&#x0A;- Original project: &apos;Application&apos;&#x0D;&#x0A;- Original element: &apos;application.controller.DriversControllers&apos;&#x0D;&#x0A;- Renamed element: &apos;application.controller.DriversController&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;DriversControllers&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;application.controller{DriversControllers.java[DriversControllers" matchStrategy="1" name="DriversController" qualified="false" references="true" similarDeclarations="false" stamp="1636476669956" textual="false" version="1.0"/>
+</session>
