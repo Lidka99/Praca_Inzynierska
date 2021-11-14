@@ -31,7 +31,6 @@ public class DriversController {
 	public boolean Create(String name, String surname, String driving_license) {
 		Drivers newDriver = new Drivers(name, surname, driving_license);
 		try {
-			newDriver.id = 2;
 			driversDao.create(newDriver);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -33,4 +33,10 @@
     <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcConnectionSource"/>
     <fullyQualifiedTypeName name="application.controller.DriversController"/>
     <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
+    <fullyQualifiedTypeName name="com.password4j.types.BCrypt"/>
+    <fullyQualifiedTypeName name="com.password4j.Password"/>
+    <fullyQualifiedTypeName name="com.password4j.Hash"/>
+    <fullyQualifiedTypeName name="com.password4j.BCryptFunction"/>
+    <fullyQualifiedTypeName name="application.model.Users"/>
+    <fullyQualifiedTypeName name="application.controller.UsersController"/>
 </qualifiedTypeNameHistroy>

@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.password4j.BCryptFunction;
+import com.password4j.Hash;
+import com.password4j.Password;
+import com.password4j.types.BCrypt;
 
 import application.model.*;
 
@@ -25,6 +29,37 @@ public class UsersController {
 			e.printStackTrace();
 		}
 
+	}
+
+	public boolean Create(String role, String name, String surname, String username, String password_hash,
+			String email) {
+		Users newUser = new Users(role, name, surname, username, password_hash, email);
+		try {
+			usersDao.create(newUser);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public Users authenticate(String login, String password) {
+
+		for (Users user : usersDao) {
+
+			if (login.equals(user.getUsername()))  {
+				BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+
+				
+				if (myBcrypt.check(password, user.getPassword_hash())) {
+					return user;
+				}
+			}
+
+		}
+
+		return null;
 	}
 
 }

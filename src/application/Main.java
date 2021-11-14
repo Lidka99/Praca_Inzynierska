@@ -10,9 +10,14 @@ import javax.activation.DataSource;
 import com.j256.ormlite.jdbc.DataSourceConnectionSource;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.password4j.BCryptFunction;
+import com.password4j.Hash;
+import com.password4j.Password;
+import com.password4j.types.BCrypt;
 
 import application.controller.DriversController;
 import application.controller.ScheduleController;
+import application.controller.UsersController;
 import application.view.Application_view_controller;
 import application.view.Login_view_controller;
 import javafx.application.Application;
@@ -26,8 +31,9 @@ public class Main extends Application {
 
 	private Stage primaryStage;
 	private BorderPane applicationWindowRoot;
-	public JdbcConnectionSource  dataBaseConnection;
+	public JdbcConnectionSource dataBaseConnection;
 	private static String DATABASE_URL = "jdbc:sqlserver://localhost:1433; databaseName=evidence; integratedSecurity=true";
+	private UsersController usersController;
 
 	// ³¹czenie z baz¹ danych
 	@Override
@@ -37,18 +43,29 @@ public class Main extends Application {
 		try {
 			dataBaseConnection = new JdbcConnectionSource(DATABASE_URL);
 			System.out.println("Po³¹czono z baz¹ danych");
-			
-			DriversController controller =  new DriversController(dataBaseConnection);
-			
-			controller.Create("Andrzej", "Nowak", "45gt5e5");
+
+			usersController = new UsersController(dataBaseConnection);
 			
 			
+
+			// klasa algorytmu BCrypt
+			 BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+
+			// tworzenie hasha na podstawie Stringa
+			 Hash hash = Password.hash("abc").with(myBcrypt);
+
+			//usersController.Create("administrator", "Janusz", "Kowalczyk", "jko5",
+			// hash.getResult(), "j.kowalczyk@gmail.com" );
+			 System.out.println(Password.check("abc", hash.getResult()).with(myBcrypt));
+
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
 			e.printStackTrace();
 		}
 	}
 	
+	
+
 	// Zamykanie po³¹czenia
 
 	@Override
@@ -86,8 +103,6 @@ public class Main extends Application {
 		}
 
 	}
-	
-
 
 	public void showapplication() {
 
@@ -143,6 +158,10 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public UsersController getUsersController() {
+		return usersController;
 	}
 
 	public static void main(String[] args) {

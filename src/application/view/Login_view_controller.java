@@ -1,7 +1,7 @@
 package application.view;
 
-
 import application.Main;
+import application.model.Users;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -17,19 +17,28 @@ public class Login_view_controller {
 	@FXML
 	private PasswordField password_text_field;
 	private Main main;
-	
+
 	@FXML
 	public void onloginButtonClick() {
 		
+		//wywolanie metody authenticate i zwrócenie user
+		Users user = main.getUsersController().authenticate(login_text_field.getText(), password_text_field.getText());
+		
+		if (user != null) {
+
 		main.showapplication();
+		}
+		else {
+			System.out.println("B³êdne dane");
+		}
 		
+
 	}
-	
+
 	public void setmainapp(Main main) {
-		
+
 		this.main = main;
-		
+
 	}
-	
-	
+
 }
