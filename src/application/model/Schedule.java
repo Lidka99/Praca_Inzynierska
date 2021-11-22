@@ -16,6 +16,8 @@ public class Schedule {
 	Date arrival_date;
 	@DatabaseField(canBeNull = true)
 	Date departure_date;
+	@DatabaseField(canBeNull = true)
+	String type;
 	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
 	int trailer_id;
 	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)

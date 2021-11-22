@@ -1,6 +1,8 @@
 package application.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -31,7 +33,7 @@ public class UsersController {
 
 	}
 
-	public boolean Create(String role, String name, String surname, String username, String password_hash,
+	public boolean Create(Users.Role role, String name, String surname, String username, String password_hash,
 			String email) {
 		Users newUser = new Users(role, name, surname, username, password_hash, email);
 		try {
@@ -60,6 +62,20 @@ public class UsersController {
 		}
 
 		return null;
+	}
+	
+	
+	public List<Users> getAllUsers(){
+		
+		List<Users> allUsers = new ArrayList<Users>();
+		
+		for (Users user : usersDao) {
+			
+			allUsers.add(new Users(user));
+		}
+		
+		
+		return allUsers;
 	}
 
 }

@@ -4,13 +4,14 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.Application_view_controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.Application_view_controller">
    <top>
       <ToolBar prefHeight="32.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <items>
           <Button fx:id="main_page_button" mnemonicParsing="false" onAction="#onMainPageButtonClick" text="Strona główna" />
             <Button fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raport" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button fx:id="admin_panel_button" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Panel administracyjny" />
+            <Button fx:id="log_out_button" mnemonicParsing="false" onAction="#onLogOutButtonClick" text="Wyloguj" />
         </items>
       </ToolBar>
    </top>

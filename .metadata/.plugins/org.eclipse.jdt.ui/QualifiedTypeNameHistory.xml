@@ -37,6 +37,16 @@
     <fullyQualifiedTypeName name="com.password4j.Password"/>
     <fullyQualifiedTypeName name="com.password4j.Hash"/>
     <fullyQualifiedTypeName name="com.password4j.BCryptFunction"/>
+    <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
     <fullyQualifiedTypeName name="application.model.Users"/>
+    <fullyQualifiedTypeName name="application.model.Users.Role"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.ToggleButton"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanel_view_controller"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
+    <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
     <fullyQualifiedTypeName name="application.controller.UsersController"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

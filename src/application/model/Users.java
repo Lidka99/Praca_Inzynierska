@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "users")
 
 public class Users {
-	
+
 	@DatabaseField(generatedId = true)
 	int id;
 	@DatabaseField(canBeNull = false)
@@ -21,14 +21,24 @@ public class Users {
 	String password_hash;
 	@DatabaseField(canBeNull = false)
 	String email;
-	
-	
+
 	public Users() {
 
 	}
-	
-	public Users(String role, String name, String surname, String username, String password_hash, String email) {
-		this.role = role;
+
+	public Users(Users user) {
+
+		this.role = user.role.toString();
+		this.name = user.name;
+		this.surname = user.surname;
+		this.username = user.username;
+		this.password_hash = null;
+		this.email = user.email;
+
+	}
+
+	public Users(Role role, String name, String surname, String username, String password_hash, String email) {
+		this.role = role.toString();
 		this.name = name;
 		this.surname = surname;
 		this.username = username;
@@ -44,12 +54,12 @@ public class Users {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return role;
+	public Role getRole() {
+		return Role.valueOf(role);
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(Role role) {
+		this.role = role.toString();
 	}
 
 	public String getName() {
@@ -91,7 +101,9 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	public enum Role {
+		administrator, user;
+	}
 
 }

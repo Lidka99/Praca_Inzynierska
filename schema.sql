@@ -31,7 +31,7 @@ CREATE TABLE users (
     name VARCHAR(30) NOT NULL,
     surname VARCHAR(30) NOT NULL,
     username VARCHAR(7) NOT NULL,
-    password_hash CHAR(64) NOT NULL,
+    password_hash NVARCHAR(100) NOT NULL,
 	email VARCHAR(30) NOT NULL
 );
 
@@ -43,6 +43,7 @@ CREATE TABLE schedule (
 	trailer_id INT NOT NULL,
 	driver_id INT NOT NULL,
 	truck_id INT NOT NULL,
+	type VARCHAR(30) NOT NULL,
 	FOREIGN KEY (trailer_id) REFERENCES trailers(id),
 	FOREIGN KEY (driver_id) REFERENCES drivers(id),
 	FOREIGN KEY (truck_id) REFERENCES drivers(id)

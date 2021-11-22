@@ -18,19 +18,28 @@ import com.password4j.types.BCrypt;
 import application.controller.DriversController;
 import application.controller.ScheduleController;
 import application.controller.UsersController;
+import application.model.Users;
+import application.view.AdminPanel_view_controller;
 import application.view.Application_view_controller;
 import application.view.Login_view_controller;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class Main extends Application {
 
 	private Stage primaryStage;
 	private BorderPane applicationWindowRoot;
+	private BorderPane adminPanelRoot;
+	private Scene loginPanelScene;
+	private Users currentUser;
 	public JdbcConnectionSource dataBaseConnection;
 	private static String DATABASE_URL = "jdbc:sqlserver://localhost:1433; databaseName=evidence; integratedSecurity=true";
 	private UsersController usersController;
@@ -46,25 +55,30 @@ public class Main extends Application {
 
 			usersController = new UsersController(dataBaseConnection);
 			
-			
+			//dodowanie uzytkownikow
 
 			// klasa algorytmu BCrypt
-			 BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+			// BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
 
 			// tworzenie hasha na podstawie Stringa
-			 Hash hash = Password.hash("abc").with(myBcrypt);
+			// Hash hash = Password.hash("haslo123").with(myBcrypt);
 
-			//usersController.Create("administrator", "Janusz", "Kowalczyk", "jko5",
+			// usersController.Create("administrator", "Janusz", "Kowalczyk", "jko05",
 			// hash.getResult(), "j.kowalczyk@gmail.com" );
-			 System.out.println(Password.check("abc", hash.getResult()).with(myBcrypt));
+			// System.out.println(Password.check("haslo123",
+			// hash.getResult()).with(myBcrypt));
+
+			// tworzenie hasha na podstawie Stringa
+			// Hash hash = Password.hash("haslo124").with(myBcrypt);
+
+			// usersController.Create("user", "Marek", "Stasiak", "mstas8",
+			// hash.getResult(), "stasiak.m@gmail.com" );
 
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	// Zamykanie po³¹czenia
 
@@ -81,7 +95,7 @@ public class Main extends Application {
 
 	}
 
-	// g³owna metoda, tworzenie pierwszego okna
+	// g³owna metoda, tworzenie pierwszego okna (logowanie)
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -94,13 +108,30 @@ public class Main extends Application {
 
 			controller.setmainapp(this);
 
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
+			loginPanelScene = new Scene(root);
+			primaryStage.setScene(loginPanelScene);
 			primaryStage.show();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public Users getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(Users currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	// wyloguj
+
+	public void logOut() {
+
+		primaryStage.setScene(loginPanelScene);
+		primaryStage.show();
 
 	}
 
@@ -115,6 +146,8 @@ public class Main extends Application {
 			Application_view_controller controller = loader.getController();
 
 			controller.setmainapp(this);
+			
+			controller.setUp();
 
 			showMainPage();
 
@@ -135,7 +168,7 @@ public class Main extends Application {
 		try {
 
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/MainPage_view.fxml"));
-			BorderPane root1 = (BorderPane) loader1.load();
+			Pane root1 = loader1.load();
 
 			applicationWindowRoot.setCenter(root1);
 
@@ -150,7 +183,7 @@ public class Main extends Application {
 		try {
 
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/Raport_view.fxml"));
-			BorderPane root1 = (BorderPane) loader1.load();
+			Pane root1 = loader1.load();
 
 			applicationWindowRoot.setCenter(root1);
 
@@ -160,6 +193,47 @@ public class Main extends Application {
 
 	}
 	
+	public void showAdminPage() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanel_view.fxml"));
+			AnchorPane root = (AnchorPane) loader1.load();
+			ObservableList<Node> rootChildren = root.getChildren();
+			
+			adminPanelRoot = (BorderPane) rootChildren.get(0);
+
+			AdminPanel_view_controller controller = loader1.getController();
+
+			controller.setmainapp(this);
+			
+			controller.setUp();
+			
+			applicationWindowRoot.setCenter(adminPanelRoot);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void showAdminPageUsers() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelUsers_view.fxml"));
+			Pane root1 = loader1.load();
+
+			adminPanelRoot.setCenter(root1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+
 	public UsersController getUsersController() {
 		return usersController;
 	}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ToggleButton fx:id="usersToggleButton" maxWidth="200.0" mnemonicParsing="false" onAction="#onUsersToggleButtonClick" prefWidth="200.0" text="Użytkownicy">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ToggleGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Kierowcy" textAlignment="CENTER" toggleGroup="$ToggleGroup" />
+            <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Ciężarówki " toggleGroup="$ToggleGroup" />
+            <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Naczepy" toggleGroup="$ToggleGroup" />
+            <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Plan  przyjazdów" toggleGroup="$ToggleGroup" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
