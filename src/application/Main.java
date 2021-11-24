@@ -19,10 +19,10 @@ import application.controller.DriversController;
 import application.controller.ScheduleController;
 import application.controller.UsersController;
 import application.model.Users;
-import application.view.AdminPanelUsers_view_controller;
-import application.view.AdminPanel_view_controller;
-import application.view.Application_view_controller;
-import application.view.Login_view_controller;
+import application.view.AdminPanelUsersViewController;
+import application.view.AdminPanelViewController;
+import application.view.ApplicationViewController;
+import application.view.LoginViewController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -56,24 +56,26 @@ public class Main extends Application {
 
 			usersController = new UsersController(dataBaseConnection);
 
+			
 			// dodowanie uzytkownikow
 
-			// klasa algorytmu BCrypt
-			// BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+			//klasa algorytmu BCrypt
+			BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
 
 			// tworzenie hasha na podstawie Stringa
-			// Hash hash = Password.hash("haslo123").with(myBcrypt);
+			Hash hash = Password.hash("haslo123").with(myBcrypt);
 
-			// usersController.Create("administrator", "Janusz", "Kowalczyk", "jko05",
-			// hash.getResult(), "j.kowalczyk@gmail.com" );
-			// System.out.println(Password.check("haslo123",
-			// hash.getResult()).with(myBcrypt));
+			usersController.Create(Users.Role.administrator, "Janusz", "Kowalczyk", "jko05",
+			hash.getResult(), "j.kowalczyk@gmail.com" );
+			System.out.println(Password.check("haslo123",
+			hash.getResult()).with(myBcrypt));
 
 			// tworzenie hasha na podstawie Stringa
-			// Hash hash = Password.hash("haslo124").with(myBcrypt);
+			Hash hash1 = Password.hash("haslo124").with(myBcrypt);
 
-			// usersController.Create("user", "Marek", "Stasiak", "mstas8",
-			// hash.getResult(), "stasiak.m@gmail.com" );
+			usersController.Create(Users.Role.user, "Marek", "Stasiak", "mstas8",
+			hash1.getResult(), "stasiak.m@gmail.com" );
+			
 
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
@@ -105,7 +107,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Login_view.fxml"));
 			GridPane root = (GridPane) loader.load();
-			Login_view_controller controller = loader.getController();
+			LoginViewController controller = loader.getController();
 
 			controller.setmainapp(this);
 
@@ -144,7 +146,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Application_view.fxml"));
 			applicationWindowRoot = (BorderPane) loader.load();
 
-			Application_view_controller controller = loader.getController();
+			ApplicationViewController controller = loader.getController();
 
 			controller.setmainapp(this);
 
@@ -203,7 +205,7 @@ public class Main extends Application {
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanel_view.fxml"));
 			Pane root1 = loader1.load();
 
-			AdminPanel_view_controller controller = loader1.getController();
+			AdminPanelViewController controller = loader1.getController();
 
 			controller.setmainapp(this);
 
@@ -226,7 +228,7 @@ public class Main extends Application {
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelUsers_view.fxml"));
 			Pane root1 = loader1.load();
 
-			AdminPanelUsers_view_controller controller = loader1.getController();
+			AdminPanelUsersViewController controller = loader1.getController();
 
 			controller.setmainapp(this);
 

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanel_view_controller">
+<VBox prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelViewController">
    <children>
       <ToggleButton fx:id="usersToggleButton" maxWidth="200.0" mnemonicParsing="false" onAction="#onUsersToggleButtonClick" prefWidth="200.0" text="Użytkownicy">
          <toggleGroup>

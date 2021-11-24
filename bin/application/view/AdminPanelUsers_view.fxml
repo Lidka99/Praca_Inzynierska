@@ -9,38 +9,68 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelUsers_view_controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelUsersViewController">
    <right>
       <VBox prefHeight="587.0" prefWidth="409.0" spacing="22.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="31.0" prefWidth="409.0">
                <children>
-                  <Label text="Imię" />
-                  <TextField fx:id="nameInputField" prefHeight="31.0" prefWidth="188.0" />
+                  <Label text="Imię">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="nameInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="103.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
             <HBox prefHeight="31.0" prefWidth="409.0">
                <children>
-                  <Label text="Nazwisko" />
-                  <TextField fx:id="surnameInputField" prefHeight="31.0" prefWidth="188.0" />
+                  <Label text="Nazwisko">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="surnameInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
             <HBox prefHeight="31.0" prefWidth="409.0">
                <children>
-                  <Label text="Nazwa użytkownika" />
-                  <TextField fx:id="usernameInputField" prefHeight="31.0" prefWidth="188.0" />
+                  <Label text="Nazwa użytkownika">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="usernameInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="2.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
             <HBox prefHeight="31.0" prefWidth="409.0">
                <children>
-                  <Label text="Adres email" />
-                  <TextField fx:id="emailInputField" prefHeight="31.0" prefWidth="188.0" />
+                  <Label text="Adres email">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="emailInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="55.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
             <HBox prefHeight="31.0" prefWidth="409.0">
                <children>
-                  <Label text="Rola" />
-                  <TextField fx:id="roleInputField" prefHeight="31.0" prefWidth="188.0" />
+                  <Label text="Rola">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin></Label>
+                  <TextField fx:id="roleInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="103.0" />
+                     </HBox.margin></TextField>
                </children>
             </HBox>
          </children>
@@ -58,11 +88,26 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Dodaj" />
-            <Button mnemonicParsing="false" text="Edytuj" />
-            <Button mnemonicParsing="false" text="Zapisz" />
-            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="83.0" text="Usuń" />
-            <Button mnemonicParsing="false" text="Anuluj" />
+            <Button mnemonicParsing="false" text="Dodaj">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" text="Edytuj">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" text="Zapisz">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" text="Usuń">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" text="Anuluj">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
    </bottom>

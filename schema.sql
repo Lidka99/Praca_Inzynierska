@@ -30,7 +30,7 @@ CREATE TABLE users (
 	role VARCHAR(30) NOT NULL,
     name VARCHAR(30) NOT NULL,
     surname VARCHAR(30) NOT NULL,
-    username VARCHAR(7) NOT NULL,
+    username VARCHAR(10) NOT NULL,
     password_hash NVARCHAR(100) NOT NULL,
 	email VARCHAR(30) NOT NULL
 );
