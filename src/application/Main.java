@@ -60,21 +60,21 @@ public class Main extends Application {
 			// dodowanie uzytkownikow
 
 			//klasa algorytmu BCrypt
-			BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+			//BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
 
 			// tworzenie hasha na podstawie Stringa
-			Hash hash = Password.hash("haslo123").with(myBcrypt);
+			//Hash hash = Password.hash("haslo123").with(myBcrypt);
 
-			usersController.Create(Users.Role.administrator, "Janusz", "Kowalczyk", "jko05",
-			hash.getResult(), "j.kowalczyk@gmail.com" );
-			System.out.println(Password.check("haslo123",
-			hash.getResult()).with(myBcrypt));
+			//usersController.Create(Users.Role.administrator, "Janusz", "Kowalczyk", "jko05",
+			//hash.getResult(), "j.kowalczyk@gmail.com" );
+			//System.out.println(Password.check("haslo123",
+			//hash.getResult()).with(myBcrypt));
 
 			// tworzenie hasha na podstawie Stringa
-			Hash hash1 = Password.hash("haslo124").with(myBcrypt);
+			//Hash hash1 = Password.hash("haslo124").with(myBcrypt);
 
-			usersController.Create(Users.Role.user, "Marek", "Stasiak", "mstas8",
-			hash1.getResult(), "stasiak.m@gmail.com" );
+			//usersController.Create(Users.Role.user, "Marek", "Stasiak", "mstas8",
+			//hash1.getResult(), "stasiak.m@gmail.com" );
 			
 
 		} catch (SQLException e) {
