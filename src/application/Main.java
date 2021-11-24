@@ -19,6 +19,7 @@ import application.controller.DriversController;
 import application.controller.ScheduleController;
 import application.controller.UsersController;
 import application.model.Users;
+import application.view.AdminPanelUsers_view_controller;
 import application.view.AdminPanel_view_controller;
 import application.view.Application_view_controller;
 import application.view.Login_view_controller;
@@ -54,8 +55,8 @@ public class Main extends Application {
 			System.out.println("Po³¹czono z baz¹ danych");
 
 			usersController = new UsersController(dataBaseConnection);
-			
-			//dodowanie uzytkownikow
+
+			// dodowanie uzytkownikow
 
 			// klasa algorytmu BCrypt
 			// BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
@@ -146,7 +147,7 @@ public class Main extends Application {
 			Application_view_controller controller = loader.getController();
 
 			controller.setmainapp(this);
-			
+
 			controller.setUp();
 
 			showMainPage();
@@ -171,6 +172,7 @@ public class Main extends Application {
 			Pane root1 = loader1.load();
 
 			applicationWindowRoot.setCenter(root1);
+			applicationWindowRoot.setLeft(null);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -186,39 +188,37 @@ public class Main extends Application {
 			Pane root1 = loader1.load();
 
 			applicationWindowRoot.setCenter(root1);
+			applicationWindowRoot.setLeft(null);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void showAdminPage() {
 
 		try {
 
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanel_view.fxml"));
-			Pane root1 = (BorderPane) loader1.load();
-			
-			ObservableList<Node> root1Children = root1.getChildren();
-			
-			
-			adminPanelRoot = (BorderPane) root1Children.get(0); ////tu cos nie tak
+			Pane root1 = loader1.load();
 
 			AdminPanel_view_controller controller = loader1.getController();
 
 			controller.setmainapp(this);
-			
+
 			controller.setUp();
-			
-			applicationWindowRoot.setCenter(adminPanelRoot);
+
+			applicationWindowRoot.setLeft(root1);
+			applicationWindowRoot.setCenter(null);
+			showAdminPageUsers();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void showAdminPageUsers() {
 
 		try {
@@ -226,15 +226,19 @@ public class Main extends Application {
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelUsers_view.fxml"));
 			Pane root1 = loader1.load();
 
-			adminPanelRoot.setCenter(root1);
+			AdminPanelUsers_view_controller controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
-	
-	
 
 	public UsersController getUsersController() {
 		return usersController;

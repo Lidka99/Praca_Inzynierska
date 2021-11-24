@@ -28,6 +28,7 @@ public class Users {
 
 	public Users(Users user) {
 
+		this.id = user.id;
 		this.role = user.role.toString();
 		this.name = user.name;
 		this.surname = user.surname;

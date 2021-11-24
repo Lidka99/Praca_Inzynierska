@@ -47,6 +47,11 @@
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
     <fullyQualifiedTypeName name="application.controller.UsersController"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelUsers_view_controller"/>
+    <fullyQualifiedTypeName name="javafx.collections.ListChangeListener.Change"/>
+    <fullyQualifiedTypeName name="javafx.collections.ListChangeListener"/>
 </qualifiedTypeNameHistroy>
