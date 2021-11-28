@@ -19,6 +19,7 @@ import application.controller.DriversController;
 import application.controller.ScheduleController;
 import application.controller.UsersController;
 import application.model.Users;
+import application.view.AdminPanelDriversViewController;
 import application.view.AdminPanelUsersViewController;
 import application.view.AdminPanelViewController;
 import application.view.ApplicationViewController;
@@ -41,9 +42,11 @@ public class Main extends Application {
 	private BorderPane adminPanelRoot;
 	private Scene loginPanelScene;
 	private Users currentUser;
+
 	public JdbcConnectionSource dataBaseConnection;
 	private static String DATABASE_URL = "jdbc:sqlserver://localhost:1433; databaseName=evidence; integratedSecurity=true";
 	private UsersController usersController;
+	private DriversController driversController;
 
 	// ³¹czenie z baz¹ danych
 	@Override
@@ -244,6 +247,31 @@ public class Main extends Application {
 
 	public UsersController getUsersController() {
 		return usersController;
+	}
+	
+	public void showAdminPageDrivers() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelDrivers_view.fxml"));
+			Pane root1 = loader1.load();
+
+			AdminPanelDriversViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public DriversController getDriversController() {
+		return driversController;
 	}
 
 	public static void main(String[] args) {

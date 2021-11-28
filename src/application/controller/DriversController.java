@@ -3,6 +3,8 @@ package application.controller;
 import application.model.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.j256.ormlite.dao.*;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -38,5 +40,19 @@ public class DriversController {
 			return false;
 		}
 		return true;
+	}
+	
+	
+public List<Drivers> getAllDrivers(){
+		
+		List<Drivers> allDrivers = new ArrayList<Drivers>();
+		
+		for (Drivers driver : driversDao) {
+			
+			allDrivers.add(new Drivers(driver));
+		}
+		
+		
+		return allDrivers;
 	}
 }

@@ -73,6 +73,20 @@
                      </HBox.margin></TextField>
                </children>
             </HBox>
+            <HBox prefHeight="31.0" prefWidth="409.0">
+               <children>
+                  <Label text="Hasło">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="passwordInputField" prefHeight="31.0" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets left="103.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets left="20.0" top="20.0" />
@@ -88,11 +102,11 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Dodaj">
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#onCreateButtonCick" text="Dodaj">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" text="Edytuj">
+            <Button fx:id="editButton" mnemonicParsing="false" text="Edytuj">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Button>
@@ -100,7 +114,7 @@
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" text="Usuń">
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Usuń">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Button>

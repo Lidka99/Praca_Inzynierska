@@ -31,16 +31,10 @@
     <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcPooledConnectionSource"/>
     <fullyQualifiedTypeName name="javax.activation.DataSource"/>
     <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcConnectionSource"/>
-    <fullyQualifiedTypeName name="application.controller.DriversController"/>
     <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
-    <fullyQualifiedTypeName name="com.password4j.types.BCrypt"/>
-    <fullyQualifiedTypeName name="com.password4j.Password"/>
-    <fullyQualifiedTypeName name="com.password4j.Hash"/>
-    <fullyQualifiedTypeName name="com.password4j.BCryptFunction"/>
     <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
     <fullyQualifiedTypeName name="application.model.Users"/>
-    <fullyQualifiedTypeName name="application.model.Users.Role"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ToggleButton"/>
     <fullyQualifiedTypeName name="application.view.AdminPanel_view_controller"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
@@ -54,4 +48,15 @@
     <fullyQualifiedTypeName name="application.view.AdminPanelUsers_view_controller"/>
     <fullyQualifiedTypeName name="javafx.collections.ListChangeListener.Change"/>
     <fullyQualifiedTypeName name="javafx.collections.ListChangeListener"/>
+    <fullyQualifiedTypeName name="application.model.Drivers"/>
+    <fullyQualifiedTypeName name="application.controller.DriversController"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelDriversViewController"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TableView.TableViewSelectionModel"/>
+    <fullyQualifiedTypeName name="java.nio.channels.spi.SelectorProvider"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelUsersViewController.EditingMode"/>
+    <fullyQualifiedTypeName name="application.model.Users.Role"/>
+    <fullyQualifiedTypeName name="com.password4j.BCryptFunction"/>
+    <fullyQualifiedTypeName name="com.password4j.types.BCrypt"/>
+    <fullyQualifiedTypeName name="com.password4j.Password"/>
+    <fullyQualifiedTypeName name="com.password4j.Hash"/>
 </qualifiedTypeNameHistroy>

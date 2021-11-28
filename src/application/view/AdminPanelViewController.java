@@ -13,12 +13,21 @@ public class AdminPanelViewController {
 
 	@FXML
 	private ToggleButton usersToggleButton;
+	@FXML
+	private ToggleButton driversToggleButton;
 	private Main main;
 
 	@FXML
 	public void onUsersToggleButtonClick() {
 
 		main.showAdminPageUsers();
+
+	}
+	
+	@FXML
+	public void onDriversToggleButtonClick() {
+
+		main.showAdminPageDrivers();
 
 	}
 
