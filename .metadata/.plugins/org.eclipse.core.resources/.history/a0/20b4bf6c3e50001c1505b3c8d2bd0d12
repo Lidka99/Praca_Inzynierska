@@ -234,8 +234,4 @@ public class AdminPanelUsersViewController {
 	public enum EditingMode {
 		adding, editing, none
 	}
-	
- 
-    
-
 }

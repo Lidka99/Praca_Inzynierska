@@ -69,12 +69,6 @@ public class AdminPanelUsersViewController {
 		enableTableView(false);
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
-		nameInputField.setEditable(true);
-		surnameInputField.setEditable(true);
-		usernameInputField.setEditable(true);
-		emailInputField.setEditable(true);
-		roleInputField.setEditable(true);
-
 	}
 
 	public void onSaveButtonCick() {
@@ -234,8 +228,4 @@ public class AdminPanelUsersViewController {
 	public enum EditingMode {
 		adding, editing, none
 	}
-	
- 
-    
-
 }
