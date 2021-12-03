@@ -7,14 +7,17 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Drivers {
 
 	@DatabaseField(generatedId = true)
-	public int id;
+	Integer id;
 	@DatabaseField(canBeNull = false)
-	public String name;
+	String name;
 	@DatabaseField(canBeNull = false)
-	public String surname;
+	String surname;
 	@DatabaseField(canBeNull = false)
-	public String driving_license;
+	String driving_license;
 
+	public Drivers() {
+		
+	}
 	public Drivers(Drivers driver) {
 		
 		this.name = driver.name;

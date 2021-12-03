@@ -9,17 +9,17 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Trailers {
 
 	@DatabaseField(generatedId = true)
-	int id;
+	Integer id;
 	@DatabaseField(canBeNull = false)
-	int trailer_number;
+	String trailer_number;
 	@DatabaseField(canBeNull = false)
-	int trailer_type;
+	String trailer_type;
 	
 	public Trailers() {
 
 	}
 	
-	public Trailers(int trailer_number, int trailer_type) {
+	public Trailers(String trailer_number, String trailer_type) {
 		this.trailer_number = trailer_number;
 		this.trailer_type = trailer_type;
 		

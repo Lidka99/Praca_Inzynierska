@@ -24,6 +24,7 @@ import application.view.AdminPanelUsersViewController;
 import application.view.AdminPanelViewController;
 import application.view.ApplicationViewController;
 import application.view.LoginViewController;
+import application.view.ScheduleViewController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -47,6 +48,7 @@ public class Main extends Application {
 	private static String DATABASE_URL = "jdbc:sqlserver://localhost:1433; databaseName=evidence; integratedSecurity=true";
 	private UsersController usersController;
 	private DriversController driversController;
+	private ScheduleController scheduleController;
 
 	// ³¹czenie z baz¹ danych
 	@Override
@@ -58,27 +60,28 @@ public class Main extends Application {
 			System.out.println("Po³¹czono z baz¹ danych");
 
 			usersController = new UsersController(dataBaseConnection);
+			driversController = new DriversController(dataBaseConnection);
+			scheduleController = new ScheduleController(dataBaseConnection);
 
-			
 			// dodowanie uzytkownikow
 
-			//klasa algorytmu BCrypt
-			//BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+			// klasa algorytmu BCrypt
+			// BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
 
 			// tworzenie hasha na podstawie Stringa
-			//Hash hash = Password.hash("haslo123").with(myBcrypt);
+			// Hash hash = Password.hash("haslo123").with(myBcrypt);
 
-			//usersController.Create(Users.Role.administrator, "Janusz", "Kowalczyk", "jko05",
-			//hash.getResult(), "j.kowalczyk@gmail.com" );
-			//System.out.println(Password.check("haslo123",
-			//hash.getResult()).with(myBcrypt));
+			// usersController.create(Users.Role.administrator, "Janusz", "Kowalczyk",
+			// "jko05",
+			// hash.getResult(), "j.kowalczyk@gmail.com" );
+			// System.out.println(Password.check("haslo123",
+			// hash.getResult()).with(myBcrypt));
 
 			// tworzenie hasha na podstawie Stringa
-			//Hash hash1 = Password.hash("haslo124").with(myBcrypt);
+			// Hash hash1 = Password.hash("haslo124").with(myBcrypt);
 
-			//usersController.Create(Users.Role.user, "Marek", "Stasiak", "mstas8",
-			//hash1.getResult(), "stasiak.m@gmail.com" );
-			
+			// usersController.create(Users.Role.user, "Marek", "Stasiak", "mstas8",
+			// hash1.getResult(), "stasiak.m@gmail.com" );
 
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
@@ -185,6 +188,28 @@ public class Main extends Application {
 
 	}
 
+	public void showSchedulePage() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/Schedule_view.fxml"));
+			Pane root1 = loader1.load();
+
+			ScheduleViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
+			applicationWindowRoot.setLeft(null);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void showRaportPage() {
 
 		try {
@@ -245,10 +270,6 @@ public class Main extends Application {
 
 	}
 
-	public UsersController getUsersController() {
-		return usersController;
-	}
-	
 	public void showAdminPageDrivers() {
 
 		try {
@@ -270,8 +291,16 @@ public class Main extends Application {
 
 	}
 
+	public UsersController getUsersController() {
+		return usersController;
+	}
+
 	public DriversController getDriversController() {
 		return driversController;
+	}
+
+	public ScheduleController getScheduleController() {
+		return scheduleController;
 	}
 
 	public static void main(String[] args) {

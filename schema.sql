@@ -46,6 +46,6 @@ CREATE TABLE schedule (
 	type VARCHAR(30) NOT NULL,
 	FOREIGN KEY (trailer_id) REFERENCES trailers(id),
 	FOREIGN KEY (driver_id) REFERENCES drivers(id),
-	FOREIGN KEY (truck_id) REFERENCES drivers(id)
+	FOREIGN KEY (truck_id) REFERENCES trucks(id)
 );
 

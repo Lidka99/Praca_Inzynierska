@@ -13,6 +13,8 @@ public class ApplicationViewController {
 	@FXML
 	private Button main_page_button;
 	@FXML
+	private Button schedule_button;
+	@FXML
 	private Button raport_button;
 	@FXML
 	private Button admin_panel_button;
@@ -25,6 +27,13 @@ public class ApplicationViewController {
 	public void onMainPageButtonClick() {
 
 		main.showMainPage();
+
+	}
+	
+	@FXML
+	public void onScheduleButtonClick() {
+
+		main.showSchedulePage();
 
 	}
 

@@ -1,6 +1,10 @@
 package application.view;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import com.password4j.BCryptFunction;
 import com.password4j.Hash;
@@ -16,6 +20,8 @@ import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +29,7 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
 public class AdminPanelUsersViewController {
 
@@ -38,7 +45,7 @@ public class AdminPanelUsersViewController {
 	@FXML
 	private TextField emailInputField;
 	@FXML
-	private TextField roleInputField;
+	private ChoiceBox roleChoiceBox;
 	@FXML
 	private TextField passwordInputField;
 	@FXML
@@ -47,6 +54,8 @@ public class AdminPanelUsersViewController {
 	private Button editButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private HBox passwordHbox;
 
 	private Users selectedUser;
 
@@ -65,15 +74,42 @@ public class AdminPanelUsersViewController {
 	}
 
 	public void onCreateButtonCick() {
+
 		clearUserFields();
+		passwordHbox.setVisible(true);
 		enableTableView(false);
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
-		nameInputField.setEditable(true);
-		surnameInputField.setEditable(true);
-		usernameInputField.setEditable(true);
-		emailInputField.setEditable(true);
-		roleInputField.setEditable(true);
+		enableInputFields(true);
+
+	}
+
+	public void onEditButtonCick() {
+
+		passwordHbox.setVisible(true);
+		enableTableView(false);
+		enableEditButttons(false);
+		editingMode = EditingMode.editing;
+		enableInputFields(true);
+
+	}
+
+	public void onGenerateButtonClick() {
+
+		String upperCaseLetters = RandomStringUtils.random(2, 65, 90, true, true);
+		String lowerCaseLetters = RandomStringUtils.random(2, 97, 122, true, true);
+		String numbers = RandomStringUtils.randomNumeric(2);
+		String specialChar = RandomStringUtils.random(2, 33, 47, false, false);
+		String totalChars = RandomStringUtils.randomAlphanumeric(2);
+		String combinedChars = upperCaseLetters.concat(lowerCaseLetters).concat(numbers).concat(specialChar)
+				.concat(totalChars);
+		List<Character> pwdChars = combinedChars.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+		Collections.shuffle(pwdChars);
+
+		String password = pwdChars.stream().collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+				.toString();
+
+		passwordInputField.setText(password);
 
 	}
 
@@ -81,35 +117,119 @@ public class AdminPanelUsersViewController {
 
 		switch (editingMode) {
 		case adding: {
-			Users.Role role = Role.valueOf(roleInputField.getText());
+
 			String name = nameInputField.getText();
 			String surname = surnameInputField.getText();
 			String username = usernameInputField.getText();
 			String password = passwordInputField.getText();
 			String email = emailInputField.getText();
-			
-			//klasa algorytmu BCrypt
+
+			ValidatingStatus nameStatus = validate(name, 30, false);
+			ValidatingStatus surnameStatus = validate(surname, 30, false);
+			ValidatingStatus usernameStatus = validate(username, 10, true);
+			ValidatingStatus passwordStatus = validate(password, 100, false);
+			ValidatingStatus emailStatus = validate(email, 30, false);
+
+			if (nameStatus != ValidatingStatus.sukces || surnameStatus != ValidatingStatus.sukces
+					|| usernameStatus != ValidatingStatus.sukces || passwordStatus != ValidatingStatus.sukces
+					|| emailStatus != ValidatingStatus.sukces) {
+
+				return;
+			}
+
+			Users.Role role = (Users.Role) roleChoiceBox.getValue();
+
+			// klasa algorytmu BCrypt
 			BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
 
-			
 			Hash hash = Password.hash(password).with(myBcrypt);
-			
-					main.getUsersController().create(role, name, surname, username, hash.getResult(), email);
-		}	
+
+			main.getUsersController().create(role, name, surname, username, hash.getResult(), email);
+		}
 			break;
-			
+
 		case editing: {
+
+			String name = nameInputField.getText();
+			String surname = surnameInputField.getText();
+			String username = usernameInputField.getText();
+			String password = passwordInputField.getText();
+			String email = emailInputField.getText();
+
+			ValidatingStatus nameStatus = validate(name, 30, false);
+			ValidatingStatus surnameStatus = validate(surname, 30, false);
+			ValidatingStatus usernameStatus = validate(username, 10, false); // !!!!! obs³u¿yæ sprawdzanie unikatowoœci w przypadku edycji !!!!!
+			ValidatingStatus passwordStatus = validate(password, 100, false);
+			ValidatingStatus emailStatus = validate(email, 30, false);
+
+			if (nameStatus != ValidatingStatus.sukces || surnameStatus != ValidatingStatus.sukces
+					|| usernameStatus != ValidatingStatus.sukces || passwordStatus != ValidatingStatus.sukces
+					|| emailStatus != ValidatingStatus.sukces) {
+
+				return;
+			}
+
+			Users.Role role = (Users.Role) roleChoiceBox.getValue();
+
+			// klasa algorytmu BCrypt
+			BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+
+			Hash hash = Password.hash(password).with(myBcrypt);
+
+			main.getUsersController().update(selectedUser.getId(), role, name, surname, username, hash.getResult(), email);
+
 		}
 			break;
 
 		default:
 			break;
 		}
-		
+
 		clearUserFields();
+		passwordHbox.setVisible(false);
+		updateTableView();
+		enableTableView(true);
+		enableEditButttons(true);
+		enableInputFields(false);
+		editingMode = EditingMode.none;
+
+	}
+
+	private ValidatingStatus validate(String text, int maxLength, boolean checkUsernameUniqueness) {
+
+		if (text == null || text.length() <= 0)
+			return ValidatingStatus.pustePole;
+
+		if (text.length() > maxLength)
+			return ValidatingStatus.tekstZaDlugi;
+
+		if (checkUsernameUniqueness && main.getUsersController().checkUsername(text))
+			return ValidatingStatus.wartoscNieunikatowa;
+
+		return ValidatingStatus.sukces;
+
+	}
+
+	public void onCancelButtonCick() {
+
+		clearUserFields();
+		passwordHbox.setVisible(false);
+		updateTableView();
 		enableTableView(true);
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
+		enableInputFields(false);
+
+	}
+
+	public void enableInputFields(boolean enabled) {
+
+		nameInputField.setDisable(!enabled);
+		surnameInputField.setDisable(!enabled);
+		usernameInputField.setDisable(!enabled);
+		emailInputField.setDisable(!enabled);
+		roleChoiceBox.setDisable(!enabled);
+
 	}
 
 	public void setUp() {
@@ -146,11 +266,13 @@ public class AdminPanelUsersViewController {
 
 		updateTableView();
 
-		nameInputField.setEditable(false);
-		surnameInputField.setEditable(false);
-		usernameInputField.setEditable(false);
-		emailInputField.setEditable(false);
-		roleInputField.setEditable(false);
+		enableInputFields(false);
+
+		passwordHbox.setVisible(false);
+
+		// uzupe³nienie wartoœci w combo boxie
+
+		roleChoiceBox.getItems().setAll(Users.Role.values());
 
 		// tworzymy tzw "nas³uchiwacz"
 
@@ -197,7 +319,7 @@ public class AdminPanelUsersViewController {
 		surnameInputField.setText(selectedUser.getSurname());
 		usernameInputField.setText(selectedUser.getUsername());
 		emailInputField.setText(selectedUser.getEmail());
-		roleInputField.setText(selectedUser.getRole().toString());
+		roleChoiceBox.getSelectionModel().select(selectedUser.getRole().ordinal());
 
 	}
 
@@ -207,7 +329,8 @@ public class AdminPanelUsersViewController {
 		surnameInputField.setText(null);
 		usernameInputField.setText(null);
 		emailInputField.setText(null);
-		roleInputField.setText(null);
+		roleChoiceBox.getSelectionModel().select(0);
+		passwordInputField.setText(null);
 
 	}
 
@@ -234,8 +357,10 @@ public class AdminPanelUsersViewController {
 	public enum EditingMode {
 		adding, editing, none
 	}
-	
- 
-    
+
+	public enum ValidatingStatus {
+		sukces, pustePole, tekstZaDlugi, wartoscNieunikatowa
+
+	}
 
 }

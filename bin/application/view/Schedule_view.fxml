@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ScheduleViewController">
+   <children>
+      <DatePicker fx:id="datePicker" layoutX="552.0" layoutY="57.0" prefHeight="37.0" prefWidth="260.0" />
+      <TableView fx:id="scheduleTableView" layoutX="64.0" layoutY="145.0" prefHeight="559.0" prefWidth="1162.0" />
+   </children>
+</AnchorPane>

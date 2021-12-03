@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Users {
 
 	@DatabaseField(generatedId = true)
-	int id;
+	Integer id;
 	@DatabaseField(canBeNull = false)
 	String role;
 	@DatabaseField(canBeNull = false)

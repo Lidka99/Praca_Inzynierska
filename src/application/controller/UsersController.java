@@ -47,6 +47,29 @@ public class UsersController {
 		}
 		return true;
 	}
+	
+	// edycja u¿ytkowników
+	
+	public boolean update(int id, Users.Role role, String name, String surname, String username, String password_hash,
+			String email) {
+		
+		Users user = getUser(id);
+		user.setRole(role);
+		user.setName(name);
+		user.setSurname(surname);
+		user.setUsername(username);
+		user.setPassword_hash(password_hash);
+		user.setEmail(email);
+		
+		try {
+			usersDao.update(user);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 	// usuwanie u¿ytkowników
 
@@ -113,6 +136,22 @@ public class UsersController {
 		}
 
 		return null;
+	}
+	
+	//sprawdzanie czy istnieje u¿ytkownik o danym loginie
+
+	public boolean checkUsername(String login) {
+
+		for (Users user : usersDao) {
+
+			if (login.equals(user.getUsername())) {
+
+				return true;
+			}
+
+		}
+
+		return false;
 	}
 
 }

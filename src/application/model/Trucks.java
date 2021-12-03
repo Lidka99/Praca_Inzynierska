@@ -8,9 +8,9 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Trucks {
 
 	@DatabaseField(generatedId = true)
-	int id;
+	Integer id;
 	@DatabaseField(canBeNull = false)
-	int licence_number;
+	String licence_number;
 	@DatabaseField(canBeNull = false)
 	String brand;
 	@DatabaseField(canBeNull = false)
@@ -18,22 +18,22 @@ public class Trucks {
 	@DatabaseField(canBeNull = false)
 	int max_load;
 	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
-	int current_trailer_id;
+	Trailers current_trailer;
 	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
-	int current_driver_id;
+	Drivers current_driver;
 
 	public Trucks() {
 
 	}
 
-	public Trucks(int license_number, String brand, String model, int max_load, int current_trailer_id,
-			int current_driver_id) {
+	public Trucks(String license_number, String brand, String model, int max_load, Trailers current_trailer_id,
+			Drivers current_driver_id) {
 		this.licence_number = license_number;
 		this.brand = brand;
 		this.model = model;
 		this.max_load = max_load;
-		this.current_trailer_id = current_trailer_id;
-		this.current_driver_id = current_driver_id;
+		this.current_trailer = current_trailer_id;
+		this.current_driver = current_driver_id;
 	}
 
 }
