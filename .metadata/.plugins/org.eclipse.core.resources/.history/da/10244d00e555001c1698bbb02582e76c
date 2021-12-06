@@ -48,7 +48,7 @@ public class ScheduleController {
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
 		for (Schedule schedule : scheduleDao) {
-			if (schedule.getScheduled_date().equals(scheduled_date)) { 
+			if (schedule.getScheduled_date().equals(scheduled_date)) { //tu poprawic porownywanie equals albo cos takiegi
 				allSchedules.add(schedule);
 			}
 			

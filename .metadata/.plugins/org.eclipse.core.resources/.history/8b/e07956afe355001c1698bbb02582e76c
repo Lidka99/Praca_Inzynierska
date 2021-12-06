@@ -111,7 +111,8 @@ public class ScheduleViewController {
 
 		ScheduleController controller = main.getScheduleController();
 
-		List<Schedule> schedules = controller.getSchedulesByScheduledDate(selectedDate); 
+		List<Schedule> schedules = controller.getSchedulesByScheduledDate(selectedDate); //tu poprawic
+
 		scheduleTableView.getItems().clear();
 
 		for (Schedule schedule : schedules) {
