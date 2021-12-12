@@ -79,7 +79,7 @@ public class Schedule {
 		this.type = type;
 	}
 
-	public Trailers getTrailer_id() {
+	public Trailers getTrailer() {
 		return trailer;
 	}
 
@@ -87,7 +87,7 @@ public class Schedule {
 		this.trailer = trailer_id;
 	}
 
-	public Drivers getDriver_id() {
+	public Drivers getDriver() {
 		return driver;
 	}
 
@@ -95,7 +95,7 @@ public class Schedule {
 		this.driver = driver_id;
 	}
 
-	public Trucks getTruck_id() {
+	public Trucks getTruck() {
 		return truck;
 	}
 

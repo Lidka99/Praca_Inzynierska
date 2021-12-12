@@ -24,4 +24,31 @@ public class Trailers {
 		this.trailer_type = trailer_type;
 		
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTrailer_number() {
+		return trailer_number;
+	}
+
+	public void setTrailer_number(String trailer_number) {
+		this.trailer_number = trailer_number;
+	}
+
+	public String getTrailer_type() {
+		return trailer_type;
+	}
+
+	public void setTrailer_type(String trailer_type) {
+		this.trailer_type = trailer_type;
+	}
+	
+	
+	
 }

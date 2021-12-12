@@ -27,5 +27,16 @@ public class TrailersController {
 		}
 
 	}
+	
+	public Trailers getByTrailerNumber(String trailersNumber) {
+		for (Trailers trailer : trailersDao) {
+
+			if(trailersNumber.toLowerCase().equals(trailer.getTrailer_number().toLowerCase())) {
+				return trailer;
+			}
+		}
+		
+		return null;
+	}
 
 }

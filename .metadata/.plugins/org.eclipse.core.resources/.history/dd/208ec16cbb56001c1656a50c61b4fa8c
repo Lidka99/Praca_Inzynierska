@@ -1,0 +1,118 @@
+package application.view.intermediate;
+
+import java.util.Date;
+
+import com.j256.ormlite.field.DatabaseField;
+
+import application.model.Drivers;
+import application.model.Schedule;
+import application.model.Trailers;
+import application.model.Trucks;
+
+public class ScheduleIntermediate {
+
+	Integer id;
+
+	String scheduled_date;
+
+	String arrival_date;
+
+	String departure_date;
+
+	String type;
+
+	Trailers trailer;
+
+	Drivers driver;
+
+	Trucks truck;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getScheduled_date() {
+		return scheduled_date;
+	}
+
+	public void setScheduled_date(String scheduled_date) {
+		this.scheduled_date = scheduled_date;
+	}
+
+	public String getArrival_date() {
+		return arrival_date;
+	}
+
+	public void setArrival_date(String arrival_date) {
+		this.arrival_date = arrival_date;
+	}
+
+	public String getDeparture_date() {
+		return departure_date;
+	}
+
+	public void setDeparture_date(String departure_date) {
+		this.departure_date = departure_date;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Trailers getTrailer() {
+		return trailer;
+	}
+
+	public void setTrailer(Trailers trailer) {
+		this.trailer = trailer;
+	}
+
+	public Drivers getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Drivers driver) {
+		this.driver = driver;
+	}
+
+	public Trucks getTruck() {
+		return truck;
+	}
+
+	public void setTruck(Trucks truck) {
+		this.truck = truck;
+	}
+
+	public ScheduleIntermediate(Schedule schedule) {
+		super();
+
+		Date scheduledDate = schedule.getScheduled_date();
+		if (scheduledDate != null) {
+			this.scheduled_date = scheduledDate.toString();
+		}
+
+		Date arrivalDate = schedule.getArrival_date();
+		if (arrivalDate != null) {
+			this.arrival_date = arrivalDate.toString();
+		}
+
+		Date departureDate = schedule.getDeparture_date();
+		if (arrivalDate != null) {
+			this.departure_date = departureDate.toString();
+		}
+		
+		this.type = schedule.getType();
+		this.trailer = schedule.getTrailer_id();
+		this.driver = schedule.getDriver_id();
+		this.truck = schedule.getTruck_id();
+	}
+
+}

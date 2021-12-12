@@ -42,22 +42,22 @@ public class ScheduleController {
 		return allSchedules;
 
 	}
-	
+
 	public List<Schedule> getSchedulesByScheduledDate(Date scheduled_date) {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
 		for (Schedule schedule : scheduleDao) {
-			if (schedule.getScheduled_date().equals(scheduled_date)) { 
+			if (schedule.getScheduled_date().equals(scheduled_date)) {
 				allSchedules.add(schedule);
 			}
-			
+
 		}
 
 		return allSchedules;
 
 	}
-	
+
 	public List<Schedule> getSchedulesByArrivalDate(Date arrival_date) {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
@@ -66,13 +66,13 @@ public class ScheduleController {
 			if (schedule.getArrival_date().equals(arrival_date)) {
 				allSchedules.add(schedule);
 			}
-			
+
 		}
 
 		return allSchedules;
 
 	}
-	
+
 	public List<Schedule> getSchedulesbyDepartureDate(Date departure_date) {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
@@ -81,11 +81,86 @@ public class ScheduleController {
 			if (schedule.getDeparture_date().equals(departure_date)) {
 				allSchedules.add(schedule);
 			}
-			
+
+		}
+
+		return allSchedules;
+
+	}
+	
+	public List<Schedule> getSchedulesInWarehouse() {
+
+		List<Schedule> allSchedules = new ArrayList<Schedule>();
+
+		for (Schedule schedule : scheduleDao) {
+			if (schedule.getDeparture_date() == null && schedule.getArrival_date() != null) {
+				allSchedules.add(schedule);
+			}
+
 		}
 
 		return allSchedules;
 
 	}
 
+
+	public List<Schedule> getSchedulesByData(Drivers driver, Trailers trailer, Trucks truck) {
+
+		List<Schedule> allSchedules = new ArrayList<Schedule>();
+
+		for (Schedule schedule : scheduleDao) {
+			if (schedule.getDriver().getId() == driver.getId() && schedule.getTrailer().getId() == trailer.getId()
+					&& schedule.getTruck().getId() == truck.getId()) {
+				allSchedules.add(schedule);
+			}
+
+		}
+
+		return allSchedules;
+
+	}
+
+	public Schedule getSchedule(int id) {
+
+		for (Schedule schedule : scheduleDao) {
+
+			if (id == schedule.getId()) {
+
+				return schedule;
+			}
+		}
+		return null;
+	}
+
+	//metoda aktualizujaca aktualna date przyjazdu
+	
+	public boolean updateArrivalDate(int id, Date arrivalDate) {
+		Schedule schedule = getSchedule(id);
+		schedule.setArrival_date(arrivalDate);
+
+		try {
+			scheduleDao.update(schedule);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	//metoda aktualizujaca date wyjazdu
+	
+	public boolean updateDepartureDate(int id, Date departureDate) {
+		Schedule schedule = getSchedule(id);
+		schedule.setDeparture_date(departureDate);
+
+		try {
+			scheduleDao.update(schedule);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

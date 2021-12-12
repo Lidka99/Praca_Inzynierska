@@ -36,6 +36,15 @@ public class ApplicationViewController {
 		main.showSchedulePage();
 
 	}
+	
+	@FXML
+	public void onArrivalsDeparturesButtonClick() {
+
+		main.showArrivalsDeparturesPage();
+
+	}
+	
+	
 
 	@FXML
 	public void onRaportButtonClick() {

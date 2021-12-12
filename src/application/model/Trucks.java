@@ -36,4 +36,61 @@ public class Trucks {
 		this.current_driver = current_driver_id;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getLicence_number() {
+		return licence_number;
+	}
+
+	public void setLicence_number(String licence_number) {
+		this.licence_number = licence_number;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getMax_load() {
+		return max_load;
+	}
+
+	public void setMax_load(int max_load) {
+		this.max_load = max_load;
+	}
+
+	public Trailers getCurrent_trailer() {
+		return current_trailer;
+	}
+
+	public void setCurrent_trailer(Trailers current_trailer) {
+		this.current_trailer = current_trailer;
+	}
+
+	public Drivers getCurrent_driver() {
+		return current_driver;
+	}
+
+	public void setCurrent_driver(Drivers current_driver) {
+		this.current_driver = current_driver;
+	}
+
+	
 }

@@ -1,0 +1,5 @@
+package application.controller.intermediate;
+
+public class ScheduleIntermediate {
+
+}

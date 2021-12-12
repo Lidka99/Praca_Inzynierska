@@ -11,7 +11,7 @@
             <ToggleGroup fx:id="ToggleGroup" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Kierowcy" textAlignment="CENTER" toggleGroup="$ToggleGroup" />
+      <ToggleButton fx:id="driversToggleButton" maxWidth="200.0" mnemonicParsing="false" onAction="#onDriversToggleButtonClick" prefWidth="200.0" text="Kierowcy" textAlignment="CENTER" toggleGroup="$ToggleGroup" />
       <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Ciężarówki " toggleGroup="$ToggleGroup" />
       <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Naczepy" toggleGroup="$ToggleGroup" />
       <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Plan  przyjazdów" toggleGroup="$ToggleGroup" />

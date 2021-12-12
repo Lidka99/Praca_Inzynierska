@@ -17,7 +17,7 @@
             </ImageView>
           <Button fx:id="main_page_button" mnemonicParsing="false" onAction="#onMainPageButtonClick" text="Strona główna" />
             <Button fx:id="schedule_button" mnemonicParsing="false" onAction="#onScheduleButtonClick" text="Plan przyjazdów" />
-            <Button fx:id="admin_panel_button11" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Wpuszczanie/Wypuszczanie" />
+            <Button fx:id="admin_panel_button11" mnemonicParsing="false" onAction="#onArrivalsDeparturesButtonClick" text="Przyjazdy/Wyjazdy" />
             <Button fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raport" />
             <Button fx:id="admin_panel_button" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Panel administracyjny" />
             <Button fx:id="log_out_button" mnemonicParsing="false" onAction="#onLogOutButtonClick" text="Wyloguj" />

@@ -2,6 +2,7 @@ package application.view;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -18,8 +19,10 @@ import application.model.Users.Role;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -66,10 +69,22 @@ public class AdminPanelUsersViewController {
 	private ListChangeListener<Users> selectionListener;
 
 	public void onDeleteButtonClick() {
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Usuniêcie u¿ytkownika");
+		alert.setHeaderText("Masz zamiar usun¹æ u¿ytkownika");
+		alert.setContentText("Czy na pewno chcesz to zrobiæ?");
 
-		main.getUsersController().delete(selectedUser);
-		updateTableView();
-		clearUserFields();
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			main.getUsersController().delete(selectedUser);
+			updateTableView();
+			clearUserFields();
+		} else {
+		    
+		}
+
+		
 
 	}
 

@@ -27,4 +27,15 @@ public class TrucksController {
 
 	}
 
+	public Trucks getByTruckNumber(String trucksNumber) {
+		for (Trucks truck : trucksDao) {
+
+			if(trucksNumber.toLowerCase().equals(truck.getLicence_number().toLowerCase())) {
+				return truck;
+			}
+		}
+		
+		return null;
+	}
+
 }

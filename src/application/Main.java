@@ -17,13 +17,17 @@ import com.password4j.types.BCrypt;
 
 import application.controller.DriversController;
 import application.controller.ScheduleController;
+import application.controller.TrailersController;
+import application.controller.TrucksController;
 import application.controller.UsersController;
 import application.model.Users;
 import application.view.AdminPanelDriversViewController;
 import application.view.AdminPanelUsersViewController;
 import application.view.AdminPanelViewController;
 import application.view.ApplicationViewController;
+import application.view.ArrivalsDeparturesViewController;
 import application.view.LoginViewController;
+import application.view.MainPageViewController;
 import application.view.ScheduleViewController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -31,6 +35,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -49,6 +54,8 @@ public class Main extends Application {
 	private UsersController usersController;
 	private DriversController driversController;
 	private ScheduleController scheduleController;
+	private TrucksController trucksController;
+	private TrailersController trailersController;
 
 	// ³¹czenie z baz¹ danych
 	@Override
@@ -61,6 +68,8 @@ public class Main extends Application {
 
 			usersController = new UsersController(dataBaseConnection);
 			driversController = new DriversController(dataBaseConnection);
+			trucksController = new TrucksController(dataBaseConnection);
+			trailersController = new TrailersController(dataBaseConnection);
 			scheduleController = new ScheduleController(dataBaseConnection);
 
 			// dodowanie uzytkownikow
@@ -179,6 +188,12 @@ public class Main extends Application {
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/MainPage_view.fxml"));
 			Pane root1 = loader1.load();
 
+			MainPageViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+			
 			applicationWindowRoot.setCenter(root1);
 			applicationWindowRoot.setLeft(null);
 
@@ -196,6 +211,28 @@ public class Main extends Application {
 			Pane root1 = loader1.load();
 
 			ScheduleViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
+			applicationWindowRoot.setLeft(null);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void showArrivalsDeparturesPage() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/ArrivalsDeparture_view.fxml"));
+			TabPane root1 = loader1.load();
+
+			ArrivalsDeparturesViewController controller = loader1.getController();
 
 			controller.setmainapp(this);
 
@@ -301,6 +338,16 @@ public class Main extends Application {
 
 	public ScheduleController getScheduleController() {
 		return scheduleController;
+	}
+	
+	
+
+	public TrucksController getTrucksController() {
+		return trucksController;
+	}
+
+	public TrailersController getTrailersController() {
+		return trailersController;
 	}
 
 	public static void main(String[] args) {

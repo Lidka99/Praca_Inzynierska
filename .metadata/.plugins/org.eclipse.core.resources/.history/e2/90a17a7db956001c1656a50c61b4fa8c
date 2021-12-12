@@ -1,0 +1,41 @@
+package application.view.intermediate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import application.model.Schedule;
+
+
+
+public class Conventer {
+	
+	//zamiana  obiektów schedule na obiekty poœrednie do wyœwietlenia
+
+	public static ScheduleIntermediate convert(Schedule schedule) {
+
+		return new ScheduleIntermediate(schedule.getScheduled_date().toString(), schedule.getArrival_date().toString(),
+				schedule.getDeparture_date().toString(), schedule.getType(), schedule.getTrailer_id(),
+				schedule.getDriver_id(), schedule.getTruck_id()
+
+		);
+		
+
+	}
+	
+	
+	//zamiana listy obiektów schedule na listê obiektów poœrednich do wyœwietlenia
+	
+	public static List<ScheduleIntermediate> convert(List<Schedule> schedules) {
+
+		List<ScheduleIntermediate> result = new ArrayList<ScheduleIntermediate>();
+		
+		for (Schedule schedule : schedules ) {
+			result.add(convert(schedule));
+		}
+		
+		return result;
+		
+
+	}
+
+}
