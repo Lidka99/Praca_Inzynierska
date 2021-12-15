@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.j256.ormlite.table.DatabaseTable"/>
-    <fullyQualifiedTypeName name="com.j256.ormlite.field.DatabaseField"/>
-    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.DataSourceConnectionSource"/>
-    <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcPooledConnectionSource"/>
     <fullyQualifiedTypeName name="javax.activation.DataSource"/>
     <fullyQualifiedTypeName name="com.j256.ormlite.jdbc.JdbcConnectionSource"/>
-    <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
     <fullyQualifiedTypeName name="application.model.Users"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ToggleButton"/>
     <fullyQualifiedTypeName name="application.view.AdminPanel_view_controller"/>
@@ -41,23 +31,33 @@
     <fullyQualifiedTypeName name="application.model.Users.Role"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
     <fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.time.ZoneId"/>
     <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
     <fullyQualifiedTypeName name="application.view.ScheduleViewController"/>
     <fullyQualifiedTypeName name="application.model.Trailers"/>
     <fullyQualifiedTypeName name="application.model.Trucks"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediate"/>
     <fullyQualifiedTypeName name="application.view.intermediate.Converter"/>
     <fullyQualifiedTypeName name="application.model.Schedule"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="java.text.DateFormat"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
     <fullyQualifiedTypeName name="application.controller.TrucksController"/>
     <fullyQualifiedTypeName name="application.controller.TrailersController"/>
     <fullyQualifiedTypeName name="application.model.Drivers"/>
     <fullyQualifiedTypeName name="application.view.ArrivalsDeparturesViewController"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.TabPane"/>
+    <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
+    <fullyQualifiedTypeName name="application.view.MainPageViewController"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Alert.AlertType"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.ButtonType"/>
+    <fullyQualifiedTypeName name="java.text.DateFormat"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.TimeRaportEntry"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediate"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,5 @@
+package application.view.intermediate;
+
+public class TimeRaportEntry {
+
+}

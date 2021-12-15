@@ -1,6 +1,9 @@
 package application.controller;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +12,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 
+import application.Main;
 import application.model.*;
 
 public class ScheduleController {
@@ -87,7 +91,78 @@ public class ScheduleController {
 		return allSchedules;
 
 	}
-	
+
+	public List<Schedule> getSchedulesToday() {
+
+		List<Schedule> allSchedules = new ArrayList<Schedule>();
+
+		Date currentDate = new Date(System.currentTimeMillis());
+
+		
+
+		Date todayWithZeroTime = null;
+
+		try {
+			todayWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(currentDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (todayWithZeroTime != null) {
+
+			for (Schedule schedule : scheduleDao) {
+
+				Date scheduledDate = null;
+
+				try {
+					scheduledDate = Main.getDateFormat().parse(Main.getDateFormat().format(schedule.getScheduled_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (scheduledDate != null && scheduledDate.equals(todayWithZeroTime)) {
+					allSchedules.add(schedule);
+				}
+
+			}
+		}
+
+		return allSchedules;
+
+	}
+
+	public List<Schedule> getSchedulesWithArrivalBetween(Date startDate, Date endDate) {
+
+		List<Schedule> allSchedules = new ArrayList<Schedule>();
+
+		
+		for (Schedule schedule : scheduleDao) {
+
+			if (schedule.getArrival_date() != null) {
+
+				Date arrivalDate = null;
+
+				try {
+					arrivalDate = Main.getDateFormat().parse(Main.getDateFormat().format(schedule.getArrival_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (arrivalDate != null && schedule.getDeparture_date() != null) {
+					if (startDate.getTime() <= arrivalDate.getTime() && endDate.getTime() >= arrivalDate.getTime()) {
+						allSchedules.add(schedule);
+					}
+				}
+
+			}
+		}
+
+		return allSchedules;
+	}
+
 	public List<Schedule> getSchedulesInWarehouse() {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
@@ -102,7 +177,6 @@ public class ScheduleController {
 		return allSchedules;
 
 	}
-
 
 	public List<Schedule> getSchedulesByData(Drivers driver, Trailers trailer, Trucks truck) {
 
@@ -132,8 +206,8 @@ public class ScheduleController {
 		return null;
 	}
 
-	//metoda aktualizujaca aktualna date przyjazdu
-	
+	// metoda aktualizujaca aktualna date przyjazdu
+
 	public boolean updateArrivalDate(int id, Date arrivalDate) {
 		Schedule schedule = getSchedule(id);
 		schedule.setArrival_date(arrivalDate);
@@ -147,9 +221,9 @@ public class ScheduleController {
 		}
 		return true;
 	}
-	
-	//metoda aktualizujaca date wyjazdu
-	
+
+	// metoda aktualizujaca date wyjazdu
+
 	public boolean updateDepartureDate(int id, Date departureDate) {
 		Schedule schedule = getSchedule(id);
 		schedule.setDeparture_date(departureDate);

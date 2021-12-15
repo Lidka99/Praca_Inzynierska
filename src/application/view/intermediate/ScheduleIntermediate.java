@@ -6,6 +6,7 @@ import java.util.Date;
 
 import com.j256.ormlite.field.DatabaseField;
 
+import application.Main;
 import application.model.Drivers;
 import application.model.Schedule;
 import application.model.Trailers;
@@ -140,7 +141,7 @@ public class ScheduleIntermediate {
 	public ScheduleIntermediate(Schedule schedule) {
 		super();
 		
-		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		
 		
 		this.id = schedule.getId();
 
@@ -148,17 +149,17 @@ public class ScheduleIntermediate {
 		if (scheduledDate != null) {
 			
 			
-			this.scheduled_date = dateFormat.format(scheduledDate);
+			this.scheduled_date = Main.getDateTimeFormat().format(scheduledDate);
 		}
 
 		Date arrivalDate = schedule.getArrival_date();
 		if (arrivalDate != null) {
-			this.arrival_date = dateFormat.format(arrivalDate);
+			this.arrival_date = Main.getDateTimeFormat().format(arrivalDate);
 		}
 
 		Date departureDate = schedule.getDeparture_date();
 		if (departureDate != null) {
-			this.departure_date = dateFormat.format(departureDate);
+			this.departure_date = Main.getDateTimeFormat().format(departureDate);
 		}
 		
 		this.type = schedule.getType();

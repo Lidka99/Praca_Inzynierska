@@ -1,0 +1,28 @@
+package application.view.intermediate;
+
+import java.util.Date;
+
+public class TimeRaportEntry {
+
+	private String dateString;
+	private Date date;
+	private float minTime;
+	private float maxTime;
+	private float avgTime;
+
+	public String toCSV() {
+		return date.toString() + ";" + minTime + ";" + maxTime + ";" + avgTime;
+	}
+
+	public TimeRaportEntry(Date date, float minTime, float maxTime, float avgTime) {
+		super();
+		this.date = date;
+		this.dateString = date.toString();
+		this.minTime = minTime;
+		this.maxTime = maxTime;
+		this.avgTime = avgTime;
+	}
+	
+	
+
+}

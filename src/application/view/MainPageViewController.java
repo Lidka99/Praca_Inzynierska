@@ -72,56 +72,105 @@ public class MainPageViewController {
 
 			inWarehouseTableView.getItems().add(schedule);
 		}
+		
+		List<ScheduleIntermediate> scheduleToday = Converter.convert(controller.getSchedulesToday());
+		scheduleTableView.getItems().clear();
+
+		for (ScheduleIntermediate schedule : scheduleToday) {
+
+			scheduleTableView.getItems().add(schedule);
+		}
 	}
 
 	public void setUp() {
-		
+
 		usernameLabel.setText(main.getCurrentUser().getName() + " " + main.getCurrentUser().getSurname());
 		Date currentDate = new Date(System.currentTimeMillis());
 		currentDateLabel.setText(currentDate.toString());
 
+		// tabela schedule
 		// dodawanie kolumny id
 		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
 		column1.setCellValueFactory(new PropertyValueFactory("id"));
-		inWarehouseTableView.getColumns().add(column1);
 		scheduleTableView.getColumns().add(column1);
 
 		// dodawanie kolumny planowana data
 		TableColumn<ScheduleIntermediate, String> column2 = new TableColumn("Planowana data przyjazdu");
 		column2.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
-		inWarehouseTableView.getColumns().add(column2);
+		scheduleTableView.getColumns().add(column2);
 
 		// dodawanie kolumny data przyjazdu
 		TableColumn<ScheduleIntermediate, String> column3 = new TableColumn("Data przyjazdu");
 		column3.setCellValueFactory(new PropertyValueFactory("arrival_date"));
-		inWarehouseTableView.getColumns().add(column3);
+		scheduleTableView.getColumns().add(column3);
 
 		// dodawanie kolumny rodzaj
 		TableColumn<ScheduleIntermediate, String> column5 = new TableColumn("Rodzaj");
 		column5.setCellValueFactory(new PropertyValueFactory("type"));
-		inWarehouseTableView.getColumns().add(column5);
+		scheduleTableView.getColumns().add(column5);
 
 		// dodawanie kolumny imie kierowcy
 		TableColumn<ScheduleIntermediate, String> column6 = new TableColumn("Imiê kierowcy");
 		column6.setCellValueFactory(new PropertyValueFactory("driverName"));
-		inWarehouseTableView.getColumns().add(column6);
+		scheduleTableView.getColumns().add(column6);
 
 		// dodawanie kolumny nazwisko kierowcy
 		TableColumn<ScheduleIntermediate, String> column7 = new TableColumn("Nazwisko kierowcy");
 		column7.setCellValueFactory(new PropertyValueFactory("driverSurname"));
-		inWarehouseTableView.getColumns().add(column7);
+		scheduleTableView.getColumns().add(column7);
 
 		// dodawanie kolumny nr rejestracyjny naczepy
 		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
 		column8.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
-		inWarehouseTableView.getColumns().add(column8);
+		scheduleTableView.getColumns().add(column8);
 
 		// dodawanie kolumny nr rejestracyjny auta
 		TableColumn<ScheduleIntermediate, String> column9 = new TableColumn("Nr rejestracyjny auta");
 		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
-		inWarehouseTableView.getColumns().add(column9);
+		scheduleTableView.getColumns().add(column9);
 
-		// dodac ko
+		// dodac kolumny marka itd
+		// tabela warehouse
+
+		// dodawanie kolumny id
+		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
+		column11.setCellValueFactory(new PropertyValueFactory("id"));
+		inWarehouseTableView.getColumns().add(column11);
+
+		// dodawanie kolumny planowana data
+		TableColumn<ScheduleIntermediate, String> column22 = new TableColumn("Planowana data przyjazdu");
+		column22.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
+		inWarehouseTableView.getColumns().add(column22);
+
+		// dodawanie kolumny data przyjazdu
+		TableColumn<ScheduleIntermediate, String> column33 = new TableColumn("Data przyjazdu");
+		column33.setCellValueFactory(new PropertyValueFactory("arrival_date"));
+		inWarehouseTableView.getColumns().add(column33);
+
+		// dodawanie kolumny rodzaj
+		TableColumn<ScheduleIntermediate, String> column55 = new TableColumn("Rodzaj");
+		column55.setCellValueFactory(new PropertyValueFactory("type"));
+		inWarehouseTableView.getColumns().add(column55);
+
+		// dodawanie kolumny imie kierowcy
+		TableColumn<ScheduleIntermediate, String> column66 = new TableColumn("Imiê kierowcy");
+		column66.setCellValueFactory(new PropertyValueFactory("driverName"));
+		inWarehouseTableView.getColumns().add(column66);
+
+		// dodawanie kolumny nazwisko kierowcy
+		TableColumn<ScheduleIntermediate, String> column77 = new TableColumn("Nazwisko kierowcy");
+		column77.setCellValueFactory(new PropertyValueFactory("driverSurname"));
+		inWarehouseTableView.getColumns().add(column77);
+
+		// dodawanie kolumny nr rejestracyjny naczepy
+		TableColumn<ScheduleIntermediate, String> column88 = new TableColumn("Nr rejestracyjny naczepy");
+		column88.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
+		inWarehouseTableView.getColumns().add(column88);
+
+		// dodawanie kolumny nr rejestracyjny auta
+		TableColumn<ScheduleIntermediate, String> column99 = new TableColumn("Nr rejestracyjny auta");
+		column99.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
+		inWarehouseTableView.getColumns().add(column99);
 
 		updateTableView();
 

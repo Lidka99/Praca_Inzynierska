@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.activation.DataSource;
+import javax.swing.text.DateFormatter;
 
 import com.j256.ormlite.jdbc.DataSourceConnectionSource;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -28,6 +31,7 @@ import application.view.ApplicationViewController;
 import application.view.ArrivalsDeparturesViewController;
 import application.view.LoginViewController;
 import application.view.MainPageViewController;
+import application.view.RaportViewController;
 import application.view.ScheduleViewController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -42,6 +46,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class Main extends Application {
+
+	private static DateFormat dateFormat;
+	private static DateFormat dateTimeFormat;
 
 	private Stage primaryStage;
 	private BorderPane applicationWindowRoot;
@@ -62,6 +69,10 @@ public class Main extends Application {
 	public void init() throws Exception {
 		// TODO Auto-generated method stub
 		super.init();
+
+		dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		dateTimeFormat = new SimpleDateFormat ("dd.MM.yyyy HH:mm");
+
 		try {
 			dataBaseConnection = new JdbcConnectionSource(DATABASE_URL);
 			System.out.println("Po³¹czono z baz¹ danych");
@@ -193,7 +204,7 @@ public class Main extends Application {
 			controller.setmainapp(this);
 
 			controller.setUp();
-			
+
 			applicationWindowRoot.setCenter(root1);
 			applicationWindowRoot.setLeft(null);
 
@@ -224,7 +235,7 @@ public class Main extends Application {
 		}
 
 	}
-	
+
 	public void showArrivalsDeparturesPage() {
 
 		try {
@@ -252,7 +263,13 @@ public class Main extends Application {
 		try {
 
 			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/Raport_view.fxml"));
-			Pane root1 = loader1.load();
+			TabPane root1 = loader1.load();
+
+			RaportViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
 
 			applicationWindowRoot.setCenter(root1);
 			applicationWindowRoot.setLeft(null);
@@ -339,8 +356,6 @@ public class Main extends Application {
 	public ScheduleController getScheduleController() {
 		return scheduleController;
 	}
-	
-	
 
 	public TrucksController getTrucksController() {
 		return trucksController;
@@ -348,6 +363,14 @@ public class Main extends Application {
 
 	public TrailersController getTrailersController() {
 		return trailersController;
+	}
+
+	public static DateFormat getDateFormat() {
+		return dateFormat;
+	}
+	
+	public static DateFormat getDateTimeFormat() {
+		return dateTimeFormat;
 	}
 
 	public static void main(String[] args) {

@@ -1,0 +1,29 @@
+package application.view.intermediate;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+import java.util.Map;
+
+public class RaportGenerator {
+	
+	public static List<TimeRaportEntry> generateTimeRaport(List <ScheduleIntermediate> schedules){
+		
+		List<TimeRaportEntry> raport = new ArrayList<TimeRaportEntry>();
+		
+		float min;
+		float max;
+		float sum;
+		
+	
+			
+		return raport;
+	}
+	
+	
+	private static Map<Date, List<ScheduleIntermediate>> groupByDate(List <ScheduleIntermediate> schedules) {
+		
+	}
+	
+
+}
