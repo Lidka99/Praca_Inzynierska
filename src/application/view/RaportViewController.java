@@ -13,12 +13,18 @@ import application.view.intermediate.RaportGenerator;
 import application.view.intermediate.ScheduleIntermediate;
 import application.view.intermediate.TimeRaportEntry;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class RaportViewController {
 
@@ -34,6 +40,10 @@ public class RaportViewController {
 	private TableView raportTableView;
 	@FXML
 	private LineChart raportChart;
+	@FXML
+	private NumberAxis numberAxis;
+	@FXML
+	private CategoryAxis categoryAxis;
 
 	private Main main;
 
@@ -54,25 +64,70 @@ public class RaportViewController {
 		List<ScheduleIntermediate> schedulesIntermediate = Converter.convert(schedules);
 
 		raport = RaportGenerator.generateTimeRaport(schedulesIntermediate);
-		
+
 		updateTableView();
+		updateLineChart();
 
 	}
 
 	public void onExportCSVButtonCLick() {
 
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Eksportuj do CSV");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("CSV", "*.csv"));
+
+		fileChooser.showSaveDialog(main.getPrimaryStage());
+
 	}
 
 	public void updateTableView() {
-		
-		if(raport != null) {
-			
+
+		if (raport != null) {
+
 			raportTableView.getItems().clear();
 
 			for (TimeRaportEntry raportEntry : raport) {
 
 				raportTableView.getItems().add(raportEntry);
 			}
+		}
+
+	}
+
+	public void updateLineChart() {
+
+		if (raport != null) {
+
+			raportChart.getData().clear();
+
+			categoryAxis.getCategories().clear();
+
+			Series<String, Number> seriesMax = new Series<String, Number>();
+			seriesMax.setName("Maksymalny czas pobytu (min)");
+
+			Series<String, Number> seriesMin = new Series<String, Number>();
+			seriesMin.setName("Minimalny czas pobytu (min)");
+
+			Series<String, Number> seriesAvg = new Series<String, Number>();
+			seriesAvg.setName("Œredni czas pobytu (min)");
+
+			for (TimeRaportEntry raportEntry : raport) {
+				if (!categoryAxis.getCategories().contains(raportEntry.getDateString())) {
+					categoryAxis.getCategories().add(raportEntry.getDateString());
+				}
+				seriesMax.getData()
+						.add(new Data<String, Number>(raportEntry.getDateString(), raportEntry.getMaxTimeMinutes()));
+				seriesMin.getData()
+						.add(new Data<String, Number>(raportEntry.getDateString(), raportEntry.getMinTimeMinutes()));
+				seriesAvg.getData()
+						.add(new Data<String, Number>(raportEntry.getDateString(), raportEntry.getAvgTimeMinutes()));
+
+			}
+
+			raportChart.getData().add(seriesMin);
+			raportChart.getData().add(seriesMax);
+			raportChart.getData().add(seriesAvg);
+
 		}
 
 	}
@@ -85,23 +140,22 @@ public class RaportViewController {
 		raportTableView.getColumns().add(column1);
 
 		// dodawanie kolumny max
-		TableColumn<TimeRaportEntry, Float> column2 = new TableColumn("Maksymlny czas pobytu");
-		column2.setCellValueFactory(new PropertyValueFactory("maxTime"));
+		TableColumn<TimeRaportEntry, Float> column2 = new TableColumn("Maksymalny czas pobytu");
+		column2.setCellValueFactory(new PropertyValueFactory("maxTimeMinutes"));
 		raportTableView.getColumns().add(column2);
-
 
 		// dodawanie kolumny min
 		TableColumn<TimeRaportEntry, Float> column3 = new TableColumn("Minimalny czas pobytu");
-		column3.setCellValueFactory(new PropertyValueFactory("minTime"));
+		column3.setCellValueFactory(new PropertyValueFactory("minTimeMinutes"));
 		raportTableView.getColumns().add(column3);
 
 		// dodawanie kolumny srednia
 		TableColumn<TimeRaportEntry, Float> column4 = new TableColumn("Œredni czas pobytu");
-		column4.setCellValueFactory(new PropertyValueFactory("avgTime"));
+		column4.setCellValueFactory(new PropertyValueFactory("avgTimeMinutes"));
 		raportTableView.getColumns().add(column4);
 
-
 		updateTableView();
+		updateLineChart();
 
 	}
 

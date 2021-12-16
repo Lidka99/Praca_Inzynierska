@@ -81,6 +81,7 @@ public class RaportGenerator {
 
 			try {
 				arrivalDate = Main.getDateTimeFormat().parse(schedule.getArrival_date());
+				arrivalDate = Main.getDateFormat().parse(Main.getDateFormat().format(arrivalDate));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

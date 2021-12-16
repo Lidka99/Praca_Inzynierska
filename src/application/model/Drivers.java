@@ -20,6 +20,7 @@ public class Drivers {
 	}
 	public Drivers(Drivers driver) {
 		
+		this.id = driver.id;
 		this.name = driver.name;
 		this.surname = driver.surname;
 		this.driving_license = driver.driving_license;

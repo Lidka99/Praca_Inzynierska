@@ -86,7 +86,7 @@ public class MainPageViewController {
 
 		usernameLabel.setText(main.getCurrentUser().getName() + " " + main.getCurrentUser().getSurname());
 		Date currentDate = new Date(System.currentTimeMillis());
-		currentDateLabel.setText(currentDate.toString());
+		currentDateLabel.setText(Main.getDateFormat().format(currentDate));
 
 		// tabela schedule
 		// dodawanie kolumny id

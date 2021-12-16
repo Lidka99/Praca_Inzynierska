@@ -51,6 +51,7 @@ public class Main extends Application {
 	private static DateFormat dateTimeFormat;
 
 	private Stage primaryStage;
+
 	private BorderPane applicationWindowRoot;
 	private BorderPane adminPanelRoot;
 	private Scene loginPanelScene;
@@ -71,7 +72,7 @@ public class Main extends Application {
 		super.init();
 
 		dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		dateTimeFormat = new SimpleDateFormat ("dd.MM.yyyy HH:mm");
+		dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
 		try {
 			dataBaseConnection = new JdbcConnectionSource(DATABASE_URL);
@@ -129,10 +130,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		this.primaryStage = primaryStage;
+		this.primaryStage.setTitle("Aplikacja kontroluj¹ca przyjazdy i wyjazdy floty transportowej");
 
 		try {
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("view/Login_view.fxml"));
-			GridPane root = (GridPane) loader.load();
+			Pane root = loader.load();
 			LoginViewController controller = loader.getController();
 
 			controller.setmainapp(this);
@@ -345,6 +347,10 @@ public class Main extends Application {
 
 	}
 
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
 	public UsersController getUsersController() {
 		return usersController;
 	}
@@ -368,7 +374,7 @@ public class Main extends Application {
 	public static DateFormat getDateFormat() {
 		return dateFormat;
 	}
-	
+
 	public static DateFormat getDateTimeFormat() {
 		return dateTimeFormat;
 	}

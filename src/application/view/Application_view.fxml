@@ -12,7 +12,7 @@
         <items>
             <ImageView fitHeight="91.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../logo.JPG" />
+                  <Image url="@../../../../horizontal_on_white_by_logaster%20(1).png" />
                </image>
             </ImageView>
           <Button fx:id="main_page_button" mnemonicParsing="false" onAction="#onMainPageButtonClick" text="Strona główna" />

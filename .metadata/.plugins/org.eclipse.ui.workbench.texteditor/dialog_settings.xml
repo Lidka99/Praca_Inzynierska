@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getUser"/>
+		<item key="selection" value="SimpleDateFormat"/>
 		<list key="findhistory">
+			<item value="SimpleDateFormat"/>
 			<item value="getUser"/>
 			<item value="Click"/>
 			<item value="on"/>
