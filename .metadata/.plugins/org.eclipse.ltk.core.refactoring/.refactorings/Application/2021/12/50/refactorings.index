@@ -1,2 +1,8 @@
 1639592040418	Rename field 'dateFormatter'
 1639592897900	Rename local variable 'scheduledDate'
+1639824873939	Copy file
+1639825751676	Copy compilation unit
+1639825776306	Rename field 'driversTableView'
+1639825800939	Rename field 'selectedDriver'
+1639826112752	Rename method 'clearDriverFields'
+1639827725406	Rename local variable 'allDrivers'

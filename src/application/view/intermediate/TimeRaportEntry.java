@@ -18,7 +18,7 @@ public class TimeRaportEntry {
 	
 
 	public String toCSV() {
-		return date.toString() + ";" + minTime + ";" + maxTime + ";" + avgTime;
+		return dateString + ";" + minTimeMinutes + ";" + maxTimeMinutes + ";" + avgTimeMinutes;
 	}
 
 	public TimeRaportEntry(Date date, Float minTime, Float maxTime, Float avgTime) {
@@ -34,6 +34,10 @@ public class TimeRaportEntry {
 		
 		
 		
+	}
+	
+	public static String getCSVHeader() {
+		return "Data; Minimalny czas; Maksymalny czas; Œredni czas";
 	}
 
 	public String getDateString() {

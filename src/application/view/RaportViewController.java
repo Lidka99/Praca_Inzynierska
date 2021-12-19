@@ -1,5 +1,8 @@
 package application.view;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,6 +21,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -67,8 +72,12 @@ public class RaportViewController {
 
 		updateTableView();
 		updateLineChart();
+		
+		exportCSV.setDisable(raport == null || raport.isEmpty());
 
 	}
+	
+	// eksport CSV
 
 	public void onExportCSVButtonCLick() {
 
@@ -76,7 +85,39 @@ public class RaportViewController {
 		fileChooser.setTitle("Eksportuj do CSV");
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("CSV", "*.csv"));
 
-		fileChooser.showSaveDialog(main.getPrimaryStage());
+		File file = fileChooser.showSaveDialog(main.getPrimaryStage());
+
+		// zapisywanie pliku
+		try {
+			FileWriter writer = new FileWriter(file);
+			
+			writer.write(TimeRaportEntry.getCSVHeader() + "\n");
+
+			for (TimeRaportEntry entry : raport) {
+				
+				writer.write(entry.toCSV() + "\n");
+			}
+
+			writer.close();
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Zapisywanie pliku");
+			alert.setHeaderText(null);
+			alert.setContentText("Zapisano");
+
+			alert.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Zapisywanie pliku");
+			alert.setHeaderText(null);
+			alert.setContentText("B³¹d w zapisie");
+
+			alert.showAndWait();
+		}
 
 	}
 
@@ -156,6 +197,8 @@ public class RaportViewController {
 
 		updateTableView();
 		updateLineChart();
+		
+		exportCSV.setDisable(raport == null || raport.isEmpty());
 
 	}
 

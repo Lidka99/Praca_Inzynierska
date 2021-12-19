@@ -71,12 +71,12 @@ public class Schedule {
 		this.departure_date = departure_date;
 	}
 
-	public String getType() {
-		return type;
+	public Type getType() {
+		return Type.valueOf(type);
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(Type type) {
+		this.type = type.toString();
 	}
 
 	public Trailers getTrailer() {
@@ -101,6 +101,12 @@ public class Schedule {
 
 	public void setTruck_id(Trucks truck_id) {
 		this.truck = truck_id;
+	}
+	
+	
+	//enum
+	public enum Type {
+		roz³adunek, za³adunek
 	}
 
 }

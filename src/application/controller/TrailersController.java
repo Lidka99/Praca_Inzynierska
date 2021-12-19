@@ -1,6 +1,8 @@
 package application.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -38,5 +40,18 @@ public class TrailersController {
 		
 		return null;
 	}
+	
+	public List<Trailers> getAllTrailers() {
+
+		List<Trailers> allTrailers = new ArrayList<Trailers>();
+
+		for (Trailers trailer : trailersDao) {
+
+			allTrailers.add(trailer);
+		}
+
+		return allTrailers;
+	}
+	
 
 }

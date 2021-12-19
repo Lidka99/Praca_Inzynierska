@@ -1,6 +1,8 @@
 package application.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -37,5 +39,18 @@ public class TrucksController {
 		
 		return null;
 	}
+	
+	public List<Trucks> getAllTrucks() {
+
+		List<Trucks> allTrucks = new ArrayList<Trucks>();
+
+		for (Trucks truck : trucksDao) {
+
+			allTrucks.add(truck);
+		}
+
+		return allTrucks;
+	}
+	
 
 }
