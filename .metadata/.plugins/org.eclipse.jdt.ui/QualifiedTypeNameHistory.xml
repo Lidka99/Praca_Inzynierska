@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.password4j.Password"/>
-    <fullyQualifiedTypeName name="com.password4j.Hash"/>
-    <fullyQualifiedTypeName name="org.apache.commons.lang3.RandomStringUtils"/>
-    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
-    <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.HBox"/>
     <fullyQualifiedTypeName name="application.view.AdminPanelUsersViewController.ValidatingStatus"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
     <fullyQualifiedTypeName name="application.model.Users.Role"/>
-    <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
     <fullyQualifiedTypeName name="application.view.ScheduleViewController"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
@@ -34,8 +28,6 @@
     <fullyQualifiedTypeName name="java.time.Instant"/>
     <fullyQualifiedTypeName name="java.time.ZoneId"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="application.view.intermediate.Converter"/>
-    <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediate"/>
     <fullyQualifiedTypeName name="application.view.intermediate.RaportGenerator"/>
     <fullyQualifiedTypeName name="javax.swing.text.DateFormatter"/>
     <fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
@@ -52,7 +44,6 @@
     <fullyQualifiedTypeName name="application.view.intermediate.TimeRaportEntry"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Alert.AlertType"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
-    <fullyQualifiedTypeName name="application.model.Schedule"/>
     <fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="application.model.Trucks"/>
@@ -60,4 +51,13 @@
     <fullyQualifiedTypeName name="java.sql.Driver"/>
     <fullyQualifiedTypeName name="application.model.Drivers"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
+    <fullyQualifiedTypeName name="application.model.Schedule"/>
+    <fullyQualifiedTypeName name="application.model.Schedule.Type"/>
+    <fullyQualifiedTypeName name="javafx.collections.ListChangeListener"/>
+    <fullyQualifiedTypeName name="org.apache.commons.lang3.time.FastDateParser"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelSchedulesViewController"/>
+    <fullyQualifiedTypeName name="application.controller.ScheduleController"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediate"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.Converter"/>
 </qualifiedTypeNameHistroy>

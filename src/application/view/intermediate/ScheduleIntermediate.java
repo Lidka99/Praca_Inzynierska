@@ -162,7 +162,7 @@ public class ScheduleIntermediate {
 			this.departure_date = Main.getDateTimeFormat().format(departureDate);
 		}
 		
-		this.type = schedule.getType();
+		this.type = schedule.getType().toString();
 		this.trailer = schedule.getTrailer();
 		this.driver = schedule.getDriver();
 		this.truck = schedule.getTruck();

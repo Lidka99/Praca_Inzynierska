@@ -1,0 +1,5 @@
+1640017215902	Rename method 'setDriver_id'
+1640017223633	Rename method 'setTrailer_id'
+1640017239788	Rename method 'setTruck_id'
+1640017920309	Rename method 'onSelectedDriver'
+1640019678051	Rename local variable 'truckIndex'

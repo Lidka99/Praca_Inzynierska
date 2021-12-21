@@ -102,6 +102,8 @@ public class AdminPanelDriversViewController {
 
 				return;
 			}
+			
+			//main.getUsersController().create(role, name, surname, username, hash.getResult(), email); poprawic
 		}
 		
 		break;
@@ -123,6 +125,8 @@ public class AdminPanelDriversViewController {
 
 				return;
 			}
+			
+			//main.getUsersController().update(selectedUser.getId(), role, name, surname, username, hash.getResult(), email); poprawic
 		}
 		break;
 

@@ -59,6 +59,8 @@ public class AdminPanelUsersViewController {
 	private Button deleteButton;
 	@FXML
 	private HBox passwordHbox;
+	@FXML
+	private TextField searchingInputField;
 
 	private Users selectedUser;
 
@@ -69,22 +71,20 @@ public class AdminPanelUsersViewController {
 	private ListChangeListener<Users> selectionListener;
 
 	public void onDeleteButtonClick() {
-		
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Usuniêcie u¿ytkownika");
 		alert.setHeaderText("Masz zamiar usun¹æ u¿ytkownika");
 		alert.setContentText("Czy na pewno chcesz to zrobiæ?");
 
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
+		if (result.get() == ButtonType.OK) {
 			main.getUsersController().delete(selectedUser);
 			updateTableView();
 			clearUserFields();
 		} else {
-		    
-		}
 
-		
+		}
 
 	}
 
@@ -173,25 +173,31 @@ public class AdminPanelUsersViewController {
 
 			ValidatingStatus nameStatus = validate(name, 30, false);
 			ValidatingStatus surnameStatus = validate(surname, 30, false);
-			ValidatingStatus usernameStatus = validate(username, 10, false); // !!!!! obs³u¿yæ sprawdzanie unikatowoœci w przypadku edycji !!!!!
-			ValidatingStatus passwordStatus = validate(password, 100, false);
+			ValidatingStatus usernameStatus = validate(username, 10, true);
+			// ValidatingStatus passwordStatus = validate(password, 100, false);
 			ValidatingStatus emailStatus = validate(email, 30, false);
 
 			if (nameStatus != ValidatingStatus.sukces || surnameStatus != ValidatingStatus.sukces
-					|| usernameStatus != ValidatingStatus.sukces || passwordStatus != ValidatingStatus.sukces
-					|| emailStatus != ValidatingStatus.sukces) {
+					|| usernameStatus != ValidatingStatus.sukces || emailStatus != ValidatingStatus.sukces) {
 
 				return;
 			}
 
 			Users.Role role = (Users.Role) roleChoiceBox.getValue();
 
-			// klasa algorytmu BCrypt
-			BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+			String passwordHash = null;
 
-			Hash hash = Password.hash(password).with(myBcrypt);
+			if (password != null && !password.isEmpty()) {
 
-			main.getUsersController().update(selectedUser.getId(), role, name, surname, username, hash.getResult(), email);
+				// klasa algorytmu BCrypt
+				BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+
+				Hash hash = Password.hash(password).with(myBcrypt);
+				passwordHash = hash.getResult();
+
+			}
+
+			main.getUsersController().update(selectedUser.getId(), role, name, surname, username, passwordHash, email);
 
 		}
 			break;
@@ -218,7 +224,8 @@ public class AdminPanelUsersViewController {
 		if (text.length() > maxLength)
 			return ValidatingStatus.tekstZaDlugi;
 
-		if (checkUsernameUniqueness && main.getUsersController().checkUsername(text))
+		if (checkUsernameUniqueness
+				&& main.getUsersController().checkUsername(text, selectedUser != null ? selectedUser.getId() : -1))
 			return ValidatingStatus.wartoscNieunikatowa;
 
 		return ValidatingStatus.sukces;
@@ -289,6 +296,14 @@ public class AdminPanelUsersViewController {
 
 		roleChoiceBox.getItems().setAll(Users.Role.values());
 
+		clearUserFields();
+
+		// nas³uchiwacz do filtrowania
+
+		searchingInputField.textProperty().addListener((observable, oldValue, newValue) -> {
+			onSearchTextEdit(newValue);
+		});
+
 		// tworzymy tzw "nas³uchiwacz"
 
 		if (selectionListener == null) {
@@ -305,6 +320,12 @@ public class AdminPanelUsersViewController {
 			};
 		}
 		enableTableView(true);
+	}
+
+	public void onSearchTextEdit(String text) {
+		
+		updateTableView();
+
 	}
 
 	// zaczynamy lub przestajemy nas³uchiwac
@@ -335,6 +356,7 @@ public class AdminPanelUsersViewController {
 		usernameInputField.setText(selectedUser.getUsername());
 		emailInputField.setText(selectedUser.getEmail());
 		roleChoiceBox.getSelectionModel().select(selectedUser.getRole().ordinal());
+		editButton.setDisable(user == null);
 
 	}
 
@@ -346,6 +368,7 @@ public class AdminPanelUsersViewController {
 		emailInputField.setText(null);
 		roleChoiceBox.getSelectionModel().select(0);
 		passwordInputField.setText(null);
+		editButton.setDisable(true);
 
 	}
 
@@ -353,7 +376,7 @@ public class AdminPanelUsersViewController {
 
 		UsersController controller = main.getUsersController();
 
-		List<Users> AllUsers = controller.getAllUsers();
+		List<Users> AllUsers = controller.serchUsersbySurname(searchingInputField.getText());
 
 		usersTableView.getItems().clear();
 

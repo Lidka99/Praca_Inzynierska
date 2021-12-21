@@ -47,20 +47,21 @@ public class UsersController {
 		}
 		return true;
 	}
-	
+
 	// edycja u¿ytkowników
-	
+
 	public boolean update(int id, Users.Role role, String name, String surname, String username, String password_hash,
 			String email) {
-		
+
 		Users user = getUser(id);
 		user.setRole(role);
 		user.setName(name);
 		user.setSurname(surname);
 		user.setUsername(username);
-		user.setPassword_hash(password_hash);
+		if (password_hash != null)
+			user.setPassword_hash(password_hash);
 		user.setEmail(email);
-		
+
 		try {
 			usersDao.update(user);
 		} catch (SQLException e) {
@@ -121,6 +122,20 @@ public class UsersController {
 		return allUsers;
 	}
 
+	public List<Users> serchUsersbySurname(String text) {
+
+		List<Users> allUsers = new ArrayList<Users>();
+
+		for (Users user : usersDao) {
+
+			if (user.getSurname().toLowerCase().startsWith(text.toLowerCase()))
+
+				allUsers.add(new Users(user));
+		}
+
+		return allUsers;
+	}
+
 	public Users authenticate(String login, String password) {
 
 		for (Users user : usersDao) {
@@ -137,14 +152,14 @@ public class UsersController {
 
 		return null;
 	}
-	
-	//sprawdzanie czy istnieje u¿ytkownik o danym loginie
 
-	public boolean checkUsername(String login) {
+	// sprawdzanie czy istnieje u¿ytkownik o danym loginie
+
+	public boolean checkUsername(String login, int ignoredId) {
 
 		for (Users user : usersDao) {
 
-			if (login.equals(user.getUsername())) {
+			if (login.equals(user.getUsername()) && user.getId() != ignoredId) {
 
 				return true;
 			}

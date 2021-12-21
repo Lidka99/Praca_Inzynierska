@@ -30,6 +30,14 @@ public class AdminPanelViewController {
 		main.showAdminPageDrivers();
 
 	}
+	
+	@FXML
+	public void onSchedulesToggleButtonClick() {
+
+		main.showAdminPageSchedule();
+
+	}
+
 
 	public void setUp() {
 

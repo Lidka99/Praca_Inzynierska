@@ -136,7 +136,7 @@ public class ArrivalsDeparturesViewController {
 			scheduledDateTextField.setText(selectedSchedule.getScheduled_date().toString());
 			nameSurnameTextField
 					.setText(selectedSchedule.getDriver().getName() + ' ' + selectedSchedule.getDriver().getSurname());
-			typeTextField.setText(selectedSchedule.getType());
+			typeTextField.setText(selectedSchedule.getType().toString());
 			brandTextField.setText(selectedSchedule.getTruck().getBrand());
 			trailerTypeTextField.setText(selectedSchedule.getTrailer().getTrailer_type());
 

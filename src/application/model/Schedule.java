@@ -83,7 +83,7 @@ public class Schedule {
 		return trailer;
 	}
 
-	public void setTrailer_id(Trailers trailer_id) {
+	public void setTrailer(Trailers trailer_id) {
 		this.trailer = trailer_id;
 	}
 
@@ -91,7 +91,7 @@ public class Schedule {
 		return driver;
 	}
 
-	public void setDriver_id(Drivers driver_id) {
+	public void setDriver(Drivers driver_id) {
 		this.driver = driver_id;
 	}
 
@@ -99,7 +99,7 @@ public class Schedule {
 		return truck;
 	}
 
-	public void setTruck_id(Trucks truck_id) {
+	public void setTruck(Trucks truck_id) {
 		this.truck = truck_id;
 	}
 	

@@ -4,12 +4,14 @@ import java.sql.Driver;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.time.FastDateParser;
 
 import com.password4j.BCryptFunction;
 import com.password4j.Hash;
@@ -18,6 +20,7 @@ import com.password4j.types.BCrypt;
 
 import application.Main;
 import application.controller.DriversController;
+import application.controller.ScheduleController;
 import application.controller.UsersController;
 import application.model.Drivers;
 import application.model.Schedule;
@@ -26,6 +29,8 @@ import application.model.Trucks;
 import application.model.Users;
 import application.view.AdminPanelUsersViewController.EditingMode;
 import application.view.AdminPanelUsersViewController.ValidatingStatus;
+import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
@@ -44,26 +49,24 @@ public class AdminPanelSchedulesViewController {
 
 	@FXML
 	private TableView scheduleTableView;
-	
+
 	@FXML
 	private DatePicker scheduledDateDatePicker;
-	
+
 	@FXML
 	private ChoiceBox typeChoiceBox;
-	
+
 	@FXML
 	private ChoiceBox driverChoiceBox;
-	
+
 	@FXML
 	private ChoiceBox truckChoiceBox;
 
 	@FXML
 	private ChoiceBox trailerChoiceBox;
-	
-	
 
-	private Schedule selectedSchedule;
-	
+	private ScheduleIntermediate selectedSchedule;
+
 	private EditingMode editingMode = EditingMode.none;
 
 	@FXML
@@ -75,16 +78,15 @@ public class AdminPanelSchedulesViewController {
 
 	private Main main;
 
-	private ListChangeListener<Schedule> selectionListener;
-	
-	private List <Drivers> filteredDrivers;
-	private List <Trucks> filteredTrucks;
-	private List <Trailers> filteredTrailers;
-	
+	private ListChangeListener<ScheduleIntermediate> selectionListener;
+
+	private List<Drivers> filteredDrivers;
+	private List<Trucks> filteredTrucks;
+	private List<Trailers> filteredTrailers;
 
 	public void onDeleteButtonClick() {
 
-		main.getScheduleController().delete(selectedSchedule);
+		main.getScheduleController().delete(selectedSchedule.getId());
 		updateTableView();
 		clearScheduleFields();
 
@@ -117,43 +119,56 @@ public class AdminPanelSchedulesViewController {
 			LocalDate localDate = scheduledDateDatePicker.getValue();
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 			Date scheduledDate = Date.from(instant);
-			
+
 			Schedule.Type type = (Schedule.Type) typeChoiceBox.getValue();
 			Drivers driver = filteredDrivers.get(driverChoiceBox.getSelectionModel().getSelectedIndex());
+			Trailers trailer = filteredTrailers.get(trailerChoiceBox.getSelectionModel().getSelectedIndex());
+			Trucks truck = filteredTrucks.get(truckChoiceBox.getSelectionModel().getSelectedIndex());
 
-			//ValidatingStatus nameStatus = validate(name, 30, false);
-			//ValidatingStatus surnameStatus = validate(surname, 30, false);
-			//ValidatingStatus drivingLicenseStatus = validate(drivingLicense, 30, false);
+			// ValidatingStatus nameStatus = validate(name, 30, false);
+			// ValidatingStatus surnameStatus = validate(surname, 30, false);
+			// ValidatingStatus drivingLicenseStatus = validate(drivingLicense, 30, false);
 
-			/*if (nameStatus != ValidatingStatus.sukces || surnameStatus != ValidatingStatus.sukces
-					|| drivingLicenseStatus != ValidatingStatus.sukces) {
+			// if (nameStatus != ValidatingStatus.sukces || surnameStatus !=
+			// ValidatingStatus.sukces
+			// || drivingLicenseStatus != ValidatingStatus.sukces) {
 
-				return;
-			}
-			*/
+			// return;
+			// }
+
+			main.getScheduleController().create(scheduledDate, type, driver, trailer, truck);
+
 		}
-		
-		break;
+
+			break;
 
 		case editing: {
 
-			String name = nameInputField.getText();
-			String surname = surnameInputField.getText();
-			String drivingLicense = driving_licenseInputField.getText();
+			LocalDate localDate = scheduledDateDatePicker.getValue();
+			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+			Date scheduledDate = Date.from(instant);
 
-			ValidatingStatus nameStatus = validate(name, 30, false);
-			ValidatingStatus surnameStatus = validate(surname, 30, false);
-			ValidatingStatus drivingLicenseStatus = validate(drivingLicense, 10, false); // !!!!! obs³u¿yæ sprawdzanie
-																							// unikatowoœci
-			// w przypadku edycji !!!!!
+			Schedule.Type type = (Schedule.Type) typeChoiceBox.getValue();
+			Drivers driver = filteredDrivers.get(driverChoiceBox.getSelectionModel().getSelectedIndex());
+			Trailers trailer = filteredTrailers.get(trailerChoiceBox.getSelectionModel().getSelectedIndex());
+			Trucks truck = filteredTrucks.get(truckChoiceBox.getSelectionModel().getSelectedIndex());
 
-			if (nameStatus != ValidatingStatus.sukces || surnameStatus != ValidatingStatus.sukces
-					|| drivingLicenseStatus != ValidatingStatus.sukces) {
+			/*
+			 * ValidatingStatus nameStatus = validate(name, 30, false); ValidatingStatus
+			 * surnameStatus = validate(surname, 30, false); ValidatingStatus
+			 * drivingLicenseStatus = validate(drivingLicense, 10, false); // !!!!! obs³u¿yæ
+			 * sprawdzanie // unikatowoœci // w przypadku edycji !!!!!
+			 * 
+			 * if (nameStatus != ValidatingStatus.sukces || surnameStatus !=
+			 * ValidatingStatus.sukces || drivingLicenseStatus != ValidatingStatus.sukces) {
+			 * 
+			 * return; }
+			 */
 
-				return;
-			}
+			main.getScheduleController().update(selectedSchedule.getId(), scheduledDate, type, driver, trailer, truck);
 		}
-		break;
+
+			break;
 
 		default:
 			break;
@@ -196,54 +211,68 @@ public class AdminPanelSchedulesViewController {
 
 	public void enableInputFields(boolean enabled) {
 
-		nameInputField.setDisable(!enabled);
-		surnameInputField.setDisable(!enabled);
-		driving_licenseInputField.setDisable(!enabled);
-		
+		scheduledDateDatePicker.setDisable(!enabled);
+		typeChoiceBox.setDisable(!enabled);
+		driverChoiceBox.setDisable(!enabled);
+		truckChoiceBox.setDisable(!enabled);
+		trailerChoiceBox.setDisable(!enabled);
+
 	}
 
 	public void setUp() {
 
 		// dodawanie kolumny id
-		TableColumn<Drivers, Integer> column1 = new TableColumn("Id");
+		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
 		column1.setCellValueFactory(new PropertyValueFactory("id"));
 		scheduleTableView.getColumns().add(column1);
 
-		// dodawanie kolumny imie
-		TableColumn<Drivers, String> column2 = new TableColumn("Imiê");
-		column2.setCellValueFactory(new PropertyValueFactory("name"));
+		// dodawanie kolumny planowana data
+		TableColumn<ScheduleIntermediate, String> column2 = new TableColumn("Planowana data przyjazdu");
+		column2.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
 		scheduleTableView.getColumns().add(column2);
 
-		// dodawanie kolumny nazwisko
-		TableColumn<Drivers, String> column3 = new TableColumn("Nazwisko");
-		column3.setCellValueFactory(new PropertyValueFactory("surname"));
-		scheduleTableView.getColumns().add(column3);
+		// dodawanie kolumny rodzaj
+		TableColumn<ScheduleIntermediate, String> column5 = new TableColumn("Rodzaj");
+		column5.setCellValueFactory(new PropertyValueFactory("type"));
+		scheduleTableView.getColumns().add(column5);
 
-		// dodawanie kolumny numer prawa jazdy
-		TableColumn<Drivers, String> column4 = new TableColumn("Numer prawa jazdy");
-		column4.setCellValueFactory(new PropertyValueFactory("driving_license"));
-		scheduleTableView.getColumns().add(column4);
+		// dodawanie kolumny imie kierowcy
+		TableColumn<ScheduleIntermediate, String> column6 = new TableColumn("Imiê kierowcy");
+		column6.setCellValueFactory(new PropertyValueFactory("driverName"));
+		scheduleTableView.getColumns().add(column6);
 
-	
+		// dodawanie kolumny nazwisko kierowcy
+		TableColumn<ScheduleIntermediate, String> column7 = new TableColumn("Nazwisko kierowcy");
+		column7.setCellValueFactory(new PropertyValueFactory("driverSurname"));
+		scheduleTableView.getColumns().add(column7);
+
+		// dodawanie kolumny nr rejestracyjny naczepy
+		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
+		column8.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
+		scheduleTableView.getColumns().add(column8);
+
+		// dodawanie kolumny nr rejestracyjny auta
+		TableColumn<ScheduleIntermediate, String> column9 = new TableColumn("Nr rejestracyjny auta");
+		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
+		scheduleTableView.getColumns().add(column9);
+
 		updateTableView();
 
 		enableInputFields(false);
-		
+
 		updateFilteredLists();
-		
+
 		typeChoiceBox.getItems().setAll(Schedule.Type.values());
-
-
 
 		// tworzymy tzw "nas³uchiwacz"
 
 		if (selectionListener == null) {
-			selectionListener = new ListChangeListener<Drivers>() {
+			selectionListener = new ListChangeListener<ScheduleIntermediate>() {
 				@Override
-				public void onChanged(Change<? extends Drivers> change) {
+				public void onChanged(Change<? extends ScheduleIntermediate> change) {
 					if (change.getList() != null && change.getList().size() > 0) {
 
-						onSelectedDriver(change.getList().get(0));
+						onSelectedSchedule(change.getList().get(0));
 
 					}
 				}
@@ -273,59 +302,103 @@ public class AdminPanelSchedulesViewController {
 
 	}
 
-	private void onSelectedDriver(Drivers driver) {
+	private void onSelectedSchedule(ScheduleIntermediate schedule) {
 
-		selectedSchedule = driver;
-		nameInputField.setText(selectedSchedule.getName());
-		surnameInputField.setText(selectedSchedule.getSurname());
-		driving_licenseInputField.setText(selectedSchedule.getDriving_license());
-		
+		selectedSchedule = schedule;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+		scheduledDateDatePicker.setValue(LocalDate.parse(schedule.getScheduled_date(), formatter));
+		typeChoiceBox.setValue(Schedule.Type.valueOf(schedule.getType()));
+
+		updateFilteredLists(false);
+
+		int driverIndex;
+
+		for (driverIndex = 0; driverIndex < filteredDrivers.size(); driverIndex++) {
+
+			if (filteredDrivers.get(driverIndex).getId() == schedule.getDriver().getId())
+				break;
+
+		}
+		driverChoiceBox.getSelectionModel().select(driverIndex);
+
+		int truckIndex;
+
+		for (truckIndex = 0; truckIndex < filteredTrucks.size(); truckIndex++) {
+
+			if (filteredTrucks.get(truckIndex).getId() == schedule.getTruck().getId())
+				break;
+
+		}
+		truckChoiceBox.getSelectionModel().select(truckIndex);
+
+		int trailerIndex;
+
+		for (trailerIndex = 0; trailerIndex < filteredTrailers.size(); trailerIndex++) {
+
+			if (filteredTrailers.get(trailerIndex).getId() == schedule.getTrailer().getId())
+				break;
+
+		}
+		trailerChoiceBox.getSelectionModel().select(trailerIndex);
 
 	}
 
 	private void clearScheduleFields() {
 
-		nameInputField.setText(null);
-		surnameInputField.setText(null);
-		driving_licenseInputField.setText(null);
-		
+		scheduledDateDatePicker.setValue(null);
+		typeChoiceBox.setValue(null);
+		driverChoiceBox.setValue(null);
+		truckChoiceBox.setValue(null);
+		trailerChoiceBox.setValue(null);
+
 	}
 
 	private void updateTableView() {
 
-		DriversController controller = main.getDriversController();
+		ScheduleController controller = main.getScheduleController();
 
-		List<Drivers> AllDrivers = controller.getAllDrivers();
+		List<Schedule> allSchedules = controller.getAllSchedules();
+		List<ScheduleIntermediate> schedules = Converter.convert(allSchedules);
 
 		scheduleTableView.getItems().clear();
 
-		for (Drivers driver : AllDrivers) {
+		for (ScheduleIntermediate schedule : schedules) {
 
-			scheduleTableView.getItems().add(driver);
+			scheduleTableView.getItems().add(schedule);
 		}
 	}
-	
-	
+
 	private void updateFilteredLists() {
-		
+		updateFilteredLists(true);
+	}
+
+	private void updateFilteredLists(boolean useFilters) {
+
 		filteredDrivers = main.getDriversController().getAllDrivers();
-		
+
 		filteredTrucks = main.getTrucksController().getAllTrucks();
-		
+
 		filteredTrailers = main.getTrailersController().getAllTrailers();
 		
-		for(Drivers driver : filteredDrivers) {
-			driverChoiceBox.getItems().add(driver.getName() + " " + driver.getSurname() + " " + driver.getDriving_license());
+		driverChoiceBox.getItems().clear();
+
+		for (Drivers driver : filteredDrivers) {
+			driverChoiceBox.getItems()
+					.add(driver.getName() + " " + driver.getSurname() + " " + driver.getDriving_license());
 		}
 		
-		for(Trucks truck : filteredTrucks) {
+		truckChoiceBox.getItems().clear();
+
+		for (Trucks truck : filteredTrucks) {
 			truckChoiceBox.getItems().add(truck.getLicence_number() + " " + truck.getModel());
 		}
 		
-		for(Trailers trailer : filteredTrailers) {
+		trailerChoiceBox.getItems().clear();
+
+		for (Trailers trailer : filteredTrailers) {
 			trailerChoiceBox.getItems().add(trailer.getTrailer_number() + " " + trailer.getTrailer_type());
 		}
-		
+
 	}
 
 	public void setmainapp(Main main) {

@@ -98,8 +98,6 @@ public class ScheduleController {
 
 		Date currentDate = new Date(System.currentTimeMillis());
 
-		
-
 		Date todayWithZeroTime = null;
 
 		try {
@@ -116,7 +114,8 @@ public class ScheduleController {
 				Date scheduledDate = null;
 
 				try {
-					scheduledDate = Main.getDateFormat().parse(Main.getDateFormat().format(schedule.getScheduled_date()));
+					scheduledDate = Main.getDateFormat()
+							.parse(Main.getDateFormat().format(schedule.getScheduled_date()));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -137,7 +136,6 @@ public class ScheduleController {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
-		
 		for (Schedule schedule : scheduleDao) {
 
 			if (schedule.getArrival_date() != null) {
@@ -237,4 +235,73 @@ public class ScheduleController {
 		}
 		return true;
 	}
+
+	// aktualizowanie, edycja u admina
+
+	public boolean update(int id, Date scheduledDate, Schedule.Type type, Drivers driver, Trailers trailer,
+			Trucks truck) {
+		Schedule schedule = getSchedule(id);
+		schedule.setScheduled_date(scheduledDate);
+		schedule.setType(type);
+		schedule.setDriver(driver);
+		schedule.setTrailer(trailer);
+		schedule.setTruck(truck);
+
+		try {
+			scheduleDao.update(schedule);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	//tworzenie 
+	
+	public boolean create( Date scheduledDate, Schedule.Type type, Drivers driver, Trailers trailer,
+			Trucks truck) {
+		Schedule schedule = new Schedule();
+		schedule.setScheduled_date(scheduledDate);
+		schedule.setType(type);
+		schedule.setDriver(driver);
+		schedule.setTrailer(trailer);
+		schedule.setTruck(truck);
+
+		try {
+			scheduleDao.create(schedule);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	//usuwanie
+
+		public boolean delete(int id) {
+
+			Schedule schedule = getSchedule(id);
+			return delete(schedule);
+
+		}
+
+		public boolean delete(Schedule schedule) {
+
+			if (schedule != null) {
+
+				try {
+					scheduleDao.delete(schedule);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				return true;
+
+			}
+			return false;
+		}
+
 }
