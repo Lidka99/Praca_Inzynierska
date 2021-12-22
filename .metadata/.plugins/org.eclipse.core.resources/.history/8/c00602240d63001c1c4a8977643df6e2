@@ -9,10 +9,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
-
 public class ApplicationViewController {
 
-	
 	@FXML
 	private ToggleButton main_page_button;
 	@FXML

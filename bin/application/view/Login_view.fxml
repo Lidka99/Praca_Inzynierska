@@ -16,7 +16,7 @@
             <Image url="@../../../../horizontal_on_white_by_logaster%20(1).png" />
          </image>
       </ImageView>
-      <Button fx:id="login_button" layoutX="665.0" layoutY="480.0" mnemonicParsing="false" onAction="#onloginButtonClick" prefHeight="31.0" prefWidth="121.0" text="Zaloguj się">
+      <Button fx:id="login_button" layoutX="672.0" layoutY="504.0" mnemonicParsing="false" onAction="#onloginButtonClick" prefHeight="31.0" prefWidth="121.0" text="Zaloguj się">
          <font>
             <Font size="19.0" />
          </font></Button>
@@ -26,7 +26,10 @@
          <font>
             <Font size="22.0" />
          </font></Label>
-      <Label fx:id="error_label" layoutX="639.0" layoutY="416.0" text="Błędne dane" visible="false" />
+      <Label fx:id="error_label" layoutX="558.0" layoutY="445.0" prefHeight="34.0" prefWidth="175.0" text="Błędne dane" textFill="#e1240b" visible="false">
+         <font>
+            <Font size="23.0" />
+         </font></Label>
       <Label layoutX="484.0" layoutY="385.0" text="Hasło">
          <font>
             <Font size="21.0" />
