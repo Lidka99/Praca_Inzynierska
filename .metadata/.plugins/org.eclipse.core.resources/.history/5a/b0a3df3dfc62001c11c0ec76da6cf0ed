@@ -7,22 +7,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 
 public class ApplicationViewController {
 
 	@FXML
-	private ToggleButton main_page_button;
+	private Button main_page_button;
 	@FXML
-	private ToggleButton schedule_button;
+	private Button schedule_button;
 	@FXML
-	private ToggleButton arrivalsDeparturesButton;
+	private Button arrivalsDeparturesButton;
 	@FXML
-	private ToggleButton raport_button;
+	private Button raport_button;
 	@FXML
-	private ToggleButton admin_panel_button;
+	private Button admin_panel_button;
 	@FXML
-	private ToggleButton log_out_button;
+	private Button log_out_button;
 
 	private Main main;
 

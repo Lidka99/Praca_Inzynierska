@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelViewController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="203.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelViewController">
    <children>
-      <ToggleButton fx:id="usersToggleButton" maxWidth="200.0" mnemonicParsing="false" onAction="#onUsersToggleButtonClick" prefWidth="200.0" text="Użytkownicy">
-         <toggleGroup>
-            <ToggleGroup fx:id="ToggleGroup" />
-         </toggleGroup>
-      </ToggleButton>
-      <ToggleButton fx:id="driversToggleButton" maxWidth="200.0" mnemonicParsing="false" onAction="#onDriversToggleButtonClick" prefWidth="200.0" text="Kierowcy" textAlignment="CENTER" toggleGroup="$ToggleGroup" />
-      <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Ciężarówki " toggleGroup="$ToggleGroup" />
-      <ToggleButton maxWidth="200.0" mnemonicParsing="false" prefWidth="200.0" text="Naczepy" toggleGroup="$ToggleGroup" />
-      <ToggleButton maxWidth="200.0" mnemonicParsing="false" onAction="#onSchedulesToggleButtonClick" prefWidth="200.0" text="Plan  przyjazdów" toggleGroup="$ToggleGroup" />
+      <AnchorPane blendMode="SRC_ATOP" prefHeight="636.0" prefWidth="203.0">
+         <children>
+            <ToggleButton fx:id="usersToggleButton" layoutX="14.0" layoutY="116.0" maxWidth="200.0" mnemonicParsing="false" onAction="#onUsersToggleButtonClick" prefHeight="50.0" prefWidth="200.0" text="Użytkownicy" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ToggleGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="driversToggleButton" layoutX="14.0" layoutY="190.0" maxWidth="200.0" mnemonicParsing="false" onAction="#onDriversToggleButtonClick" prefHeight="50.0" prefWidth="200.0" text="Kierowcy" toggleGroup="$ToggleGroup" />
+            <ToggleButton layoutX="14.0" layoutY="261.0" maxWidth="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Ciężarówki " textAlignment="CENTER" toggleGroup="$ToggleGroup" />
+            <ToggleButton layoutX="14.0" layoutY="335.0" maxWidth="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Naczepy" toggleGroup="$ToggleGroup" />
+            <ToggleButton layoutX="14.0" layoutY="406.0" maxWidth="200.0" mnemonicParsing="false" onAction="#onSchedulesToggleButtonClick" prefHeight="50.0" prefWidth="200.0" text="Plan  przyjazdów" textAlignment="CENTER" toggleGroup="$ToggleGroup" AnchorPane.bottomAnchor="144.0" AnchorPane.topAnchor="406.0" />
+         </children>
+      </AnchorPane>
    </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </VBox>

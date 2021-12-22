@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,12 +15,12 @@
                   <Image url="@../../../../horizontal_on_white_by_logaster%20(1).png" />
                </image>
             </ImageView>
-          <Button fx:id="main_page_button" mnemonicParsing="false" onAction="#onMainPageButtonClick" text="Strona główna" />
-            <Button fx:id="schedule_button" mnemonicParsing="false" onAction="#onScheduleButtonClick" text="Plan przyjazdów" />
-            <Button fx:id="admin_panel_button11" mnemonicParsing="false" onAction="#onArrivalsDeparturesButtonClick" text="Przyjazdy/Wyjazdy" />
-            <Button fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raport" />
-            <Button fx:id="admin_panel_button" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Panel administracyjny" />
-            <Button fx:id="log_out_button" mnemonicParsing="false" onAction="#onLogOutButtonClick" text="Wyloguj" />
+            <ToggleButton fx:id="main_page_button" mnemonicParsing="false" onAction="#onMainPageButtonClick" text="Strona główna" />
+            <ToggleButton fx:id="schedule_button" mnemonicParsing="false" onAction="#onScheduleButtonClick" text="Plan przyjazdów" />
+            <ToggleButton fx:id="arrivalsDeparturesButton" mnemonicParsing="false" onAction="#onArrivalsDeparturesButtonClick" text="Przyjazdy/Wyjazdy" />
+            <ToggleButton fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raport" />
+            <ToggleButton fx:id="admin_panel_button" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Panel administracyjny" />
+            <ToggleButton fx:id="log_out_button" mnemonicParsing="false" onAction="#onLogOutButtonClick" text="Wyloguj" />
         </items>
       </ToolBar>
    </top>
