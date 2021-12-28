@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1170.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.AdminPanelTrailersViewController">
+   <right>
+      <AnchorPane prefHeight="806.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="714.0" layoutY="176.0" prefHeight="408.0" prefWidth="409.0" spacing="22.0">
+               <children>
+                  <HBox prefHeight="31.0" prefWidth="409.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="trailerNumberInputField" layoutX="211.0" prefHeight="31.0" prefWidth="196.0" />
+                              <Label layoutY="4.0" prefHeight="21.0" prefWidth="210.0" text="Numer rejestracyjny naczepy" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="409.0">
+                     <children>
+                        <AnchorPane prefHeight="31.0" prefWidth="210.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="213.0" text="Typ naczepy" />
+                              <TextField fx:id="trailerTypeInputField" layoutX="211.0" layoutY="-1.0" prefHeight="31.0" prefWidth="197.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="31.0" prefWidth="409.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="210.0" text="Maksymalna ładowność" />
+                              <TextField fx:id="maxLoadInputField" layoutX="211.0" prefHeight="31.0" prefWidth="198.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <TableView fx:id="trailersTableView" layoutX="128.0" layoutY="135.0" prefHeight="489.0" prefWidth="569.0" />
+            <TextField fx:id="searchingInputField" layoutX="213.0" layoutY="93.0" prefHeight="31.0" prefWidth="486.0" />
+            <Button fx:id="addButton" layoutX="273.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCreateButtonCick" text="Dodaj">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="editButton" layoutX="363.0" layoutY="667.0" mnemonicParsing="false" onAction="#onEditButtonCick" text="Edytuj">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteButton" layoutX="456.0" layoutY="667.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Usuń">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="811.0" layoutY="667.0" mnemonicParsing="false" onAction="#onSaveButtonCick" text="Zapisz">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button layoutX="918.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCancelButtonCick" text="Anuluj">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Label layoutX="128.0" layoutY="93.0" prefHeight="31.0" prefWidth="93.0" text="Szukaj">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

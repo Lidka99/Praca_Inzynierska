@@ -6,12 +6,15 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="SimpleDateFormat"/>
+		<item key="selection" value="on"/>
 		<list key="findhistory">
+			<item value="onC"/>
+			<item value="on"/>
+			<item value="sp"/>
+			<item value="clear"/>
 			<item value="SimpleDateFormat"/>
 			<item value="getUser"/>
 			<item value="Click"/>
-			<item value="on"/>
 		</list>
 		<list key="replacehistory">
 		</list>

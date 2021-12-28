@@ -11,7 +11,8 @@ CREATE TABLE drivers (
 CREATE TABLE trailers (
     id INT IDENTITY PRIMARY KEY,
     trailer_number VARCHAR(10) NOT NULL,
-    trailer_type VARCHAR(20) NOT NULL
+    trailer_type VARCHAR(20) NOT NULL,
+	max_load INT NOT NULL,
 );
 
 CREATE TABLE trucks (
@@ -19,7 +20,7 @@ CREATE TABLE trucks (
     licence_number VARCHAR(10) NOT NULL,
     brand VARCHAR(20) NOT NULL,
     model VARCHAR(20) NOT NULL,
-    max_load FLOAT NOT NULL,
+    max_load INT NOT NULL,
     current_trailer_id INT NOT NULL,
     current_driver_id INT NOT NULL,
     FOREIGN KEY (current_trailer_id) REFERENCES trailers(id),

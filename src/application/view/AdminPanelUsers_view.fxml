@@ -120,12 +120,12 @@
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button layoutX="811.0" layoutY="667.0" mnemonicParsing="false" onAction="#onSaveButtonCick" text="Zapisz">
+            <Button fx:id="saveButton" layoutX="811.0" layoutY="667.0" mnemonicParsing="false" onAction="#onSaveButtonCick" text="Zapisz">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button layoutX="918.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCancelButtonCick" text="Anuluj">
+            <Button fx:id="cancelButton" layoutX="918.0" layoutY="667.0" mnemonicParsing="false" onAction="#onCancelButtonCick" text="Anuluj">
                <font>
                   <Font size="19.0" />
                </font>

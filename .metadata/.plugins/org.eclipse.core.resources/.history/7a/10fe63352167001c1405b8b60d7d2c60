@@ -1,0 +1,118 @@
+package application.model;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "trucks")
+
+public class Trucks {
+
+	@DatabaseField(generatedId = true)
+	Integer id;
+	@DatabaseField(canBeNull = false)
+	String licence_number;
+	@DatabaseField(canBeNull = false)
+	String brand;
+	@DatabaseField(canBeNull = false)
+	String model;
+	@DatabaseField(canBeNull = false)
+	int max_load;
+	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
+	Trailers current_trailer;
+	@DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
+	Drivers current_driver;
+	
+
+
+	public Trucks(String licence_number, String brand, String model, int max_load, Trailers current_trailer_id,
+			Drivers current_driver_id) {
+		this.licence_number = licence_number;
+		this.brand = brand;
+		this.model = model;
+		this.max_load = max_load;
+		this.current_trailer = current_trailer_id;
+		this.current_driver = current_driver_id;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getLicence_number() {
+		return licence_number;
+	}
+
+	public void setLicence_number(String licence_number) {
+		this.licence_number = licence_number;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public int getMax_load() {
+		return max_load;
+	}
+
+	public void setMax_load(int max_load) {
+		this.max_load = max_load;
+	}
+
+	public Trailers getCurrent_trailer() {
+		return current_trailer;
+	}
+
+	public void setCurrent_trailer(Trailers current_trailer) {
+		this.current_trailer = current_trailer;
+	}
+
+	public Drivers getCurrent_driver() {
+		return current_driver;
+	}
+
+	public void setCurrent_driver(Drivers current_driver) {
+		this.current_driver = current_driver;
+	}
+	
+
+	public Trailers getTrailer() {
+		return trailer;
+	}
+
+	public void setTrailer(Trailers trailer_id) {
+		this.trailer = trailer_id;
+	}
+
+	public Drivers getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Drivers driver_id) {
+		this.driver = driver_id;
+	}
+
+	public Trucks getTruck() {
+		return truck;
+	}
+
+	public void setTruck(Trucks truck_id) {
+		this.truck = truck_id;
+	}
+	
+}

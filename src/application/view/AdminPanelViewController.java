@@ -15,6 +15,10 @@ public class AdminPanelViewController {
 	private ToggleButton usersToggleButton;
 	@FXML
 	private ToggleButton driversToggleButton;
+	@FXML
+	private ToggleButton trailersToggleButton;
+	@FXML
+	private ToggleButton trucksToggleButton;
 	private Main main;
 
 	@FXML
@@ -28,6 +32,20 @@ public class AdminPanelViewController {
 	public void onDriversToggleButtonClick() {
 
 		main.showAdminPageDrivers();
+
+	}
+	
+	@FXML
+	public void onTrailersToggleButtonClick() {
+
+		main.showAdminPageTrailers();
+
+	}
+	
+	@FXML
+	public void onTrucksToggleButtonClick() {
+
+		main.showAdminPageTrucks();
 
 	}
 	

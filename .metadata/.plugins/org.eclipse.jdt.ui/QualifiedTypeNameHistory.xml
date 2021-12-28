@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="application.view.AdminPanelUsersViewController.ValidatingStatus"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
-    <fullyQualifiedTypeName name="application.model.Users.Role"/>
-    <fullyQualifiedTypeName name="application.view.ScheduleViewController"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableCell"/>
     <fullyQualifiedTypeName name="javafx.scene.layout.AnchorPane"/>
-    <fullyQualifiedTypeName name="application.controller.TrucksController"/>
-    <fullyQualifiedTypeName name="application.controller.TrailersController"/>
     <fullyQualifiedTypeName name="application.view.ArrivalsDeparturesViewController"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TabPane"/>
     <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
@@ -45,10 +39,7 @@
     <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
     <fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="application.model.Trucks"/>
-    <fullyQualifiedTypeName name="application.model.Trailers"/>
     <fullyQualifiedTypeName name="java.sql.Driver"/>
-    <fullyQualifiedTypeName name="application.model.Drivers"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
     <fullyQualifiedTypeName name="application.model.Schedule"/>
     <fullyQualifiedTypeName name="application.model.Schedule.Type"/>
@@ -60,4 +51,13 @@
     <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediate"/>
     <fullyQualifiedTypeName name="application.view.intermediate.Converter"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ToggleButton"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelTrucksViewController"/>
+    <fullyQualifiedTypeName name="application.view.AdminPanelTrailersViewController"/>
+    <fullyQualifiedTypeName name="application.controller.TrailersController"/>
+    <fullyQualifiedTypeName name="application.controller.TrucksController"/>
+    <fullyQualifiedTypeName name="application.model.Trailers"/>
+    <fullyQualifiedTypeName name="application.model.Drivers"/>
+    <fullyQualifiedTypeName name="application.model.Trucks"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.TrucksConverter"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.TrucksIntermediate"/>
 </qualifiedTypeNameHistroy>

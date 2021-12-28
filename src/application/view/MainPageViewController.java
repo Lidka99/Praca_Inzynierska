@@ -23,7 +23,7 @@ import application.model.Trailers;
 import application.model.Trucks;
 import application.model.Users;
 import application.model.Users.Role;
-import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -65,7 +65,7 @@ public class MainPageViewController {
 
 		ScheduleController controller = main.getScheduleController();
 
-		List<ScheduleIntermediate> schedules = Converter.convert(controller.getSchedulesInWarehouse());
+		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(controller.getSchedulesInWarehouse());
 		inWarehouseTableView.getItems().clear();
 
 		for (ScheduleIntermediate schedule : schedules) {
@@ -73,7 +73,7 @@ public class MainPageViewController {
 			inWarehouseTableView.getItems().add(schedule);
 		}
 		
-		List<ScheduleIntermediate> scheduleToday = Converter.convert(controller.getSchedulesToday());
+		List<ScheduleIntermediate> scheduleToday = ScheduleConverter.convert(controller.getSchedulesToday());
 		scheduleTableView.getItems().clear();
 
 		for (ScheduleIntermediate schedule : scheduleToday) {

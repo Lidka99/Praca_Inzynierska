@@ -122,7 +122,7 @@ public class UsersController {
 		return allUsers;
 	}
 
-	public List<Users> serchUsersbySurname(String text) {
+	public List<Users> searchUsersbySurname(String text) {
 
 		List<Users> allUsers = new ArrayList<Users>();
 
@@ -153,7 +153,7 @@ public class UsersController {
 		return null;
 	}
 
-	// sprawdzanie czy istnieje u¿ytkownik o danym loginie
+	// sprawdzanie czy istnieje uzytkownik o danym loginie
 
 	public boolean checkUsername(String login, int ignoredId) {
 
@@ -168,5 +168,7 @@ public class UsersController {
 
 		return false;
 	}
+
+	
 
 }

@@ -23,7 +23,7 @@ import application.model.Trailers;
 import application.model.Trucks;
 import application.model.Users;
 import application.model.Users.Role;
-import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -52,7 +52,7 @@ public class ScheduleViewController {
 
 	@FXML
 	private DatePicker datePicker;
-	
+
 	private Date selectedDate;
 
 	private Main main;
@@ -79,7 +79,7 @@ public class ScheduleViewController {
 		column4.setCellValueFactory(new PropertyValueFactory("departure_date"));
 		scheduleTableView.getColumns().add(column4);
 
-		// dodawanie kolumny rodzaj 
+		// dodawanie kolumny rodzaj
 		TableColumn<ScheduleIntermediate, String> column5 = new TableColumn("Rodzaj");
 		column5.setCellValueFactory(new PropertyValueFactory("type"));
 		scheduleTableView.getColumns().add(column5);
@@ -98,24 +98,26 @@ public class ScheduleViewController {
 		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
 		column8.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
 		scheduleTableView.getColumns().add(column8);
-		
+
 		// dodawanie kolumny nr rejestracyjny auta
 		TableColumn<ScheduleIntermediate, String> column9 = new TableColumn("Nr rejestracyjny auta");
 		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
 		scheduleTableView.getColumns().add(column9);
-		
-		//dodac ko
 
+		// dodac ko
 
 		updateTableView();
 
 		// tworzymy tzw "nas³uchiwacz"
 		datePicker.valueProperty().addListener((observable, oldDate, newDate) -> {
-			
-			//aktualnie wybrana data
-			ZoneId defaultZoneId = ZoneId.systemDefault();
-			selectedDate = Date.from(newDate.atStartOfDay(defaultZoneId).toInstant());
-			
+
+			// aktualnie wybrana data
+			if (newDate != null) {
+
+				ZoneId defaultZoneId = ZoneId.systemDefault();
+				selectedDate = Date.from(newDate.atStartOfDay(defaultZoneId).toInstant());
+
+			}
 			updateTableView();
 		});
 
@@ -125,7 +127,8 @@ public class ScheduleViewController {
 
 		ScheduleController controller = main.getScheduleController();
 
-		List<ScheduleIntermediate> schedules = Converter.convert(controller.getSchedulesByScheduledDate(selectedDate)); 
+		List<ScheduleIntermediate> schedules = ScheduleConverter
+				.convert(controller.getSchedulesByScheduledDate(selectedDate));
 		scheduleTableView.getItems().clear();
 
 		for (ScheduleIntermediate schedule : schedules) {

@@ -26,6 +26,8 @@ import application.controller.UsersController;
 import application.model.Users;
 import application.view.AdminPanelDriversViewController;
 import application.view.AdminPanelSchedulesViewController;
+import application.view.AdminPanelTrailersViewController;
+import application.view.AdminPanelTrucksViewController;
 import application.view.AdminPanelUsersViewController;
 import application.view.AdminPanelViewController;
 import application.view.ApplicationViewController;
@@ -349,6 +351,53 @@ public class Main extends Application {
 		
 
 	}
+	
+	public void showAdminPageTrucks() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelTrucks_view.fxml"));
+			Pane root1 = loader1.load();
+
+			AdminPanelTrucksViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+
+	}
+	
+	public void showAdminPageTrailers() {
+
+		try {
+
+			FXMLLoader loader1 = new FXMLLoader(Main.class.getResource("view/AdminPanelTrailers_view.fxml"));
+			Pane root1 = loader1.load();
+
+			AdminPanelTrailersViewController controller = loader1.getController();
+
+			controller.setmainapp(this);
+
+			controller.setUp();
+
+			applicationWindowRoot.setCenter(root1);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+
+	}
+
 	
 	
 	public void showAdminPageSchedule() {

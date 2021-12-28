@@ -173,10 +173,10 @@ public class ScheduleIntermediate {
 		}
 		
 		if (trailer != null)
-		this.trailerNumber = trailer.getTrailer_number();
+		this.trailerNumber = trailer.getTrailerNumber();
 		
 		if (truck != null)
-		this.truckLicenceNumber = truck.getLicence_number();
+		this.truckLicenceNumber = truck.getLicenceNumber();
 	}
 	
 	

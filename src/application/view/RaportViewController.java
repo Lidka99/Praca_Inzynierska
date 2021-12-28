@@ -11,7 +11,7 @@ import java.util.List;
 
 import application.Main;
 import application.model.Schedule;
-import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.RaportGenerator;
 import application.view.intermediate.ScheduleIntermediate;
 import application.view.intermediate.TimeRaportEntry;
@@ -66,7 +66,7 @@ public class RaportViewController {
 
 		List<Schedule> schedules = main.getScheduleController().getSchedulesWithArrivalBetween(startDate, endDate);
 
-		List<ScheduleIntermediate> schedulesIntermediate = Converter.convert(schedules);
+		List<ScheduleIntermediate> schedulesIntermediate = ScheduleConverter.convert(schedules);
 
 		raport = RaportGenerator.generateTimeRaport(schedulesIntermediate);
 

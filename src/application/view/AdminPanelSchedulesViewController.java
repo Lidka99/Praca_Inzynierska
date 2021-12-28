@@ -29,7 +29,7 @@ import application.model.Trucks;
 import application.model.Users;
 import application.view.AdminPanelUsersViewController.EditingMode;
 import application.view.AdminPanelUsersViewController.ValidatingStatus;
-import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -86,10 +86,12 @@ public class AdminPanelSchedulesViewController {
 
 	public void onDeleteButtonClick() {
 
-		main.getScheduleController().delete(selectedSchedule.getId());
-		updateTableView();
-		clearScheduleFields();
+		if (selectedSchedule != null) {
+			main.getScheduleController().delete(selectedSchedule.getId());
+			updateTableView();
+			clearScheduleFields();
 
+		}
 	}
 
 	public void onCreateButtonCick() {
@@ -358,7 +360,7 @@ public class AdminPanelSchedulesViewController {
 		ScheduleController controller = main.getScheduleController();
 
 		List<Schedule> allSchedules = controller.getAllSchedules();
-		List<ScheduleIntermediate> schedules = Converter.convert(allSchedules);
+		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(allSchedules);
 
 		scheduleTableView.getItems().clear();
 
@@ -379,24 +381,24 @@ public class AdminPanelSchedulesViewController {
 		filteredTrucks = main.getTrucksController().getAllTrucks();
 
 		filteredTrailers = main.getTrailersController().getAllTrailers();
-		
+
 		driverChoiceBox.getItems().clear();
 
 		for (Drivers driver : filteredDrivers) {
 			driverChoiceBox.getItems()
 					.add(driver.getName() + " " + driver.getSurname() + " " + driver.getDriving_license());
 		}
-		
+
 		truckChoiceBox.getItems().clear();
 
 		for (Trucks truck : filteredTrucks) {
-			truckChoiceBox.getItems().add(truck.getLicence_number() + " " + truck.getModel());
+			truckChoiceBox.getItems().add(truck.getLicenceNumber() + " " + truck.getModel());
 		}
-		
+
 		trailerChoiceBox.getItems().clear();
 
 		for (Trailers trailer : filteredTrailers) {
-			trailerChoiceBox.getItems().add(trailer.getTrailer_number() + " " + trailer.getTrailer_type());
+			trailerChoiceBox.getItems().add(trailer.getTrailerNumber() + " " + trailer.getTrailerType());
 		}
 
 	}

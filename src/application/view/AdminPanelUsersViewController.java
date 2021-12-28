@@ -58,6 +58,10 @@ public class AdminPanelUsersViewController {
 	@FXML
 	private Button deleteButton;
 	@FXML
+	private Button saveButton;
+	@FXML
+	private Button cancelButton;
+	@FXML
 	private HBox passwordHbox;
 	@FXML
 	private TextField searchingInputField;
@@ -96,6 +100,9 @@ public class AdminPanelUsersViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -106,6 +113,10 @@ public class AdminPanelUsersViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
+
 
 	}
 
@@ -213,6 +224,12 @@ public class AdminPanelUsersViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
+
 
 	}
 
@@ -241,6 +258,11 @@ public class AdminPanelUsersViewController {
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
 		enableInputFields(false);
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -255,6 +277,12 @@ public class AdminPanelUsersViewController {
 	}
 
 	public void setUp() {
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
+		
 
 		// dodawanie kolumny id
 		TableColumn<Users, Integer> column1 = new TableColumn("Id");
@@ -357,6 +385,10 @@ public class AdminPanelUsersViewController {
 		emailInputField.setText(selectedUser.getEmail());
 		roleChoiceBox.getSelectionModel().select(selectedUser.getRole().ordinal());
 		editButton.setDisable(user == null);
+		
+		editButton.setDisable(false);
+		deleteButton.setDisable(false);
+		
 
 	}
 
@@ -376,7 +408,7 @@ public class AdminPanelUsersViewController {
 
 		UsersController controller = main.getUsersController();
 
-		List<Users> AllUsers = controller.serchUsersbySurname(searchingInputField.getText());
+		List<Users> AllUsers = controller.searchUsersbySurname(searchingInputField.getText());
 
 		usersTableView.getItems().clear();
 

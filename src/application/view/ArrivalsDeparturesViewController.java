@@ -23,7 +23,7 @@ import application.model.Trailers;
 import application.model.Trucks;
 import application.model.Users;
 import application.model.Users.Role;
-import application.view.intermediate.Converter;
+import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
@@ -138,7 +138,7 @@ public class ArrivalsDeparturesViewController {
 					.setText(selectedSchedule.getDriver().getName() + ' ' + selectedSchedule.getDriver().getSurname());
 			typeTextField.setText(selectedSchedule.getType().toString());
 			brandTextField.setText(selectedSchedule.getTruck().getBrand());
-			trailerTypeTextField.setText(selectedSchedule.getTrailer().getTrailer_type());
+			trailerTypeTextField.setText(selectedSchedule.getTrailer().getTrailerType());
 
 		} else {
 			infoPanel.setVisible(false);
@@ -185,7 +185,7 @@ public class ArrivalsDeparturesViewController {
 
 		ScheduleController controller = main.getScheduleController();
 
-		List<ScheduleIntermediate> schedules = Converter.convert(controller.getSchedulesInWarehouse());
+		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(controller.getSchedulesInWarehouse());
 		inWarehouseTableView.getItems().clear();
 
 		for (ScheduleIntermediate schedule : schedules) {
