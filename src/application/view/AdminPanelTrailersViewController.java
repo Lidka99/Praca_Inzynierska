@@ -61,6 +61,10 @@ public class AdminPanelTrailersViewController {
 	private Button editButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button cancelButton;
 
 	private Main main;
 
@@ -91,6 +95,9 @@ public class AdminPanelTrailersViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -101,6 +108,8 @@ public class AdminPanelTrailersViewController {
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
 
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 	}
 
 	public void onSaveButtonCick() {
@@ -156,6 +165,12 @@ public class AdminPanelTrailersViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
+
 
 	}
 
@@ -184,6 +199,11 @@ public class AdminPanelTrailersViewController {
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
 		enableInputFields(false);
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -196,6 +216,11 @@ public class AdminPanelTrailersViewController {
 	}
 
 	public void setUp() {
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 		// dodawanie kolumny id
 		TableColumn<Trailers, Integer> column1 = new TableColumn("Id");
@@ -282,6 +307,8 @@ public class AdminPanelTrailersViewController {
 		maxLoadInputField.setText(selectedTrailer.getMaxLoad().toString());
 		
 		editButton.setDisable(trailer == null);
+		editButton.setDisable(false);
+		deleteButton.setDisable(false);
 
 	}
 

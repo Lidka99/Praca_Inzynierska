@@ -1,0 +1,61 @@
+package application.controller;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class DataGenerator {
+
+	static List<String> names;
+	static List<String> surnames;
+
+	public static void loadNames(String filePath) {
+
+		if (names == null) {
+			names = new ArrayList<String>();
+		}
+
+		try {
+			File myObj = new File(filePath);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				String[] columns = data.split(",");
+				if (columns.length > 0) {
+					names.add(columns[0]);
+				}
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void loadSurnames(String filePath) {
+
+		if (surnames == null) {
+			surnames = new ArrayList<String>();
+		}
+
+		try {
+			File myObj = new File(filePath);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				String[] columns = data.split(",");
+				if (columns.length > 0) {
+					surnames.add(columns[0]);
+				}
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+}

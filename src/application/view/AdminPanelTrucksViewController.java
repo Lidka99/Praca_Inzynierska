@@ -82,6 +82,10 @@ public class AdminPanelTrucksViewController {
 	private Button editButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button cancelButton;
 
 	private Main main;
 
@@ -116,6 +120,9 @@ public class AdminPanelTrucksViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -125,6 +132,10 @@ public class AdminPanelTrucksViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
+
 
 	}
 
@@ -172,6 +183,12 @@ public class AdminPanelTrucksViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
+
 
 	}
 
@@ -183,6 +200,11 @@ public class AdminPanelTrucksViewController {
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
 		enableInputFields(false);
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -198,6 +220,11 @@ public class AdminPanelTrucksViewController {
 	}
 
 	public void setUp() {
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 		// dodawanie kolumny id
 		TableColumn<TrucksIntermediate, Integer> column1 = new TableColumn("Id");
@@ -320,6 +347,10 @@ public class AdminPanelTrucksViewController {
 		}
 		trailerChoiceBox.getSelectionModel().select(trailerIndex);
 
+		editButton.setDisable(truck == null);
+		
+		editButton.setDisable(false);
+		deleteButton.setDisable(false);
 	}
 
 	private void clearTruckFields() {

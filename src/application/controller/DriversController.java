@@ -45,14 +45,14 @@ public class DriversController {
 		return true;
 	}
 
-	// edycja u¿ytkowników
+	// edycja kierowcow
 
 	public boolean update(int id, String name, String surname, String drivingLicense) {
 
 		Drivers driver = getDrivers(id);
 		driver.setName(name);
 		driver.setSurname(surname);
-		driver.setSurname(drivingLicense);
+		driver.setDriving_license(drivingLicense);
 
 		try {
 			driversDao.update(driver);

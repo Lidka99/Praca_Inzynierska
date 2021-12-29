@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -34,8 +35,9 @@ import application.view.intermediate.ScheduleIntermediate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
@@ -43,6 +45,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AdminPanelSchedulesViewController {
@@ -75,6 +78,10 @@ public class AdminPanelSchedulesViewController {
 	private Button editButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button cancelButton;
 
 	private Main main;
 
@@ -87,10 +94,22 @@ public class AdminPanelSchedulesViewController {
 	public void onDeleteButtonClick() {
 
 		if (selectedSchedule != null) {
-			main.getScheduleController().delete(selectedSchedule.getId());
-			updateTableView();
-			clearScheduleFields();
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Usuniêcie transportu");
+			alert.setHeaderText("Masz zamiar usun¹æ transport");
+			alert.setContentText("Czy na pewno chcesz to zrobiæ?");
 
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				main.getScheduleController().delete(selectedSchedule.getId());
+				updateTableView();
+				clearScheduleFields();
+
+			} else {
+
+			}
+			
+			
 		}
 	}
 
@@ -101,6 +120,9 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -110,6 +132,9 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -182,6 +207,11 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -208,6 +238,11 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
 		enableInputFields(false);
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -222,6 +257,11 @@ public class AdminPanelSchedulesViewController {
 	}
 
 	public void setUp() {
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 		// dodawanie kolumny id
 		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
@@ -311,6 +351,10 @@ public class AdminPanelSchedulesViewController {
 		scheduledDateDatePicker.setValue(LocalDate.parse(schedule.getScheduled_date(), formatter));
 		typeChoiceBox.setValue(Schedule.Type.valueOf(schedule.getType()));
 
+		editButton.setDisable(schedule == null);
+		editButton.setDisable(false);
+		deleteButton.setDisable(false);
+		
 		updateFilteredLists(false);
 
 		int driverIndex;
@@ -352,6 +396,8 @@ public class AdminPanelSchedulesViewController {
 		driverChoiceBox.setValue(null);
 		truckChoiceBox.setValue(null);
 		trailerChoiceBox.setValue(null);
+		
+		editButton.setDisable(true);
 
 	}
 

@@ -2,6 +2,7 @@ package application.view;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -21,13 +22,15 @@ import application.view.AdminPanelUsersViewController.ValidatingStatus;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class AdminPanelDriversViewController {
@@ -52,18 +55,35 @@ public class AdminPanelDriversViewController {
 	private Button editButton;
 	@FXML
 	private Button deleteButton;
+	@FXML
+	private Button saveButton;
+	@FXML
+	private Button cancelButton;
 
 	private Main main;
 
 	private ListChangeListener<Drivers> selectionListener;
 
+	
+
 	public void onDeleteButtonClick() {
 
-		main.getDriversController().delete(selectedDriver);
-		updateTableView();
-		clearDriverFields();
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Usuniêcie kierowcy");
+		alert.setHeaderText("Masz zamiar usun¹æ kierowcê");
+		alert.setContentText("Czy na pewno chcesz to zrobiæ?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			main.getDriversController().delete(selectedDriver);
+			updateTableView();
+			clearDriverFields();
+		} else {
+
+		}
 
 	}
+	
 
 	public void onCreateButtonCick() {
 
@@ -72,6 +92,9 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -81,6 +104,9 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
+		
+		cancelButton.setDisable(false);
+		saveButton.setDisable(false);
 
 	}
 
@@ -103,7 +129,7 @@ public class AdminPanelDriversViewController {
 				return;
 			}
 			
-			//main.getUsersController().create(role, name, surname, username, hash.getResult(), email); poprawic
+			main.getDriversController().create(name, surname, drivingLicense);
 		}
 		
 		break;
@@ -126,7 +152,8 @@ public class AdminPanelDriversViewController {
 				return;
 			}
 			
-			//main.getUsersController().update(selectedUser.getId(), role, name, surname, username, hash.getResult(), email); poprawic
+			main.getDriversController().update(selectedDriver.getId(), name, surname, drivingLicense);
+			
 		}
 		break;
 
@@ -140,6 +167,11 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 	}
 
@@ -175,9 +207,19 @@ public class AdminPanelDriversViewController {
 		surnameInputField.setDisable(!enabled);
 		driving_licenseInputField.setDisable(!enabled);
 		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
+		
 	}
 
 	public void setUp() {
+		
+		editButton.setDisable(true);
+		deleteButton.setDisable(true);
+		cancelButton.setDisable(true);
+		saveButton.setDisable(true);
 
 		// dodawanie kolumny id
 		TableColumn<Drivers, Integer> column1 = new TableColumn("Id");
@@ -250,7 +292,10 @@ public class AdminPanelDriversViewController {
 		nameInputField.setText(selectedDriver.getName());
 		surnameInputField.setText(selectedDriver.getSurname());
 		driving_licenseInputField.setText(selectedDriver.getDriving_license());
+		editButton.setDisable(driver == null);
 		
+		editButton.setDisable(false);
+		deleteButton.setDisable(false);
 
 	}
 
@@ -260,6 +305,8 @@ public class AdminPanelDriversViewController {
 		surnameInputField.setText(null);
 		driving_licenseInputField.setText(null);
 		
+		editButton.setDisable(true);
+
 	}
 
 	private void updateTableView() {

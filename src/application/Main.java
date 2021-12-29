@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -18,6 +19,7 @@ import com.password4j.Hash;
 import com.password4j.Password;
 import com.password4j.types.BCrypt;
 
+import application.controller.DataGenerator;
 import application.controller.DriversController;
 import application.controller.ScheduleController;
 import application.controller.TrailersController;
@@ -106,6 +108,17 @@ public class Main extends Application {
 
 			// usersController.create(Users.Role.user, "Marek", "Stasiak", "mstas8",
 			// hash1.getResult(), "stasiak.m@gmail.com" );
+			
+			DataGenerator.initialize(this);
+			
+			//DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
+			//DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
+			//DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
+			//DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
+			
+			//DataGenerator.generateUsers(25);
+			
+			
 
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
