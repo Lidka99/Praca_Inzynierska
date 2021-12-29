@@ -321,7 +321,7 @@ public class AdminPanelDriversViewController {
 
 		DriversController controller = main.getDriversController();
 
-		List<Drivers> AllDrivers = controller.searchDriversbySurname(searchingInputField.getText());
+		List<Drivers> AllDrivers = controller.getAllDrivers();
 
 		driversTableView.getItems().clear();
 

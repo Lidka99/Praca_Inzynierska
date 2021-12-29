@@ -52,6 +52,9 @@ public class ScheduleViewController {
 
 	@FXML
 	private DatePicker datePicker;
+	
+	@FXML
+	private DatePicker searchingDatePicker;
 
 	private Date selectedDate;
 
@@ -108,7 +111,11 @@ public class ScheduleViewController {
 
 		updateTableView();
 		
-	
+		// nas³uchiwacz do filtrowania
+
+		searchingDatePicker.accessibleTextProperty().addListener((observable, oldValue, newValue) -> {
+					onSearch(newValue);
+				});
 
 		// tworzymy tzw "nas³uchiwacz"
 		datePicker.valueProperty().addListener((observable, oldDate, newDate) -> {
@@ -122,6 +129,12 @@ public class ScheduleViewController {
 			}
 			updateTableView();
 		});
+
+	}
+	
+	public void onSearch(String text) {
+
+		updateTableView();
 
 	}
 

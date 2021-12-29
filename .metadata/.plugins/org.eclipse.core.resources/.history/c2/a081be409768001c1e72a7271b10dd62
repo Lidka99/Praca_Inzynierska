@@ -46,7 +46,7 @@ public class AdminPanelDriversViewController {
 	private TextField driving_licenseInputField;
 
 	private Drivers selectedDriver;
-
+	
 	private EditingMode editingMode = EditingMode.none;
 
 	@FXML
@@ -66,6 +66,8 @@ public class AdminPanelDriversViewController {
 
 	private ListChangeListener<Drivers> selectionListener;
 
+	
+
 	public void onDeleteButtonClick() {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -83,6 +85,7 @@ public class AdminPanelDriversViewController {
 		}
 
 	}
+	
 
 	public void onCreateButtonCick() {
 
@@ -91,7 +94,7 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
-
+		
 		cancelButton.setDisable(false);
 		saveButton.setDisable(false);
 
@@ -103,7 +106,7 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
-
+		
 		cancelButton.setDisable(false);
 		saveButton.setDisable(false);
 
@@ -127,11 +130,11 @@ public class AdminPanelDriversViewController {
 
 				return;
 			}
-
+			
 			main.getDriversController().create(name, surname, drivingLicense);
 		}
-
-			break;
+		
+		break;
 
 		case editing: {
 
@@ -150,11 +153,11 @@ public class AdminPanelDriversViewController {
 
 				return;
 			}
-
+			
 			main.getDriversController().update(selectedDriver.getId(), name, surname, drivingLicense);
-
+			
 		}
-			break;
+		break;
 
 		default:
 			break;
@@ -166,7 +169,7 @@ public class AdminPanelDriversViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
-
+		
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
@@ -205,16 +208,16 @@ public class AdminPanelDriversViewController {
 		nameInputField.setDisable(!enabled);
 		surnameInputField.setDisable(!enabled);
 		driving_licenseInputField.setDisable(!enabled);
-
+		
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
 		saveButton.setDisable(true);
-
+		
 	}
 
 	public void setUp() {
-
+		
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
@@ -240,15 +243,12 @@ public class AdminPanelDriversViewController {
 		column4.setCellValueFactory(new PropertyValueFactory("driving_license"));
 		driversTableView.getColumns().add(column4);
 
+	
 		updateTableView();
 
 		enableInputFields(false);
 
-		// nas³uchiwacz do filtrowania
 
-		searchingInputField.textProperty().addListener((observable, oldValue, newValue) -> {
-			onSearchTextEdit(newValue);
-		});
 
 		// tworzymy tzw "nas³uchiwacz"
 
@@ -266,12 +266,6 @@ public class AdminPanelDriversViewController {
 			};
 		}
 		enableTableView(true);
-	}
-
-	public void onSearchTextEdit(String text) {
-
-		updateTableView();
-
 	}
 
 	// zaczynamy lub przestajemy nas³uchiwac
@@ -301,7 +295,7 @@ public class AdminPanelDriversViewController {
 		surnameInputField.setText(selectedDriver.getSurname());
 		driving_licenseInputField.setText(selectedDriver.getDriving_license());
 		editButton.setDisable(driver == null);
-
+		
 		editButton.setDisable(false);
 		deleteButton.setDisable(false);
 
@@ -312,7 +306,7 @@ public class AdminPanelDriversViewController {
 		nameInputField.setText(null);
 		surnameInputField.setText(null);
 		driving_licenseInputField.setText(null);
-
+		
 		editButton.setDisable(true);
 
 	}
@@ -321,7 +315,7 @@ public class AdminPanelDriversViewController {
 
 		DriversController controller = main.getDriversController();
 
-		List<Drivers> AllDrivers = controller.searchDriversbySurname(searchingInputField.getText());
+		List<Drivers> AllDrivers = controller.getAllDrivers();
 
 		driversTableView.getItems().clear();
 

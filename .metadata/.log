@@ -7303,3 +7303,9 @@ java.lang.NullPointerException: Cannot invoke "String.lastIndexOf(int)" because 
 
 !ENTRY org.eclipse.jdt.debug 2 0 2021-12-29 10:38:53.296
 !MESSAGE Unable to find location of java.lang.Thread.setName() in debuggee JVM, for type java.lang.Thread
+
+!ENTRY org.eclipse.jdt.debug 2 0 2021-12-29 11:52:08.524
+!MESSAGE Unable to find location of java.lang.Thread.setName() in debuggee JVM, for type java.lang.Thread
+
+!ENTRY org.eclipse.jdt.debug 2 0 2021-12-29 11:55:27.187
+!MESSAGE Unable to find location of java.lang.Thread.setName() in debuggee JVM, for type java.lang.Thread

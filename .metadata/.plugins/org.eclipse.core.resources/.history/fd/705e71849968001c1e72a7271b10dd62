@@ -107,8 +107,6 @@ public class ScheduleViewController {
 		// dodac ko
 
 		updateTableView();
-		
-	
 
 		// tworzymy tzw "nas³uchiwacz"
 		datePicker.valueProperty().addListener((observable, oldDate, newDate) -> {

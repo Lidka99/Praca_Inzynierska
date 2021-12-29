@@ -65,15 +65,7 @@ public class DriversController {
 	}
 
 	private Drivers getDrivers(int id) {
-
-		for (Drivers driver : driversDao) {
-
-			if (id == driver.getId()) {
-
-				return driver;
-			}
-		}
-
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -122,22 +114,6 @@ public class DriversController {
 		for (Drivers driver : driversDao) {
 
 			allDrivers.add(new Drivers(driver));
-		}
-
-		return allDrivers;
-	}
-
-	// filtrowanie kierowców po nazwisku
-
-	public List<Drivers> searchDriversbySurname(String text) {
-
-		List<Drivers> allDrivers = new ArrayList<Drivers>();
-
-		for (Drivers driver : driversDao) {
-
-			if (driver.getSurname().toLowerCase().startsWith(text.toLowerCase()))
-
-				allDrivers.add(new Drivers(driver));
 		}
 
 		return allDrivers;
