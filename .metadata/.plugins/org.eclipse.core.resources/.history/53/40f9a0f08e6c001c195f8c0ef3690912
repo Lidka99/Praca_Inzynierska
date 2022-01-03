@@ -123,7 +123,7 @@ public class Main extends Application {
 			//DataGenerator.generateTrailers(30);
 			//DataGenerator.generateTrucks(30);
 			
-			//DataGenerator.generateSchedules(50);
+			DataGenerator.generateSchedules(50);
 			
 			
 			

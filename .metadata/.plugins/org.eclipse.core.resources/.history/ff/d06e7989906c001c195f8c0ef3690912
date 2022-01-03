@@ -276,16 +276,6 @@ public class AdminPanelSchedulesViewController {
 		column2.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
 		scheduleTableView.getColumns().add(column2);
 
-		// dodawanie kolumny data przyjazdu
-		TableColumn<ScheduleIntermediate, String> column22 = new TableColumn("Data przyjazdu");
-		column22.setCellValueFactory(new PropertyValueFactory("arrival_date"));
-		scheduleTableView.getColumns().add(column22);
-
-		// dodawanie kolumny data wyjazdu
-		TableColumn<ScheduleIntermediate, String> column222 = new TableColumn("Data wyjazdu");
-		column222.setCellValueFactory(new PropertyValueFactory("departure_date"));
-		scheduleTableView.getColumns().add(column222);
-
 		// dodawanie kolumny rodzaj
 		TableColumn<ScheduleIntermediate, String> column5 = new TableColumn("Rodzaj");
 		column5.setCellValueFactory(new PropertyValueFactory("type"));
