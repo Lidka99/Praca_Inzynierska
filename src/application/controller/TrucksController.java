@@ -77,10 +77,10 @@ public class TrucksController {
 
 	// tworzenie
 
-	public boolean create(String drivingLicence, String brand, String model, Integer maxLoad, Drivers driver,
+	public boolean create(String licenceNumber, String brand, String model, Integer maxLoad, Drivers driver,
 			Trailers trailer) {
 		Trucks truck = new Trucks();
-		truck.setBrand(drivingLicence);
+		truck.setLicenceNumber(licenceNumber);
 		truck.setBrand(brand);
 		truck.setModel(model);
 		truck.setMaxLoad(maxLoad);

@@ -111,12 +111,27 @@ public class Main extends Application {
 			
 			DataGenerator.initialize(this);
 			
-			//DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
-			//DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
-			//DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
-			//DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
+			DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
+			DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
+			DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
+			DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
+			
+			DataGenerator.loadLicenceNumbers("C:\\Users\\Lidka\\Desktop\\do generacji\\rejestracje.csv");
 			
 			//DataGenerator.generateUsers(25);
+			//DataGenerator.generateDrivers(30);
+			//DataGenerator.generateTrailers(30);
+			//DataGenerator.generateTrucks(30);
+			
+			DataGenerator.generateSchedules(50);
+			
+			
+			
+			//sprawdzanie poprawnosci z generowaniem dat
+			//Date date = DataGenerator.getRandomDate(2021, 10, 1, 2022, 3, 31);
+			//System.out.println(date);
+			
+			
 			
 			
 

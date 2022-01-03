@@ -43,6 +43,8 @@ public class TrailersController {
 		return null;
 	}
 	
+	
+	
 	public List<Trailers> getAllTrailers() {
 
 		List<Trailers> allTrailers = new ArrayList<Trailers>();
@@ -54,8 +56,24 @@ public class TrailersController {
 
 		return allTrailers;
 	}
+	
+	
+	public List<Trailers> getTrailersBelowMaxLoad(int maxLoad) {
 
-	// tworzenie u¿ytkowników
+		List<Trailers> allTrailers = new ArrayList<Trailers>();
+
+		for (Trailers trailer : trailersDao) {
+			
+			if(trailer.getMaxLoad()<maxLoad)
+
+			allTrailers.add(trailer);
+		}
+
+		return allTrailers;
+	}
+
+
+	// tworzenie naczep
 
 	public boolean create(String trailerNumber, String trailerType, Integer maxLoad) {
 		Trailers newTrailer = new Trailers(trailerNumber, trailerType, maxLoad);

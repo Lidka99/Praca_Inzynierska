@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
-    <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
-    <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
     <fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
@@ -24,8 +21,6 @@
     <fullyQualifiedTypeName name="javafx.scene.control.DatePicker"/>
     <fullyQualifiedTypeName name="java.sql.Driver"/>
     <fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
-    <fullyQualifiedTypeName name="application.model.Schedule"/>
-    <fullyQualifiedTypeName name="application.model.Schedule.Type"/>
     <fullyQualifiedTypeName name="javafx.collections.ListChangeListener"/>
     <fullyQualifiedTypeName name="org.apache.commons.lang3.time.FastDateParser"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
@@ -38,9 +33,6 @@
     <fullyQualifiedTypeName name="application.view.AdminPanelTrailersViewController"/>
     <fullyQualifiedTypeName name="application.controller.TrailersController"/>
     <fullyQualifiedTypeName name="application.controller.TrucksController"/>
-    <fullyQualifiedTypeName name="application.model.Trailers"/>
-    <fullyQualifiedTypeName name="application.model.Drivers"/>
-    <fullyQualifiedTypeName name="application.model.Trucks"/>
     <fullyQualifiedTypeName name="application.view.intermediate.TrucksConverter"/>
     <fullyQualifiedTypeName name="application.view.intermediate.TrucksIntermediate"/>
     <fullyQualifiedTypeName name="java.util.List"/>
@@ -58,6 +50,14 @@
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
-    <fullyQualifiedTypeName name="application.controller.DataGenerator"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
+    <fullyQualifiedTypeName name="application.controller.DataGenerator"/>
+    <fullyQualifiedTypeName name="application.controller.DriversController"/>
+    <fullyQualifiedTypeName name="application.model.Drivers"/>
+    <fullyQualifiedTypeName name="application.model.Trailers"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="application.model.Schedule"/>
+    <fullyQualifiedTypeName name="application.model.Schedule.Type"/>
+    <fullyQualifiedTypeName name="application.model.Trucks"/>
 </qualifiedTypeNameHistroy>

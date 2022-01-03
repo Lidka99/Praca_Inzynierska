@@ -83,6 +83,10 @@ public class AdminPanelSchedulesViewController {
 	@FXML
 	private Button cancelButton;
 
+	@FXML
+	private DatePicker filterDateDatePicker;
+	private Date selectedDate;
+
 	private Main main;
 
 	private ListChangeListener<ScheduleIntermediate> selectionListener;
@@ -108,8 +112,7 @@ public class AdminPanelSchedulesViewController {
 			} else {
 
 			}
-			
-			
+
 		}
 	}
 
@@ -120,7 +123,7 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.adding;
 		enableInputFields(true);
-		
+
 		cancelButton.setDisable(false);
 		saveButton.setDisable(false);
 
@@ -132,7 +135,7 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(false);
 		editingMode = EditingMode.editing;
 		enableInputFields(true);
-		
+
 		cancelButton.setDisable(false);
 		saveButton.setDisable(false);
 
@@ -207,7 +210,7 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(true);
 		enableInputFields(false);
 		editingMode = EditingMode.none;
-		
+
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
@@ -238,7 +241,7 @@ public class AdminPanelSchedulesViewController {
 		enableEditButttons(true);
 		editingMode = EditingMode.none;
 		enableInputFields(false);
-		
+
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
@@ -257,7 +260,7 @@ public class AdminPanelSchedulesViewController {
 	}
 
 	public void setUp() {
-		
+
 		editButton.setDisable(true);
 		deleteButton.setDisable(true);
 		cancelButton.setDisable(true);
@@ -306,6 +309,24 @@ public class AdminPanelSchedulesViewController {
 
 		typeChoiceBox.getItems().setAll(Schedule.Type.values());
 
+		// tworzymy tzw "nas³uchiwacz" do filtrowania po dacie
+
+		filterDateDatePicker.valueProperty().addListener((observable, oldDate, newDate) -> {
+
+			// aktualnie wybrana data
+			if (newDate != null) {
+
+				ZoneId defaultZoneId = ZoneId.systemDefault();
+				selectedDate = Date.from(newDate.atStartOfDay(defaultZoneId).toInstant());
+
+			}
+
+			else {
+				selectedDate = null;
+			}
+			updateTableView();
+		});
+
 		// tworzymy tzw "nas³uchiwacz"
 
 		if (selectionListener == null) {
@@ -318,8 +339,6 @@ public class AdminPanelSchedulesViewController {
 
 					}
 				}
-				
-				
 
 			};
 		}
@@ -356,7 +375,7 @@ public class AdminPanelSchedulesViewController {
 		editButton.setDisable(schedule == null);
 		editButton.setDisable(false);
 		deleteButton.setDisable(false);
-		
+
 		updateFilteredLists(false);
 
 		int driverIndex;
@@ -398,7 +417,7 @@ public class AdminPanelSchedulesViewController {
 		driverChoiceBox.setValue(null);
 		truckChoiceBox.setValue(null);
 		trailerChoiceBox.setValue(null);
-		
+
 		editButton.setDisable(true);
 
 	}
@@ -407,7 +426,15 @@ public class AdminPanelSchedulesViewController {
 
 		ScheduleController controller = main.getScheduleController();
 
-		List<Schedule> allSchedules = controller.getAllSchedules();
+		List<Schedule> allSchedules = null;
+		if (selectedDate != null) {
+			allSchedules = controller.getSchedulesByScheduledDate(selectedDate);
+
+		} else {
+			allSchedules = controller.getAllSchedules();
+
+		}
+
 		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(allSchedules);
 
 		scheduleTableView.getItems().clear();

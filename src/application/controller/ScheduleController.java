@@ -278,6 +278,27 @@ public class ScheduleController {
 		return true;
 	}
 	
+	public boolean create( Date scheduledDate, Date arrivalDate, Date departureDate, Schedule.Type type, Drivers driver, Trailers trailer,
+			Trucks truck) {
+		Schedule schedule = new Schedule();
+		schedule.setScheduled_date(scheduledDate);
+		schedule.setArrival_date(arrivalDate);
+		schedule.setDeparture_date(departureDate);
+		schedule.setType(type);
+		schedule.setDriver(driver);
+		schedule.setTrailer(trailer);
+		schedule.setTruck(truck);
+
+		try {
+			scheduleDao.create(schedule);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	//usuwanie
 
 		public boolean delete(int id) {

@@ -104,8 +104,8 @@ public class ScheduleViewController {
 		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
 		scheduleTableView.getColumns().add(column9);
 
-		// dodac ko
-
+	
+		
 		updateTableView();
 		
 	
