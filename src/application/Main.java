@@ -54,6 +54,9 @@ public class Main extends Application {
 
 	private static DateFormat dateFormat;
 	private static DateFormat dateTimeFormat;
+	private static DateFormat timeFormat;
+	private static DateFormat hourFormat;
+	private static DateFormat minuteFormat;
 
 	private Stage primaryStage;
 
@@ -78,6 +81,10 @@ public class Main extends Application {
 
 		dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		timeFormat = new SimpleDateFormat("HH:mm");
+		hourFormat = new SimpleDateFormat("HH");
+		minuteFormat = new SimpleDateFormat("mm");
+		
 
 		try {
 			dataBaseConnection = new JdbcConnectionSource(DATABASE_URL);
@@ -482,6 +489,22 @@ public class Main extends Application {
 
 	public static DateFormat getDateTimeFormat() {
 		return dateTimeFormat;
+	}
+	
+	
+
+	public static DateFormat getTimeFormat() {
+		return timeFormat;
+	}
+
+	
+	
+	public static DateFormat getHourFormat() {
+		return hourFormat;
+	}
+
+	public static DateFormat getMinuteFormat() {
+		return minuteFormat;
 	}
 
 	public static void main(String[] args) {

@@ -72,7 +72,7 @@ public class MainPageViewController {
 
 			inWarehouseTableView.getItems().add(schedule);
 		}
-		
+
 		List<ScheduleIntermediate> scheduleToday = ScheduleConverter.convert(controller.getSchedulesToday());
 		scheduleTableView.getItems().clear();
 
@@ -119,6 +119,11 @@ public class MainPageViewController {
 		column7.setCellValueFactory(new PropertyValueFactory("driverSurname"));
 		scheduleTableView.getColumns().add(column7);
 
+		// dodawanie kolumny prawo jazdy
+		TableColumn<ScheduleIntermediate, String> column71 = new TableColumn("Nr prawa jazdy");
+		column71.setCellValueFactory(new PropertyValueFactory("driverLicenceNumber"));
+		scheduleTableView.getColumns().add(column71);
+
 		// dodawanie kolumny nr rejestracyjny naczepy
 		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
 		column8.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
@@ -128,9 +133,6 @@ public class MainPageViewController {
 		TableColumn<ScheduleIntermediate, String> column9 = new TableColumn("Nr rejestracyjny auta");
 		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
 		scheduleTableView.getColumns().add(column9);
-
-		// dodac kolumny marka itd
-		// tabela warehouse
 
 		// dodawanie kolumny id
 		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
@@ -161,6 +163,11 @@ public class MainPageViewController {
 		TableColumn<ScheduleIntermediate, String> column77 = new TableColumn("Nazwisko kierowcy");
 		column77.setCellValueFactory(new PropertyValueFactory("driverSurname"));
 		inWarehouseTableView.getColumns().add(column77);
+
+		// dodawanie kolumny prawo jazdy
+		TableColumn<ScheduleIntermediate, String> column771 = new TableColumn("Nr prawa jazdy");
+		column771.setCellValueFactory(new PropertyValueFactory("driverLicenceNumber"));
+		inWarehouseTableView.getColumns().add(column771);
 
 		// dodawanie kolumny nr rejestracyjny naczepy
 		TableColumn<ScheduleIntermediate, String> column88 = new TableColumn("Nr rejestracyjny naczepy");

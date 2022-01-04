@@ -51,11 +51,35 @@ public class ScheduleController {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
-		for (Schedule schedule : scheduleDao) {
-			if (schedule.getScheduled_date().equals(scheduled_date)) {
-				allSchedules.add(schedule);
-			}
+		Date scheduledDateWithZeroTime = null;
 
+		try {
+			scheduledDateWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(scheduled_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (scheduledDateWithZeroTime != null) {
+
+			for (Schedule schedule : scheduleDao) {
+
+				Date dateWithZeroTime = null;
+
+				try {
+					dateWithZeroTime = Main.getDateFormat()
+							.parse(Main.getDateFormat().format(schedule.getScheduled_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (dateWithZeroTime != null && dateWithZeroTime.equals(scheduledDateWithZeroTime)) {
+
+					allSchedules.add(schedule);
+				}
+
+			}
 		}
 
 		return allSchedules;
@@ -66,13 +90,35 @@ public class ScheduleController {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
-		for (Schedule schedule : scheduleDao) {
-			if (schedule.getArrival_date().equals(arrival_date)) {
-				allSchedules.add(schedule);
-			}
+		Date scheduledDateWithZeroTime = null;
 
+		try {
+			scheduledDateWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(arrival_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+		if (scheduledDateWithZeroTime != null) {
+			for (Schedule schedule : scheduleDao) {
+
+				Date dateWithZeroTime = null;
+
+				try {
+					dateWithZeroTime = Main.getDateFormat()
+							.parse(Main.getDateFormat().format(schedule.getArrival_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (dateWithZeroTime != null && dateWithZeroTime.equals(scheduledDateWithZeroTime)) {
+
+					allSchedules.add(schedule);
+				}
+
+			}
+		}
 		return allSchedules;
 
 	}
@@ -81,14 +127,37 @@ public class ScheduleController {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
 
-		for (Schedule schedule : scheduleDao) {
-			if (schedule.getDeparture_date().equals(departure_date)) {
-				allSchedules.add(schedule);
-			}
+		Date scheduledDateWithZeroTime = null;
 
+		try {
+			scheduledDateWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(departure_date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+		if (scheduledDateWithZeroTime != null) {
+			for (Schedule schedule : scheduleDao) {
+
+				Date dateWithZeroTime = null;
+
+				try {
+					dateWithZeroTime = Main.getDateFormat()
+							.parse(Main.getDateFormat().format(schedule.getDeparture_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (dateWithZeroTime != null && dateWithZeroTime.equals(scheduledDateWithZeroTime)) {
+
+					allSchedules.add(schedule);
+				}
+
+			}
+		}
 		return allSchedules;
+
 
 	}
 
@@ -256,11 +325,10 @@ public class ScheduleController {
 		}
 		return true;
 	}
-	
-	//tworzenie 
-	
-	public boolean create( Date scheduledDate, Schedule.Type type, Drivers driver, Trailers trailer,
-			Trucks truck) {
+
+	// tworzenie
+
+	public boolean create(Date scheduledDate, Schedule.Type type, Drivers driver, Trailers trailer, Trucks truck) {
 		Schedule schedule = new Schedule();
 		schedule.setScheduled_date(scheduledDate);
 		schedule.setType(type);
@@ -277,9 +345,9 @@ public class ScheduleController {
 		}
 		return true;
 	}
-	
-	public boolean create( Date scheduledDate, Date arrivalDate, Date departureDate, Schedule.Type type, Drivers driver, Trailers trailer,
-			Trucks truck) {
+
+	public boolean create(Date scheduledDate, Date arrivalDate, Date departureDate, Schedule.Type type, Drivers driver,
+			Trailers trailer, Trucks truck) {
 		Schedule schedule = new Schedule();
 		schedule.setScheduled_date(scheduledDate);
 		schedule.setArrival_date(arrivalDate);
@@ -298,31 +366,31 @@ public class ScheduleController {
 		}
 		return true;
 	}
-	
-	//usuwanie
 
-		public boolean delete(int id) {
+	// usuwanie
 
-			Schedule schedule = getSchedule(id);
-			return delete(schedule);
+	public boolean delete(int id) {
 
-		}
+		Schedule schedule = getSchedule(id);
+		return delete(schedule);
 
-		public boolean delete(Schedule schedule) {
+	}
 
-			if (schedule != null) {
+	public boolean delete(Schedule schedule) {
 
-				try {
-					scheduleDao.delete(schedule);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return false;
-				}
-				return true;
+		if (schedule != null) {
 
+			try {
+				scheduleDao.delete(schedule);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
 			}
-			return false;
+			return true;
+
 		}
+		return false;
+	}
 
 }

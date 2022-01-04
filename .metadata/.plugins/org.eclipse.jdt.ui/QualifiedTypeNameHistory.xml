@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
-    <fullyQualifiedTypeName name="javafx.scene.chart.LineChart"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
-    <fullyQualifiedTypeName name="java.time.Instant"/>
-    <fullyQualifiedTypeName name="java.time.ZoneId"/>
-    <fullyQualifiedTypeName name="application.view.intermediate.RaportGenerator"/>
     <fullyQualifiedTypeName name="javax.swing.text.DateFormatter"/>
     <fullyQualifiedTypeName name="javafx.scene.chart.NumberAxis"/>
     <fullyQualifiedTypeName name="javafx.scene.chart.CategoryAxis"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="application.model.Schedule"/>
     <fullyQualifiedTypeName name="application.model.Schedule.Type"/>
     <fullyQualifiedTypeName name="application.model.Trucks"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Spinner"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.SpinnerValueFactory"/>
+    <fullyQualifiedTypeName name="javafx.util.converter.LocalTimeStringConverter"/>
+    <fullyQualifiedTypeName name="java.time.format.FormatStyle"/>
+    <fullyQualifiedTypeName name="java.time.LocalTime"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
 </qualifiedTypeNameHistroy>

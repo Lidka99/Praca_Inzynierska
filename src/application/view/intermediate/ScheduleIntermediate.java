@@ -33,6 +33,7 @@ public class ScheduleIntermediate {
 	String driverName;
 	
 	String driverSurname;
+	String driverLicenceNumber;
 	
 	String trailerNumber;
 	
@@ -121,6 +122,16 @@ public class ScheduleIntermediate {
 	public void setDriverSurname(String driverSurname) {
 		this.driverSurname = driverSurname;
 	}
+	
+	
+
+	public String getDriverLicenceNumber() {
+		return driverLicenceNumber;
+	}
+
+	public void setDriverLicenceNumber(String driverLicenceNumber) {
+		this.driverLicenceNumber = driverLicenceNumber;
+	}
 
 	public String getTrailerNumber() {
 		return trailerNumber;
@@ -170,6 +181,7 @@ public class ScheduleIntermediate {
 		if (driver != null) {
 		this.driverName = driver.getName();
 		this.driverSurname = driver.getSurname();
+		this.driverLicenceNumber = driver.getDriving_license();
 		}
 		
 		if (trailer != null)

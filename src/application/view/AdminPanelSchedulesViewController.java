@@ -1,10 +1,14 @@
 package application.view;
 
 import java.sql.Driver;
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -41,12 +45,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.converter.LocalTimeStringConverter;
 
 public class AdminPanelSchedulesViewController {
 
@@ -67,6 +74,12 @@ public class AdminPanelSchedulesViewController {
 
 	@FXML
 	private ChoiceBox trailerChoiceBox;
+
+	@FXML
+	private Spinner hourSpinner;
+
+	@FXML
+	private Spinner minuteSpinner;
 
 	private ScheduleIntermediate selectedSchedule;
 
@@ -352,6 +365,36 @@ public class AdminPanelSchedulesViewController {
 
 			};
 		}
+		// Value factory spinner hours.
+		SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory() {
+
+			{
+				setConverter(new LocalTimeStringConverter(FormatStyle.MEDIUM));
+			}
+
+			@Override
+			public void decrement(int steps) {
+				if (getValue() == null)
+					setValue(LocalTime.now());
+				else {
+					LocalTime time = (LocalTime) getValue();
+					setValue(time.minusMinutes(steps*5));
+				}
+			}
+
+			@Override
+			public void increment(int steps) {
+				if (this.getValue() == null)
+					setValue(LocalTime.now());
+				else {
+					LocalTime time = (LocalTime) getValue();
+					setValue(time.plusMinutes(steps*5));
+				}
+			}
+		};
+
+		hourSpinner.setValueFactory(valueFactory);
+
 		enableTableView(true);
 	}
 
@@ -380,6 +423,22 @@ public class AdminPanelSchedulesViewController {
 		selectedSchedule = schedule;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 		scheduledDateDatePicker.setValue(LocalDate.parse(schedule.getScheduled_date(), formatter));
+		try {
+			Date scheduledTime = Main.getTimeFormat()
+					.parse(Main.getTimeFormat().format(Main.getDateTimeFormat().parse(schedule.getScheduled_date())));
+			// int hours = (int) (scheduledTime.getTime() / 1000 / 60 / 60)+1;
+			// int minutes = (int) (scheduledTime.getTime() / 1000 / 60) % 60;
+			// hourSpinner.getValueFactory().setValue(hours);
+			// minuteSpinner.getValueFactory().setValue(minutes);
+
+			LocalTime time = LocalDateTime.ofInstant(scheduledTime.toInstant(), ZoneId.systemDefault()).toLocalTime();
+			
+			hourSpinner.getValueFactory().setValue(time);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		typeChoiceBox.setValue(Schedule.Type.valueOf(schedule.getType()));
 
 		editButton.setDisable(schedule == null);

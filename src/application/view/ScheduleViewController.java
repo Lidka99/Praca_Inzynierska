@@ -1,7 +1,8 @@
 package application.view;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
-
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -93,6 +94,11 @@ public class ScheduleViewController {
 		TableColumn<ScheduleIntermediate, String> column7 = new TableColumn("Nazwisko kierowcy");
 		column7.setCellValueFactory(new PropertyValueFactory("driverSurname"));
 		scheduleTableView.getColumns().add(column7);
+		
+		// dodawanie kolumny prawo jazdy
+		TableColumn<ScheduleIntermediate, String> column71 = new TableColumn("Nr prawa jazdy");
+		column71.setCellValueFactory(new PropertyValueFactory("driverLicenceNumber"));
+		scheduleTableView.getColumns().add(column71);
 
 		// dodawanie kolumny nr rejestracyjny naczepy
 		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
@@ -130,7 +136,11 @@ public class ScheduleViewController {
 		ScheduleController controller = main.getScheduleController();
 
 		List<ScheduleIntermediate> schedules = ScheduleConverter
-				.convert(controller.getSchedulesByScheduledDate(selectedDate));
+				.convert(selectedDate != null ? controller.getSchedulesByScheduledDate(selectedDate):controller.getSchedulesToday());
+		if(selectedDate == null ) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+			datePicker.setValue(LocalDate.parse(Main.getDateTimeFormat().format(new Date(System.currentTimeMillis())), formatter));
+		}
 		scheduleTableView.getItems().clear();
 
 		for (ScheduleIntermediate schedule : schedules) {
