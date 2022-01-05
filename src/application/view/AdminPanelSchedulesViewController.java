@@ -163,21 +163,25 @@ public class AdminPanelSchedulesViewController {
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 			Date scheduledDate = Date.from(instant);
 
+			LocalTime time = (LocalTime) hourSpinner.getValue();
+			long msHour = (long) time.getHour() * 60 * 60 * 1000;
+			long msMinute = (long) time.getMinute() * 60 * 1000;
+			scheduledDate = new Date(scheduledDate.getTime() + msHour + msMinute);
+
 			Schedule.Type type = (Schedule.Type) typeChoiceBox.getValue();
 			Drivers driver = filteredDrivers.get(driverChoiceBox.getSelectionModel().getSelectedIndex());
 			Trailers trailer = filteredTrailers.get(trailerChoiceBox.getSelectionModel().getSelectedIndex());
 			Trucks truck = filteredTrucks.get(truckChoiceBox.getSelectionModel().getSelectedIndex());
 
-			// ValidatingStatus nameStatus = validate(name, 30, false);
-			// ValidatingStatus surnameStatus = validate(surname, 30, false);
-			// ValidatingStatus drivingLicenseStatus = validate(drivingLicense, 30, false);
-
-			// if (nameStatus != ValidatingStatus.sukces || surnameStatus !=
-			// ValidatingStatus.sukces
-			// || drivingLicenseStatus != ValidatingStatus.sukces) {
-
-			// return;
-			// }
+			if (validate(scheduledDate, driver, truck, trailer)) {
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("B³¹d zapisu");
+				alert.setHeaderText("Taki zestaw figuruje ju¿ w danym dniu");
+				
+				alert.show();
+				return;
+			}
 
 			main.getScheduleController().create(scheduledDate, type, driver, trailer, truck);
 
@@ -191,22 +195,25 @@ public class AdminPanelSchedulesViewController {
 			Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
 			Date scheduledDate = Date.from(instant);
 
+			LocalTime time = (LocalTime) hourSpinner.getValue();
+			long msHour = (long) time.getHour() * 60 * 60 * 1000;
+			long msMinute = (long) time.getMinute() * 60 * 1000;
+			scheduledDate = new Date(scheduledDate.getTime() + msHour + msMinute);
+
 			Schedule.Type type = (Schedule.Type) typeChoiceBox.getValue();
 			Drivers driver = filteredDrivers.get(driverChoiceBox.getSelectionModel().getSelectedIndex());
 			Trailers trailer = filteredTrailers.get(trailerChoiceBox.getSelectionModel().getSelectedIndex());
 			Trucks truck = filteredTrucks.get(truckChoiceBox.getSelectionModel().getSelectedIndex());
 
-			/*
-			 * ValidatingStatus nameStatus = validate(name, 30, false); ValidatingStatus
-			 * surnameStatus = validate(surname, 30, false); ValidatingStatus
-			 * drivingLicenseStatus = validate(drivingLicense, 10, false); // !!!!! obs³u¿yæ
-			 * sprawdzanie // unikatowoœci // w przypadku edycji !!!!!
-			 * 
-			 * if (nameStatus != ValidatingStatus.sukces || surnameStatus !=
-			 * ValidatingStatus.sukces || drivingLicenseStatus != ValidatingStatus.sukces) {
-			 * 
-			 * return; }
-			 */
+		//	if (validate(scheduledDate, driver, truck, trailer)) {
+				
+				//Alert alert = new Alert(AlertType.INFORMATION);
+				//alert.setTitle("B³¹d zapisu");
+				//alert.setHeaderText("Taki zestaw figuruje ju¿ w danym dniu");
+				
+				//alert.show();
+				//return;
+			//}
 
 			main.getScheduleController().update(selectedSchedule.getId(), scheduledDate, type, driver, trailer, truck);
 		}
@@ -231,19 +238,41 @@ public class AdminPanelSchedulesViewController {
 
 	}
 
-	private ValidatingStatus validate(String text, int maxLength, boolean checkDrivingLicenseUniqueness) {
+	private boolean validate(Date scheduledDate, Drivers driver, Trucks truck, Trailers trailer) {
 
-		if (text == null || text.length() <= 0)
-			return ValidatingStatus.pustePole;
+		List<Schedule> schedules = main.getScheduleController().getSchedulesByData(driver, trailer, truck);
+		Date scheduledDateWithZeroTime = null;
 
-		if (text.length() > maxLength)
-			return ValidatingStatus.tekstZaDlugi;
+		try {
+			scheduledDateWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(scheduledDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		if (checkDrivingLicenseUniqueness && main.getDriversController().checkDrivingLicense(text))
-			return ValidatingStatus.wartoscNieunikatowa;
+		if (scheduledDateWithZeroTime != null) {
+			for (Schedule schedule : schedules) {
 
-		return ValidatingStatus.sukces;
+				Date dateWithZeroTime = null;
 
+				try {
+					dateWithZeroTime = Main.getDateFormat()
+							.parse(Main.getDateFormat().format(schedule.getScheduled_date()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				if (dateWithZeroTime != null && dateWithZeroTime.equals(scheduledDateWithZeroTime)) {
+
+					return false;
+				}
+
+			}
+
+		}
+
+		return true;
 	}
 
 	public void onCancelButtonCick() {
@@ -269,6 +298,7 @@ public class AdminPanelSchedulesViewController {
 		driverChoiceBox.setDisable(!enabled);
 		truckChoiceBox.setDisable(!enabled);
 		trailerChoiceBox.setDisable(!enabled);
+		hourSpinner.setDisable(!enabled);
 
 	}
 
@@ -374,21 +404,32 @@ public class AdminPanelSchedulesViewController {
 
 			@Override
 			public void decrement(int steps) {
-				if (getValue() == null)
-					setValue(LocalTime.now());
+				if (getValue() == null) {
+
+					LocalTime time = LocalTime.now();
+					setValue(time.withMinute((time.getMinute() / 15) * 15).withSecond(0));
+				}
+
 				else {
 					LocalTime time = (LocalTime) getValue();
-					setValue(time.minusMinutes(steps*5));
+					time = time.withMinute((time.getMinute() / 15) * 15);
+					time = time.withSecond(0);
+
+					setValue(time.minusMinutes(steps * 15));
 				}
 			}
 
 			@Override
 			public void increment(int steps) {
-				if (this.getValue() == null)
-					setValue(LocalTime.now());
-				else {
+				if (this.getValue() == null) {
+					LocalTime time = LocalTime.now();
+					setValue(time.withMinute((time.getMinute() / 15) * 15).withSecond(0));
+				} else {
 					LocalTime time = (LocalTime) getValue();
-					setValue(time.plusMinutes(steps*5));
+					time = time.withMinute((time.getMinute() / 15) * 15);
+					time = time.withSecond(0);
+
+					setValue(time.plusMinutes(steps * 15));
 				}
 			}
 		};
@@ -432,9 +473,9 @@ public class AdminPanelSchedulesViewController {
 			// minuteSpinner.getValueFactory().setValue(minutes);
 
 			LocalTime time = LocalDateTime.ofInstant(scheduledTime.toInstant(), ZoneId.systemDefault()).toLocalTime();
-			
+
 			hourSpinner.getValueFactory().setValue(time);
-			
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -55,133 +55,50 @@ public class ArrivalsDeparturesViewController {
 	private TextField truckLicenseNumberTextField;
 	@FXML
 	private TextField trailerLicenseNumberTextField;
-	@FXML
-	private TextField scheduledDateTextField;
-	@FXML
-	private TextField typeTextField;
-	@FXML
-	private TextField nameSurnameTextField;
-	@FXML
-	private TextField brandTextField;
-	@FXML
-	private TextField trailerTypeTextField;
-	@FXML
-	private AnchorPane infoPanel;
+
 	@FXML
 	private Button letInButton;
 	@FXML
-	private Button letOutButton;
-	@FXML
 	private Button letOutButton2;
+
 	@FXML
 	private TableView inWarehouseTableView;
+	@FXML
+	private TableView scheduledTableView;
 
-	private Schedule selectedSchedule;
-	private ScheduleIntermediate selectedScheduleIntermediate;
+	private ScheduleIntermediate selectedScheduleInWarehouse;
+	private ScheduleIntermediate selectedScheduleInScheduled;
 
-	private ListChangeListener<ScheduleIntermediate> selectionListener;
+	private ListChangeListener<ScheduleIntermediate> selectionListenerInWarehouse;
+	private ListChangeListener<ScheduleIntermediate> selectionListenerInScheduled;
 
 	private Main main;
-
-	public void onSearchButtonClick() {
-
-		selectedSchedule = null;
-
-		String driverLicenseNumber = drivingLicenseTextField.getText().trim();
-		Drivers driver = main.getDriversController().getByDriverLicense(driverLicenseNumber);
-
-		String truckLicenseNumber = truckLicenseNumberTextField.getText().trim();
-		Trucks truck = main.getTrucksController().getByTruckNumber(truckLicenseNumber);
-
-		String trailerLicenseNumber = trailerLicenseNumberTextField.getText().trim();
-		Trailers trailer = main.getTrailersController().getByTrailerNumber(trailerLicenseNumber);
-
-		if (driver != null && truck != null && trailer != null) {
-
-			List<Schedule> schedules = main.getScheduleController().getSchedulesByData(driver, trailer, truck);
-
-			for (Schedule schedule : schedules) {
-
-				if (schedule.getDeparture_date() == null) {
-					if (selectedSchedule == null) {
-						selectedSchedule = schedule;
-					} else if (selectedSchedule.getScheduled_date().compareTo(schedule.getScheduled_date()) > 0) {
-						selectedSchedule = schedule;
-					}
-				}
-
-			}
-
-			// tworzenie alertu
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Brak wyników");
-			alert.setHeaderText("Nie znaleziono danych w bazie!");
-			alert.setContentText("Wpisz dane jeszcze raz albo skontaktuj siê z administratorem.");
-
-			alert.showAndWait();
-		}
-
-		updateInfoPanel();
-
-	}
-
-	private void updateInfoPanel() {
-
-		if (selectedSchedule != null) {
-			infoPanel.setVisible(true);
-			letInButton.setVisible(selectedSchedule.getArrival_date() == null);
-			letOutButton.setVisible(
-					selectedSchedule.getArrival_date() != null && selectedSchedule.getDeparture_date() == null);
-			scheduledDateTextField.setText(selectedSchedule.getScheduled_date().toString());
-			nameSurnameTextField
-					.setText(selectedSchedule.getDriver().getName() + ' ' + selectedSchedule.getDriver().getSurname());
-			typeTextField.setText(selectedSchedule.getType().toString());
-			brandTextField.setText(selectedSchedule.getTruck().getBrand());
-			trailerTypeTextField.setText(selectedSchedule.getTrailer().getTrailerType());
-
-		} else {
-			infoPanel.setVisible(false);
-		}
-
-	}
 
 	public void onLetInButtonClick() {
 
 		// nadpisywanie arrival date aktualna data
 
-		if (selectedSchedule != null) {
+		if (selectedScheduleInScheduled != null) {
 			Date currentDate = new Date(System.currentTimeMillis());
-			main.getScheduleController().updateArrivalDate(selectedSchedule.getId(), currentDate);
-			selectedSchedule = main.getScheduleController().getSchedule(selectedSchedule.getId());
-			updateInfoPanel();
-		}
-
-	}
-
-	public void onLetOutButtonClick() {
-
-		if (selectedSchedule != null) {
-			Date currentDate = new Date(System.currentTimeMillis());
-			main.getScheduleController().updateDepartureDate(selectedSchedule.getId(), currentDate);
-			selectedSchedule = main.getScheduleController().getSchedule(selectedSchedule.getId());
-			updateInfoPanel();
+			main.getScheduleController().updateArrivalDate(selectedScheduleInScheduled.getId(), currentDate);
+			selectedScheduleInScheduled = null;
+			updateScheduledTableView();
 		}
 
 	}
 
 	public void onLetOutButton2Click() {
 
-		if (selectedScheduleIntermediate != null) {
+		if (selectedScheduleInWarehouse != null) {
 			Date currentDate = new Date(System.currentTimeMillis());
-			main.getScheduleController().updateDepartureDate(selectedScheduleIntermediate.getId(), currentDate);
-			selectedScheduleIntermediate = null;
-			updateTableView();
+			main.getScheduleController().updateDepartureDate(selectedScheduleInWarehouse.getId(), currentDate);
+			selectedScheduleInWarehouse = null;
+			updateInWarehouseTableView();
 		}
 
 	}
 
-	private void updateTableView() {
+	private void updateInWarehouseTableView() {
 
 		ScheduleController controller = main.getScheduleController();
 
@@ -194,7 +111,24 @@ public class ArrivalsDeparturesViewController {
 		}
 	}
 
+	private void updateScheduledTableView() {
+
+		ScheduleController controller = main.getScheduleController();
+
+		List<ScheduleIntermediate> schedules = ScheduleConverter
+				.convert(controller.getFilteredSchedulesForScheduled(drivingLicenseTextField.getText(),
+						truckLicenseNumberTextField.getText(), trailerLicenseNumberTextField.getText()));
+		scheduledTableView.getItems().clear();
+
+		for (ScheduleIntermediate schedule : schedules) {
+
+			scheduledTableView.getItems().add(schedule);
+		}
+	}
+
 	public void setUp() {
+
+		// do wypuszczania
 
 		// dodawanie kolumny id
 		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
@@ -226,6 +160,11 @@ public class ArrivalsDeparturesViewController {
 		column7.setCellValueFactory(new PropertyValueFactory("driverSurname"));
 		inWarehouseTableView.getColumns().add(column7);
 
+		// dodawanie kolumny prawo jazdy
+		TableColumn<ScheduleIntermediate, String> column71 = new TableColumn("Nr prawa jazdy");
+		column71.setCellValueFactory(new PropertyValueFactory("driverLicenceNumber"));
+		inWarehouseTableView.getColumns().add(column71);
+
 		// dodawanie kolumny nr rejestracyjny naczepy
 		TableColumn<ScheduleIntermediate, String> column8 = new TableColumn("Nr rejestracyjny naczepy");
 		column8.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
@@ -236,35 +175,123 @@ public class ArrivalsDeparturesViewController {
 		column9.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
 		inWarehouseTableView.getColumns().add(column9);
 
-		// dodac ko
+		// do wpuszczania
 
-		updateTableView();
-		
-		//nas³uchiwacz
+		// dodawanie kolumny id
+		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
+		column11.setCellValueFactory(new PropertyValueFactory("id"));
+		scheduledTableView.getColumns().add(column11);
 
-		if (selectionListener == null) {
-			selectionListener = new ListChangeListener<ScheduleIntermediate>() {
+		// dodawanie kolumny planowana data
+		TableColumn<ScheduleIntermediate, String> column22 = new TableColumn("Planowana data przyjazdu");
+		column22.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
+		scheduledTableView.getColumns().add(column22);
+
+		// dodawanie kolumny data przyjazdu
+		TableColumn<ScheduleIntermediate, String> column33 = new TableColumn("Data przyjazdu");
+		column33.setCellValueFactory(new PropertyValueFactory("arrival_date"));
+		scheduledTableView.getColumns().add(column33);
+
+		// dodawanie kolumny rodzaj
+		TableColumn<ScheduleIntermediate, String> column55 = new TableColumn("Rodzaj");
+		column55.setCellValueFactory(new PropertyValueFactory("type"));
+		scheduledTableView.getColumns().add(column55);
+
+		// dodawanie kolumny imie kierowcy
+		TableColumn<ScheduleIntermediate, String> column66 = new TableColumn("Imiê kierowcy");
+		column66.setCellValueFactory(new PropertyValueFactory("driverName"));
+		scheduledTableView.getColumns().add(column66);
+
+		// dodawanie kolumny nazwisko kierowcy
+		TableColumn<ScheduleIntermediate, String> column77 = new TableColumn("Nazwisko kierowcy");
+		column77.setCellValueFactory(new PropertyValueFactory("driverSurname"));
+		scheduledTableView.getColumns().add(column77);
+
+		// dodawanie kolumny prawo jazdy
+		TableColumn<ScheduleIntermediate, String> column771 = new TableColumn("Nr prawa jazdy");
+		column771.setCellValueFactory(new PropertyValueFactory("driverLicenceNumber"));
+		scheduledTableView.getColumns().add(column771);
+
+		// dodawanie kolumny nr rejestracyjny naczepy
+		TableColumn<ScheduleIntermediate, String> column88 = new TableColumn("Nr rejestracyjny naczepy");
+		column88.setCellValueFactory(new PropertyValueFactory("trailerNumber"));
+		scheduledTableView.getColumns().add(column88);
+
+		// dodawanie kolumny nr rejestracyjny auta
+		TableColumn<ScheduleIntermediate, String> column99 = new TableColumn("Nr rejestracyjny auta");
+		column99.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
+		scheduledTableView.getColumns().add(column99);
+
+		updateInWarehouseTableView();
+		updateScheduledTableView();
+
+		// nas³uchiwacz
+
+		if (selectionListenerInWarehouse == null) {
+			selectionListenerInWarehouse = new ListChangeListener<ScheduleIntermediate>() {
 				@Override
 				public void onChanged(Change<? extends ScheduleIntermediate> change) {
 					if (change.getList() != null && change.getList().size() > 0) {
 
-						onSelectedSchedule(change.getList().get(0));
+						onSelectedScheduleInWarehouse(change.getList().get(0));
 
 					}
 				}
 
 			};
-			inWarehouseTableView.getSelectionModel().getSelectedItems().addListener(selectionListener);
+			inWarehouseTableView.getSelectionModel().getSelectedItems().addListener(selectionListenerInWarehouse);
 		}
-		
 
-		infoPanel.setVisible(false);
+		// nas³uchiwacz2
+
+		if (selectionListenerInScheduled == null) {
+			selectionListenerInScheduled = new ListChangeListener<ScheduleIntermediate>() {
+				@Override
+				public void onChanged(Change<? extends ScheduleIntermediate> change) {
+					if (change.getList() != null && change.getList().size() > 0) {
+
+						onSelectedScheduleInScheduled(change.getList().get(0));
+
+					}
+				}
+
+			};
+			scheduledTableView.getSelectionModel().getSelectedItems().addListener(selectionListenerInScheduled);
+		}
+
+		// nas³uchiwacz do filtrowania1
+
+		drivingLicenseTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			onSearchTextEdit(newValue);
+		});
+
+		// nas³uchiwacz do filtrowania2
+
+		truckLicenseNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			onSearchTextEdit(newValue);
+		});
+
+		// nas³uchiwacz do filtrowania3
+
+		trailerLicenseNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			onSearchTextEdit(newValue);
+		});
 
 	}
 
-	private void onSelectedSchedule(ScheduleIntermediate schedule) {
+	private void onSearchTextEdit(String newValue) {
+		updateScheduledTableView();
+	}
 
-		selectedScheduleIntermediate = schedule;
+	private void onSelectedScheduleInWarehouse(ScheduleIntermediate schedule) {
+
+		selectedScheduleInWarehouse = schedule;
+
+	}
+
+	private void onSelectedScheduleInScheduled(ScheduleIntermediate schedule) {
+
+		selectedScheduleInScheduled = schedule;
 
 	}
 

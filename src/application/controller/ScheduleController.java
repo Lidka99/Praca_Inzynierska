@@ -158,7 +158,6 @@ public class ScheduleController {
 		}
 		return allSchedules;
 
-
 	}
 
 	public List<Schedule> getSchedulesToday() {
@@ -245,6 +244,31 @@ public class ScheduleController {
 
 	}
 
+	public List<Schedule> getFilteredSchedulesForScheduled(String drivingLicense, String truckLicenseNumber,
+			String trailerLicenseNumber) {
+
+		List<Schedule> allSchedules = new ArrayList<Schedule>();
+
+		drivingLicense = drivingLicense.toLowerCase().trim();
+		truckLicenseNumber = truckLicenseNumber.toLowerCase().trim();
+		trailerLicenseNumber = trailerLicenseNumber.toLowerCase().trim();
+
+		for (Schedule schedule : scheduleDao) {
+			if (schedule.getDeparture_date() == null && schedule.getArrival_date() == null) {
+				if (schedule.getDriver() != null && schedule.getDriver().getDriving_license().toLowerCase().trim().startsWith(drivingLicense) &&
+						schedule.getTruck() != null && schedule.getTruck().getLicenceNumber().toLowerCase().trim().startsWith(truckLicenseNumber) &&
+						schedule.getTrailer() != null && schedule.getTrailer().getTrailerNumber().toLowerCase().trim().startsWith(trailerLicenseNumber) 
+						) {
+					allSchedules.add(schedule);
+				}
+			}
+
+		}
+
+		return allSchedules;
+
+	}
+
 	public List<Schedule> getSchedulesByData(Drivers driver, Trailers trailer, Trucks truck) {
 
 		List<Schedule> allSchedules = new ArrayList<Schedule>();
@@ -260,6 +284,8 @@ public class ScheduleController {
 		return allSchedules;
 
 	}
+	
+	
 
 	public Schedule getSchedule(int id) {
 

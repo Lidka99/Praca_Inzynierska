@@ -1,0 +1,4 @@
+1641400973655	Rename field 'selectionListener'
+1641401074715	Rename field 'selectedScheduleIntermediate'
+1641401340089	Rename method 'updateTableView'
+1641401870065	Rename method 'onSelectedSchedule'

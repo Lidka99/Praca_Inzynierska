@@ -4,12 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="1266.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.ArrivalsDeparturesViewController">
   <tabs>
@@ -17,68 +15,27 @@
          <content>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
                <children>
-                  <Label layoutX="50.0" layoutY="71.0" text="Nr prawa jazdy kierowcy">
+                  <Label layoutX="25.0" layoutY="28.0" text="Nr prawa jazdy kierowcy">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <TextField fx:id="drivingLicenseTextField" layoutX="288.0" layoutY="71.0" />
-                  <Label layoutX="50.0" layoutY="138.0" text="Nr rejestracyjny auta">
+                  <TextField fx:id="drivingLicenseTextField" layoutX="240.0" layoutY="28.0" />
+                  <Label layoutX="447.0" layoutY="28.0" text="Nr rejestracyjny auta">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <TextField fx:id="truckLicenseNumberTextField" layoutX="288.0" layoutY="138.0" />
-                  <TextField fx:id="trailerLicenseNumberTextField" layoutX="288.0" layoutY="204.0" />
-                  <Label layoutX="50.0" layoutY="204.0" text="Nr rejestracyjny naczepy">
+                  <TextField fx:id="truckLicenseNumberTextField" layoutX="629.0" layoutY="28.0" />
+                  <TextField fx:id="trailerLicenseNumberTextField" layoutX="1063.0" layoutY="28.0" />
+                  <Label layoutX="848.0" layoutY="28.0" text="Nr rejestracyjny naczepy">
                      <font>
                         <Font size="20.0" />
                      </font></Label>
-                  <AnchorPane fx:id="infoPanel" layoutX="654.0" layoutY="57.0" prefHeight="572.0" prefWidth="566.0">
-                     <children>
-                        <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="62.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Planowana data przyjazdu ">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                        <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj przyjazdu">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                        <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię i nazwisko kierowcy">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                        <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Typ naczepy">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                        <Text fontSmoothingType="LCD" layoutX="62.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marka samochodu">
-                           <font>
-                              <Font size="20.0" />
-                           </font></Text>
-                        <TextField fx:id="trailerTypeTextField" editable="false" layoutX="314.0" layoutY="286.0" />
-                        <TextField fx:id="brandTextField" editable="false" layoutX="314.0" layoutY="225.0" />
-                        <TextField fx:id="nameSurnameTextField" editable="false" layoutX="314.0" layoutY="163.0" />
-                        <TextField fx:id="typeTextField" editable="false" layoutX="314.0" layoutY="105.0" />
-                        <Button fx:id="letOutButton" layoutX="269.0" layoutY="424.0" mnemonicParsing="false" onAction="#onLetOutButtonClick" text="Wypuść" textFill="#000000e5">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Button>
-                        <Button fx:id="letInButton" layoutX="171.0" layoutY="424.0" mnemonicParsing="false" onAction="#onLetInButtonClick" text="Wpuść" textFill="#000000e5">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Button>
-                        <TextField fx:id="scheduledDateTextField" editable="false" layoutX="314.0" layoutY="38.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane layoutX="29.0" layoutY="-49.0" prefHeight="102.0" prefWidth="664.0">
-                     <children>
-                        <TableView layoutX="14.0" layoutY="344.0" prefHeight="287.0" prefWidth="603.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
+                  <Button fx:id="letInButton" layoutX="601.0" layoutY="558.0" mnemonicParsing="false" onAction="#onLetInButtonClick" text="Wpuść" textFill="#000000e5">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="scheduledTableView" layoutX="113.0" layoutY="106.0" prefHeight="413.0" prefWidth="1054.0" />
                </children>
             </AnchorPane>
          </content></Tab>
