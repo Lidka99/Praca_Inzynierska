@@ -1,5 +1,7 @@
 CREATE DATABASE evidence;
+Go
 use evidence;
+Go
 
 CREATE TABLE drivers (
     id INT IDENTITY PRIMARY KEY,
@@ -31,9 +33,9 @@ CREATE TABLE users (
 	role VARCHAR(30) NOT NULL,
     name VARCHAR(30) NOT NULL,
     surname VARCHAR(30) NOT NULL,
-    username VARCHAR(10) NOT NULL,
+    username VARCHAR(15) NOT NULL,
     password_hash NVARCHAR(100) NOT NULL,
-	email VARCHAR(30) NOT NULL
+	email VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE schedule (

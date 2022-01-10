@@ -2,3 +2,6 @@
 1641401074715	Rename field 'selectedScheduleIntermediate'
 1641401340089	Rename method 'updateTableView'
 1641401870065	Rename method 'onSelectedSchedule'
+1641581029665	Rename field 'raport'
+1641581069639	Copy compilation unit
+1641581394806	Rename local variable 'seriesMax'

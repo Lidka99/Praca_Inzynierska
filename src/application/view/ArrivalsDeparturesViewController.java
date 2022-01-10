@@ -25,6 +25,8 @@ import application.model.Users;
 import application.model.Users.Role;
 import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
+import application.view.intermediate.ScheduleIntermediateComparator;
+import application.view.intermediate.TimeRaportEntryComparator;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
@@ -104,6 +106,8 @@ public class ArrivalsDeparturesViewController {
 
 		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(controller.getSchedulesInWarehouse());
 		inWarehouseTableView.getItems().clear();
+		
+		Collections.sort(schedules, new ScheduleIntermediateComparator());
 
 		for (ScheduleIntermediate schedule : schedules) {
 
@@ -120,6 +124,8 @@ public class ArrivalsDeparturesViewController {
 						truckLicenseNumberTextField.getText(), trailerLicenseNumberTextField.getText()));
 		scheduledTableView.getItems().clear();
 
+		Collections.sort(schedules, new ScheduleIntermediateComparator());
+		
 		for (ScheduleIntermediate schedule : schedules) {
 
 			scheduledTableView.getItems().add(schedule);
@@ -131,9 +137,9 @@ public class ArrivalsDeparturesViewController {
 		// do wypuszczania
 
 		// dodawanie kolumny id
-		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
-		column1.setCellValueFactory(new PropertyValueFactory("id"));
-		inWarehouseTableView.getColumns().add(column1);
+//		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
+//		column1.setCellValueFactory(new PropertyValueFactory("id"));
+//		inWarehouseTableView.getColumns().add(column1);
 
 		// dodawanie kolumny planowana data
 		TableColumn<ScheduleIntermediate, String> column2 = new TableColumn("Planowana data przyjazdu");
@@ -141,9 +147,9 @@ public class ArrivalsDeparturesViewController {
 		inWarehouseTableView.getColumns().add(column2);
 
 		// dodawanie kolumny data przyjazdu
-		TableColumn<ScheduleIntermediate, String> column3 = new TableColumn("Data przyjazdu");
-		column3.setCellValueFactory(new PropertyValueFactory("arrival_date"));
-		inWarehouseTableView.getColumns().add(column3);
+		TableColumn<ScheduleIntermediate, String> column33 = new TableColumn("Data przyjazdu");
+		column33.setCellValueFactory(new PropertyValueFactory("arrival_date"));
+		inWarehouseTableView.getColumns().add(column33);
 
 		// dodawanie kolumny rodzaj
 		TableColumn<ScheduleIntermediate, String> column5 = new TableColumn("Rodzaj");
@@ -178,19 +184,14 @@ public class ArrivalsDeparturesViewController {
 		// do wpuszczania
 
 		// dodawanie kolumny id
-		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
-		column11.setCellValueFactory(new PropertyValueFactory("id"));
-		scheduledTableView.getColumns().add(column11);
+//		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
+//		column11.setCellValueFactory(new PropertyValueFactory("id"));
+//		scheduledTableView.getColumns().add(column11);
 
 		// dodawanie kolumny planowana data
 		TableColumn<ScheduleIntermediate, String> column22 = new TableColumn("Planowana data przyjazdu");
 		column22.setCellValueFactory(new PropertyValueFactory("scheduled_date"));
 		scheduledTableView.getColumns().add(column22);
-
-		// dodawanie kolumny data przyjazdu
-		TableColumn<ScheduleIntermediate, String> column33 = new TableColumn("Data przyjazdu");
-		column33.setCellValueFactory(new PropertyValueFactory("arrival_date"));
-		scheduledTableView.getColumns().add(column33);
 
 		// dodawanie kolumny rodzaj
 		TableColumn<ScheduleIntermediate, String> column55 = new TableColumn("Rodzaj");

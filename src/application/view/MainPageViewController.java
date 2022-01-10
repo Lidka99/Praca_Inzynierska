@@ -25,6 +25,7 @@ import application.model.Users;
 import application.model.Users.Role;
 import application.view.intermediate.ScheduleConverter;
 import application.view.intermediate.ScheduleIntermediate;
+import application.view.intermediate.ScheduleIntermediateComparator;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
@@ -67,6 +68,9 @@ public class MainPageViewController {
 
 		List<ScheduleIntermediate> schedules = ScheduleConverter.convert(controller.getSchedulesInWarehouse());
 		inWarehouseTableView.getItems().clear();
+		
+
+		Collections.sort(schedules, new ScheduleIntermediateComparator());
 
 		for (ScheduleIntermediate schedule : schedules) {
 
@@ -75,6 +79,9 @@ public class MainPageViewController {
 
 		List<ScheduleIntermediate> scheduleToday = ScheduleConverter.convert(controller.getSchedulesToday());
 		scheduleTableView.getItems().clear();
+		
+
+		Collections.sort(scheduleToday, new ScheduleIntermediateComparator());
 
 		for (ScheduleIntermediate schedule : scheduleToday) {
 
@@ -90,9 +97,9 @@ public class MainPageViewController {
 
 		// tabela schedule
 		// dodawanie kolumny id
-		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
-		column1.setCellValueFactory(new PropertyValueFactory("id"));
-		scheduleTableView.getColumns().add(column1);
+//		TableColumn<ScheduleIntermediate, Integer> column1 = new TableColumn("Id");
+//		column1.setCellValueFactory(new PropertyValueFactory("id"));
+//		scheduleTableView.getColumns().add(column1);
 
 		// dodawanie kolumny planowana data
 		TableColumn<ScheduleIntermediate, String> column2 = new TableColumn("Planowana data przyjazdu");
@@ -135,9 +142,9 @@ public class MainPageViewController {
 		scheduleTableView.getColumns().add(column9);
 
 		// dodawanie kolumny id
-		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
-		column11.setCellValueFactory(new PropertyValueFactory("id"));
-		inWarehouseTableView.getColumns().add(column11);
+//		TableColumn<ScheduleIntermediate, Integer> column11 = new TableColumn("Id");
+//		column11.setCellValueFactory(new PropertyValueFactory("id"));
+//		inWarehouseTableView.getColumns().add(column11);
 
 		// dodawanie kolumny planowana data
 		TableColumn<ScheduleIntermediate, String> column22 = new TableColumn("Planowana data przyjazdu");

@@ -84,7 +84,6 @@ public class Main extends Application {
 		timeFormat = new SimpleDateFormat("HH:mm");
 		hourFormat = new SimpleDateFormat("HH");
 		minuteFormat = new SimpleDateFormat("mm");
-		
 
 		try {
 			dataBaseConnection = new JdbcConnectionSource(DATABASE_URL);
@@ -96,56 +95,49 @@ public class Main extends Application {
 			trailersController = new TrailersController(dataBaseConnection);
 			scheduleController = new ScheduleController(dataBaseConnection);
 
-			// dodowanie uzytkownikow
-
-			// klasa algorytmu BCrypt
-			// BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
-
-			// tworzenie hasha na podstawie Stringa
-			// Hash hash = Password.hash("haslo123").with(myBcrypt);
-
-			// usersController.create(Users.Role.administrator, "Janusz", "Kowalczyk",
-			// "jko05",
-			// hash.getResult(), "j.kowalczyk@gmail.com" );
-			// System.out.println(Password.check("haslo123",
-			// hash.getResult()).with(myBcrypt));
-
-			// tworzenie hasha na podstawie Stringa
-			// Hash hash1 = Password.hash("haslo124").with(myBcrypt);
-
-			// usersController.create(Users.Role.user, "Marek", "Stasiak", "mstas8",
-			// hash1.getResult(), "stasiak.m@gmail.com" );
-			
-			DataGenerator.initialize(this);
-			
-			DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
-			DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
-			DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
-			DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
-			
-			DataGenerator.loadLicenceNumbers("C:\\Users\\Lidka\\Desktop\\do generacji\\rejestracje.csv");
-			
-			//DataGenerator.generateUsers(25);
-			//DataGenerator.generateDrivers(30);
-			//DataGenerator.generateTrailers(30);
-			//DataGenerator.generateTrucks(30);
-			
-			//DataGenerator.generateSchedules(50);
-			
-			
-			
-			//sprawdzanie poprawnosci z generowaniem dat
-			//Date date = DataGenerator.getRandomDate(2021, 10, 1, 2022, 3, 31);
-			//System.out.println(date);
-			
-			
-			
-			
+			// ODKOMENTUJ ABY WYGENEROWAÆ DANE TESTOWE
+			//generateTestData();
 
 		} catch (SQLException e) {
 			System.err.println("Brak mo¿liwoœci po³¹czenia z baz¹ danych");
 			e.printStackTrace();
 		}
+	}
+
+	public void generateTestData() {
+
+		///// KOD DO GENEROWANIA
+		// dodowanie uzytkownikow
+
+		// klasa algorytmu BCrypt
+		BCryptFunction myBcrypt = BCryptFunction.getInstance(BCrypt.Y, 11);
+
+		// tworzenie hasha na podstawie Stringa
+		Hash hash = Password.hash("haslo123").with(myBcrypt);
+
+		usersController.create(Users.Role.administrator, "Janusz", "Kowalczyk", "jko05", hash.getResult(),
+				"j.kowalczyk@gmail.com");
+		System.out.println(Password.check("haslo123", hash.getResult()).with(myBcrypt));
+
+		// tworzenie hasha na podstawie Stringa
+		Hash hash1 = Password.hash("haslo124").with(myBcrypt);
+
+		usersController.create(Users.Role.user, "Marek", "Stasiak", "mstas8", hash1.getResult(), "stasiak.m@gmail.com");
+
+		DataGenerator.initialize(this);
+
+		DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
+		DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
+		DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
+		DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
+		DataGenerator.loadLicenceNumbers("C:\\Users\\Lidka\\Desktop\\do generacji\\rejestracje.csv");
+
+		DataGenerator.generateData(20, 40, 40, 40, 500);
+
+		// sprawdzanie poprawnosci z generowaniem dat
+		// Date date = DataGenerator.getRandomDate(2021, 10, 1, 2022, 3, 31);
+		// System.out.println(date);
+
 	}
 
 	// Zamykanie po³¹czenia
@@ -382,11 +374,9 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
-	
+
 	public void showAdminPageTrucks() {
 
 		try {
@@ -405,11 +395,9 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
-	
+
 	public void showAdminPageTrailers() {
 
 		try {
@@ -428,13 +416,9 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
 
-	
-	
 	public void showAdminPageSchedule() {
 
 		try {
@@ -453,11 +437,8 @@ public class Main extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
 	}
-
 
 	public Stage getPrimaryStage() {
 		return primaryStage;
@@ -490,15 +471,11 @@ public class Main extends Application {
 	public static DateFormat getDateTimeFormat() {
 		return dateTimeFormat;
 	}
-	
-	
 
 	public static DateFormat getTimeFormat() {
 		return timeFormat;
 	}
 
-	
-	
 	public static DateFormat getHourFormat() {
 		return hourFormat;
 	}

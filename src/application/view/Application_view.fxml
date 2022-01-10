@@ -24,7 +24,7 @@
             </ToggleButton>
             <ToggleButton fx:id="schedule_button" mnemonicParsing="false" onAction="#onScheduleButtonClick" text="Plan przyjazdów" toggleGroup="$ToggleGroup" />
             <ToggleButton fx:id="arrivalsDeparturesButton" mnemonicParsing="false" onAction="#onArrivalsDeparturesButtonClick" text="Przyjazdy/Wyjazdy" toggleGroup="$ToggleGroup" />
-            <ToggleButton fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raport" toggleGroup="$ToggleGroup" />
+            <ToggleButton fx:id="raport_button" mnemonicParsing="false" onAction="#onRaportButtonClick" text="Raporty" toggleGroup="$ToggleGroup" />
             <ToggleButton fx:id="admin_panel_button" mnemonicParsing="false" onAction="#onAdminPanelButtonClick" text="Panel administracyjny" toggleGroup="$ToggleGroup" />
             <AnchorPane prefHeight="0.0" prefWidth="200.0">
                <children>

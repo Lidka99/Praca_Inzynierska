@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,7 +55,7 @@ public class DataGenerator {
 			File file = new File(filePath);
 			if (file.exists()) {
 				FileInputStream fr = new FileInputStream(file); // reads the file
-				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.ISO_8859_1);
+				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.UTF_8);
 				BufferedReader br = new BufferedReader(isr); // creates a buffering character input stream
 
 				String line;
@@ -88,7 +89,7 @@ public class DataGenerator {
 			File file = new File(filePath);
 			if (file.exists()) {
 				FileInputStream fr = new FileInputStream(file); // reads the file
-				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.ISO_8859_1);
+				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.UTF_8);
 				BufferedReader br = new BufferedReader(isr); // creates a buffering character input stream
 
 				String line;
@@ -124,7 +125,7 @@ public class DataGenerator {
 			File file = new File(filePath);
 			if (file.exists()) {
 				FileInputStream fr = new FileInputStream(file); // reads the file
-				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.ISO_8859_1);
+				InputStreamReader isr = new InputStreamReader(fr, StandardCharsets.UTF_8);
 				BufferedReader br = new BufferedReader(isr); // creates a buffering character input stream
 
 				String line;
@@ -172,6 +173,24 @@ public class DataGenerator {
 		return new Date(randomTime);
 	}
 
+	public static Date getRandomDateToday() {
+
+		Date currentDate = new Date(System.currentTimeMillis());
+
+		try {
+			currentDate = Main.getDateFormat().parse(Main.getDateFormat().format(currentDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		long miliSecInDay = 1000 * 60 * 60 * 24;
+		Date tomorrowDate =  new Date(currentDate.getTime() + miliSecInDay);
+		
+
+		return getRandomDate(currentDate, tomorrowDate);
+	}
+
 	public static Date getRandomDate(int startYear, int startMonth, int startDay, int endYear, int endMonth,
 			int endDay) {
 
@@ -215,6 +234,9 @@ public class DataGenerator {
 	public static Trailers getRandomTrailer(int maxLoad) {
 		TrailersController controller = main.getTrailersController();
 		List<Trailers> trailers = controller.getTrailersBelowMaxLoad(maxLoad);
+		if (trailers == null || trailers.size() == 0) {
+			trailers = controller.getAllTrailers();
+		}
 		return trailers.get(random.nextInt(trailers.size()));
 	}
 
@@ -312,29 +334,73 @@ public class DataGenerator {
 
 		ScheduleController controller = main.getScheduleController();
 
-		for (int i = 0; i < count; i++) {
+		Date currentDate = new Date(System.currentTimeMillis());
+		try {
 
-			Date scheduledDate = getRandomDate(2021, 10, 1, 2022, 3, 31);
-			Date arrivalDate = null;
-			Date departureDate = null;
-
-			int scheduleOption = random.nextInt(3);
-
-			if (scheduleOption > 0) {
-				arrivalDate = getRandomDate(scheduledDate, addHoursToJavaUtilDate(scheduledDate, 12));
-			}
-
-			if (scheduleOption > 1) {
-				departureDate = getRandomDate(arrivalDate, addHoursToJavaUtilDate(arrivalDate, 4));
-			}
-
-			Trucks truck = getRandomTruck();
-
-			controller.create(scheduledDate, arrivalDate, departureDate,
-					Schedule.Type.values()[random.nextInt(Schedule.Type.values().length)], truck.getDriver(), truck.getTrailer(), truck);
-
+			currentDate = Main.getDateFormat().parse(Main.getDateFormat().format(currentDate));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+		if (currentDate != null) {
+			for (int i = 0; i < count; i++) {
+
+				Date arrivalDate = null;
+				Date departureDate = null;
+				Date scheduledDate = null;
+
+			
+				if (random.nextDouble() < 0.99) {
+					scheduledDate = getRandomDate(2021, 10, 30, 2022, 2, 28);
+					
+					Date scheduleDateWithZeroTime = null;
+					
+					try {
+
+						scheduleDateWithZeroTime = Main.getDateFormat().parse(Main.getDateFormat().format(scheduledDate));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					if(scheduleDateWithZeroTime.getTime() <= currentDate.getTime()) {
+						arrivalDate = getRandomDate(scheduledDate, addHoursToJavaUtilDate(scheduledDate, 12));
+
+						departureDate = getRandomDate(arrivalDate, addHoursToJavaUtilDate(arrivalDate, 4));
+					}
+					
+			
+				}
+
+					else {
+					
+						scheduledDate = getRandomDateToday();
+						if(random.nextDouble() < 0.5) {
+							arrivalDate = getRandomDate(scheduledDate, addHoursToJavaUtilDate(scheduledDate, 12));
+						}
+							
+				}
+
+				Trucks truck = getRandomTruck();
+
+				controller.create(scheduledDate, arrivalDate, departureDate,
+						Schedule.Type.values()[random.nextInt(Schedule.Type.values().length)], truck.getDriver(),
+						truck.getTrailer(), truck);
+
+			}
+
+		}
+	}
+
+	public static void generateData(int userCount, int driverCount, int truckCount, int trailerCount,
+			int scheduleCount) {
+
+		generateUsers(userCount);
+		generateDrivers(driverCount);
+		generateTrailers(trailerCount);
+		generateTrucks(truckCount);
+		generateSchedules(scheduleCount);
 	}
 
 }

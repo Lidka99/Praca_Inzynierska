@@ -15,6 +15,8 @@ import application.model.Trucks;
 public class ScheduleIntermediate {
 
 	Integer id;
+	
+	Date scheduleDateAsDate;
 
 	String scheduled_date;
 
@@ -157,6 +159,7 @@ public class ScheduleIntermediate {
 		this.id = schedule.getId();
 
 		Date scheduledDate = schedule.getScheduled_date();
+		scheduleDateAsDate = scheduledDate;
 		if (scheduledDate != null) {
 			
 			
@@ -191,6 +194,14 @@ public class ScheduleIntermediate {
 		this.truckLicenceNumber = truck.getLicenceNumber();
 	}
 	
+	public static String getCSVHeader() {
+		return "Data, Data przyjazdu, Data wyjazdu, Rodzaj, Imiê kierowcy, Nazwisko kierowcy, Nr prawa jazdy, Nr rejestracyjny auta, Nr rejestracyjny naczepy";
+	}
+	
+	public String toCSV() {
+		return scheduled_date + "," + arrival_date + "," + departure_date + "," + type + "," + driverName + "," + driverSurname + "," + driverLicenceNumber + "," + truckLicenceNumber + "," + trailerNumber;
+	}
+
 	
 
 }

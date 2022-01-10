@@ -173,7 +173,7 @@ public class AdminPanelSchedulesViewController {
 			Trailers trailer = filteredTrailers.get(trailerChoiceBox.getSelectionModel().getSelectedIndex());
 			Trucks truck = filteredTrucks.get(truckChoiceBox.getSelectionModel().getSelectedIndex());
 
-			if (validate(scheduledDate, driver, truck, trailer)) {
+			if (validate(scheduledDate, driver, truck, trailer) == false) {
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("B³¹d zapisu");

@@ -24,7 +24,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Data" />
-                              <DatePicker fx:id="scheduledDateDatePicker" layoutX="147.0" prefHeight="31.0" prefWidth="202.0" />
+                              <DatePicker fx:id="scheduledDateDatePicker" layoutX="152.0" prefHeight="31.0" prefWidth="195.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -34,7 +34,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Godzina" />
-                              <Spinner fx:id="hourSpinner" layoutX="141.0" layoutY="-5.0" prefHeight="31.0" prefWidth="205.0" />
+                              <Spinner fx:id="hourSpinner" layoutX="152.0" layoutY="-1.0" prefHeight="31.0" prefWidth="197.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -44,7 +44,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Typ przyjazdu" />
-                              <ChoiceBox fx:id="typeChoiceBox" layoutX="148.0" layoutY="2.0" prefHeight="31.0" prefWidth="202.0" />
+                              <ChoiceBox fx:id="typeChoiceBox" layoutX="152.0" layoutY="2.0" prefHeight="31.0" prefWidth="198.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -53,7 +53,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ChoiceBox fx:id="driverChoiceBox" layoutX="151.0" prefHeight="31.0" prefWidth="199.0" />
+                              <ChoiceBox fx:id="driverChoiceBox" layoutX="152.0" prefHeight="31.0" prefWidth="198.0" />
                               <Label text="Kierowca" />
                            </children>
                         </AnchorPane>
@@ -64,7 +64,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Ciężarówka" />
-                              <ChoiceBox fx:id="truckChoiceBox" layoutX="150.0" prefHeight="31.0" prefWidth="201.0" />
+                              <ChoiceBox fx:id="truckChoiceBox" layoutX="153.0" prefHeight="31.0" prefWidth="198.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -74,7 +74,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Label text="Naczepa" />
-                              <ChoiceBox fx:id="trailerChoiceBox" layoutX="149.0" layoutY="-1.0" prefHeight="31.0" prefWidth="200.0" />
+                              <ChoiceBox fx:id="trailerChoiceBox" layoutX="153.0" layoutY="-1.0" prefHeight="31.0" prefWidth="196.0" />
                            </children>
                         </AnchorPane>
                      </children>

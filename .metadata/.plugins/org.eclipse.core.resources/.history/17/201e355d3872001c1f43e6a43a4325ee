@@ -1,0 +1,12 @@
+package application.view.intermediate;
+
+import java.util.Comparator;
+
+public class ScheduleIntermediateComparator implements Comparator<ScheduleIntermediate> {
+
+	public int compare(ScheduleIntermediate a, ScheduleIntermediate b) {
+
+		return a.scheduled_date.compareTo(b.scheduled_date);
+	}
+
+}
