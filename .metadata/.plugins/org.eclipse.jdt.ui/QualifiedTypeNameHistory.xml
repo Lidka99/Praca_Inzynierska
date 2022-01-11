@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javafx.scene.chart.CategoryAxis"/>
-    <fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Series"/>
-    <fullyQualifiedTypeName name="javafx.scene.chart.XYChart.Data"/>
-    <fullyQualifiedTypeName name="javafx.stage.FileChooser"/>
-    <fullyQualifiedTypeName name="javafx.stage.FileChooser.ExtensionFilter"/>
-    <fullyQualifiedTypeName name="application.view.RaportViewController"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="application.view.intermediate.TimeRaportEntry"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Alert.AlertType"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="application.controller.DataGenerator"/>
     <fullyQualifiedTypeName name="javafx.scene.chart.BarChart"/>
     <fullyQualifiedTypeName name="application.view.intermediate.CountRaportEntry"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.TimeRaportEntryComparator"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.CountRaportEntryComparator"/>
+    <fullyQualifiedTypeName name="application.view.intermediate.ScheduleIntermediateComparator"/>
+    <fullyQualifiedTypeName name="com.microsoft.sqlserver.jdbc.dataclassification.Label"/>
+    <fullyQualifiedTypeName name="javafx.scene.control.Label"/>
 </qualifiedTypeNameHistroy>

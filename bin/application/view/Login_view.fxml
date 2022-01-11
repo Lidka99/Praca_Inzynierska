@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="201.0" fitWidth="440.0" layoutX="419.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../horizontal_on_white_by_logaster%20(1).png" />
+            <Image url="@../../../logo/horizontal_on_white_by_logaster%20(1).png" />
          </image>
       </ImageView>
       <Button fx:id="login_button" layoutX="672.0" layoutY="504.0" mnemonicParsing="false" onAction="#onloginButtonClick" prefHeight="31.0" prefWidth="121.0" text="Zaloguj się">
