@@ -73,7 +73,7 @@ public class ApplicationViewController {
 	public void onLogOutButtonClick() {
 		
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Koñczenie pracy aplikacji");
+		alert.setTitle("Wylogowanie siê");
 		alert.setHeaderText("Masz zamiar siê wylogowaæ");
 		alert.setContentText("Czy na pewno chcesz to zrobiæ?");
 

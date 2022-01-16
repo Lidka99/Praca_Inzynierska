@@ -225,9 +225,9 @@ public class ArrivalsDeparturesViewController {
 		scheduledTableView.getColumns().add(column99);
 
 
-		inWarehouseTableView.setPlaceholder(new Label ("Brak pojazdów aktualnie przebywaj¹cych na terenie magazynu"));
+		inWarehouseTableView.setPlaceholder(new Label ("Nie znaleziono danych"));
 		updateInWarehouseTableView();
-		scheduledTableView.setPlaceholder(new Label ("Nie znaleziono danych"));
+		scheduledTableView.setPlaceholder(new Label ("Brak pojazdów aktualnie przebywaj¹cych na terenie magazynu"));
 		updateScheduledTableView();
 
 		// nas³uchiwacz

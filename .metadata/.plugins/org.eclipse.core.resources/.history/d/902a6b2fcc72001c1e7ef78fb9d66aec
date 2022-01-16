@@ -36,7 +36,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -224,10 +223,7 @@ public class ArrivalsDeparturesViewController {
 		column99.setCellValueFactory(new PropertyValueFactory("truckLicenceNumber"));
 		scheduledTableView.getColumns().add(column99);
 
-
-		inWarehouseTableView.setPlaceholder(new Label ("Brak pojazdów aktualnie przebywaj¹cych na terenie magazynu"));
 		updateInWarehouseTableView();
-		scheduledTableView.setPlaceholder(new Label ("Nie znaleziono danych"));
 		updateScheduledTableView();
 
 		// nas³uchiwacz
