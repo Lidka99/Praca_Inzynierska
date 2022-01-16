@@ -126,11 +126,11 @@ public class Main extends Application {
 
 		DataGenerator.initialize(this);
 
-		DataGenerator.loadNames(".\\do generacji\\imionazenskie.csv");
-		DataGenerator.loadNames(".\\do generacji\\imionameskie.csv");
-		DataGenerator.loadSurnames(".\\do generacji\\nazwiskazenskie.csv");
-		DataGenerator.loadSurnames(".\\do generacji\\nazwiskameskie.csv");
-		DataGenerator.loadLicenceNumbers(".\\do generacji\\rejestracje.csv");
+		DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionazenskie.csv");
+		DataGenerator.loadNames("C:\\Users\\Lidka\\Desktop\\do generacji\\imionameskie.csv");
+		DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskazenskie.csv");
+		DataGenerator.loadSurnames("C:\\Users\\Lidka\\Desktop\\do generacji\\nazwiskameskie.csv");
+		DataGenerator.loadLicenceNumbers("C:\\Users\\Lidka\\Desktop\\do generacji\\rejestracje.csv");
 
 		DataGenerator.generateData(20, 40, 40, 40, 500);
 

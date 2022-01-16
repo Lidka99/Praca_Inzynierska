@@ -1,4 +1,0 @@
-bez bin bez git
-
-stworzyc instrukcje
-do generacji przy generowaniu n pulpit albo zmienic sciezke
