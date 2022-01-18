@@ -1,7 +1,0 @@
-package application.view.intermediate;
-
-import java.util.Comparator;
-
-public class ScheduleIntermediateComparator implements Comparator<ScheduleIndermediate> {
-
-}

@@ -1,3 +1,7 @@
-bez bin bez git zgrywac
+Instrukcja
 
-stworzyc instrukcje
+1. Przed uruchomieniem aplikacji należy stworzyć bazę danych. Jej skrypt znajduje się od nazwą "schema.sql". 
+
+2. Po stworzeniu bazy danych należy odkomentować kod, znajdujący się w Main.java, w linijce kodu nr 99. Dzięki temu wygenerujemy dane testowe. 
+
+3. Następnie uruchamiamy aplikację.
